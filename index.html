@@ -252,6 +252,21 @@ strong{color:var(--ink);font-weight:700}
 .legend-text{padding:10px 12px 6px;font-size:.92rem;line-height:1.5;color:var(--ink-2);min-height:3.2em}
 .legend-text b{color:var(--accent-deep)}
 
+/* ---------- Vidéo « en action » ---------- */
+.showreel{margin:0}
+.showreel .core{aspect-ratio:2/1;background:#1b1b22}
+.sr-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.6s var(--ease)}
+.showreel:hover .sr-video{transform:scale(1.015)}
+.showreel .core::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(21,21,28,.18),transparent 26%,transparent 62%,rgba(21,21,28,.28))}
+.sr-cap{position:absolute;left:18px;top:18px;z-index:2;display:inline-flex;align-items:center;gap:9px;padding:8px 14px;border-radius:var(--r-pill);font-size:.8rem;font-weight:600;color:var(--ink);background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(14px) saturate(170%);backdrop-filter:blur(14px) saturate(170%);box-shadow:inset 0 1px 1px #fff}
+.sr-dot{width:8px;height:8px;border-radius:50%;background:var(--spark);box-shadow:0 0 0 4px rgba(242,121,58,.2)}
+.sr-toggle{position:absolute;right:16px;top:16px;z-index:2;width:42px;height:42px;border:0;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--ink);background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 1px 1px #fff;transition:background .4s var(--ease),color .4s var(--ease)}
+.sr-toggle:hover{background:var(--accent);color:#fff}
+.sr-toggle .i{width:16px;height:16px}
+.sr-toggle .i-pl,.sr-toggle.is-paused .i-pa{display:none}
+.sr-toggle.is-paused .i-pl{display:block}
+.showreel + .facts-bar{position:relative;z-index:2;margin:-48px 26px 0}
+
 /* ---------- L'essentiel (bande de repères) ---------- */
 .facts{padding:0 0 clamp(40px,5vw,64px)}
 .facts-bar{display:grid;grid-template-columns:repeat(4,1fr);padding:8px}
@@ -642,6 +657,8 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   .js .stairs.in .here{opacity:1;transform:translate(-50%,0);animation:herePulse 2.4s ease-in-out 2.2s infinite}
   .js .stairs.in .inc{opacity:1;transform:translate(-50%,0)}
   @keyframes herePulse{0%,100%{box-shadow:0 10px 20px -10px rgba(242,121,58,.8),0 0 0 0 rgba(242,121,58,.4)}50%{box-shadow:0 10px 20px -10px rgba(242,121,58,.8),0 0 0 9px rgba(242,121,58,0)}}
+  .sr-dot{animation:srPulse 2s ease-in-out infinite}
+  @keyframes srPulse{50%{box-shadow:0 0 0 7px rgba(242,121,58,0)}}
   .reel.is-moving .reel-track{animation:reel 70s linear infinite}
   .reel.is-moving:hover .reel-track{animation-play-state:paused}
   @keyframes reel{to{transform:translateX(-50%)}}
@@ -698,6 +715,9 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   .btn{white-space:normal;text-align:left;line-height:1.3}
   .hero{padding-top:108px}
   .facts-bar{grid-template-columns:1fr}
+  .showreel + .facts-bar{margin:-22px 10px 0}
+  .sr-cap{left:10px;top:10px;padding:6px 11px;font-size:.72rem}
+  .sr-toggle{right:10px;top:10px;width:34px;height:34px}
   .fact+.fact{border-left:0;border-top:1px solid var(--line)}
   .b-item{grid-column:1/-1}
   .b-stat .core{min-height:380px}
@@ -723,6 +743,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   .legend{margin-top:-36px}
   .legend-tabs button{padding:8px 8px 9px}
   .legend-tabs button span{font-size:.8rem}
+  .legend-tabs button small{font-size:.58rem;letter-spacing:.06em;white-space:nowrap}
   .live-total{margin-top:-28px}
   .pay{padding:18px}
   .pay-amt{font-size:2rem}
@@ -747,6 +768,8 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   <symbol id="i-check" viewBox="0 0 256 256"><path d="M228.24,76.24l-128,128a6,6,0,0,1-8.48,0l-56-56a6,6,0,0,1,8.48-8.48L96,191.51,219.76,67.76a6,6,0,0,1,8.48,8.48Z"/></symbol>
   <symbol id="i-x" viewBox="0 0 256 256"><path d="M204.24,195.76a6,6,0,1,1-8.48,8.48L128,136.49,60.24,204.24a6,6,0,0,1-8.48-8.48L119.51,128,51.76,60.24a6,6,0,0,1,8.48-8.48L128,119.51l67.76-67.75a6,6,0,0,1,8.48,8.48L136.49,128Z"/></symbol>
   <symbol id="i-plus" viewBox="0 0 256 256"><path d="M222,128a6,6,0,0,1-6,6H134v82a6,6,0,0,1-12,0V134H40a6,6,0,0,1,0-12h82V40a6,6,0,0,1,12,0v82h82A6,6,0,0,1,222,128Z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 256 256"><path d="M88,48h24a8,8,0,0,1,8,8V200a8,8,0,0,1-8,8H88a8,8,0,0,1-8-8V56A8,8,0,0,1,88,48Zm56,0h24a8,8,0,0,1,8,8V200a8,8,0,0,1-8,8H144a8,8,0,0,1-8-8V56A8,8,0,0,1,144,48Z"/></symbol>
+  <symbol id="i-playf" viewBox="0 0 256 256"><path d="M84,46.6a10,10,0,0,1,10.2.3l112,70a12.9,12.9,0,0,1,0,22.2l-112,70A10,10,0,0,1,79,200.6V55.4A10,10,0,0,1,84,46.6Z"/></symbol>
   <symbol id="i-fp" viewBox="0 0 256 256"><path d="M70,128a132.68,132.68,0,0,1-14,59.58,6,6,0,0,1-5.38,3.33,6,6,0,0,1-5.36-8.67A120.74,120.74,0,0,0,58,128,69.72,69.72,0,0,1,84.25,73.36a6,6,0,0,1,7.51,9.37A57.73,57.73,0,0,0,70,128Zm58-6a6,6,0,0,0-6,6,186.07,186.07,0,0,1-23.23,90.07,6,6,0,0,0,10.5,5.82A198.14,198.14,0,0,0,134,128,6,6,0,0,0,128,122Zm0-32a38,38,0,0,0-38,38,6,6,0,0,0,12,0,26,26,0,0,1,52,0,216.06,216.06,0,0,1-20.71,92.85A6,6,0,1,0,144.16,226,227.94,227.94,0,0,0,166,128,38,38,0,0,0,128,90Zm0-64A102.11,102.11,0,0,0,26,128a90,90,0,0,1-5.12,30,6,6,0,1,0,11.31,4A101.83,101.83,0,0,0,38,128a90,90,0,0,1,180,0,284.7,284.7,0,0,1-5.33,54.84,6,6,0,0,0,4.72,7.05,6.8,6.8,0,0,0,1.17.11,6,6,0,0,0,5.88-4.84A295.92,295.92,0,0,0,230,128,102.12,102.12,0,0,0,128,26ZM94,154.13a6,6,0,0,0-7.07,4.69,152.82,152.82,0,0,1-17.44,46,6,6,0,0,0,10.4,6,164.77,164.77,0,0,0,18.8-49.65A6,6,0,0,0,94,154.13ZM128,58a70.76,70.76,0,0,0-8.75.54,6,6,0,1,0,1.49,11.91A58,58,0,0,1,186,128a252.27,252.27,0,0,1-1.94,31.26,6,6,0,0,0,5.21,6.69,6.59,6.59,0,0,0,.75,0,6,6,0,0,0,5.95-5.26A266.46,266.46,0,0,0,198,128,70.08,70.08,0,0,0,128,58ZM185.44,186.2a6,6,0,0,0-7.31,4.31c-1.47,5.74-3.18,11.49-5.06,17.09a6,6,0,0,0,11.38,3.82c2-5.88,3.75-11.9,5.3-17.92A6,6,0,0,0,185.44,186.2Z"/></symbol>
 </svg>
 
@@ -830,7 +853,17 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
 <!-- ===== L'ESSENTIEL ===== -->
 <section class="facts" aria-label="L'essentiel du bootcamp">
   <div class="wrap">
-    <div class="facts-bar glass rv">
+    <figure class="showreel bezel rv">
+      <div class="core">
+        <video class="sr-video" muted loop playsinline preload="none" poster="videos/en-action.webp" aria-label="Djouzar en action : il présente les agents IA, les connecteurs et l'IA dans Excel">
+          <source src="videos/en-action-mobile.mp4" type="video/mp4" media="(max-width: 700px)">
+          <source src="videos/en-action.mp4" type="video/mp4">
+        </video>
+        <figcaption class="sr-cap"><span class="sr-dot" aria-hidden="true"></span>En action, extraits de mes formations</figcaption>
+        <button class="sr-toggle" type="button" aria-label="Mettre la vidéo en pause"><svg class="i i-pa" aria-hidden="true"><use href="#i-pause"/></svg><svg class="i i-pl" aria-hidden="true"><use href="#i-playf"/></svg></button>
+      </div>
+    </figure>
+    <div class="facts-bar glass blur rv">
       <div class="fact"><span class="ic-s" aria-hidden="true"><svg class="i"><use href="#i-cal"/></svg></span><span><span class="fact-k">Début</span><span class="fact-v">8&nbsp;novembre</span></span></div>
       <div class="fact"><span class="ic-s" aria-hidden="true"><svg class="i"><use href="#i-play"/></svg></span><span><span class="fact-k">Format</span><span class="fact-v">En ligne · 4&nbsp;semaines + un préambule de 3&nbsp;h</span></span></div>
       <div class="fact"><span class="ic-s" aria-hidden="true"><svg class="i"><use href="#i-clock"/></svg></span><span><span class="fact-k">Chaque semaine</span><span class="fact-v">2 à 3&nbsp;h de vidéo + 2 lives de 1&nbsp;h&nbsp;30</span></span></div>
@@ -1670,6 +1703,26 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
     document.addEventListener('visibilitychange', startCrowd);
     card.addEventListener('pointermove', function(e){ var r = crowd.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
     card.addEventListener('pointerleave', function(){ mouse.x = mouse.y = -999; });
+  }
+
+  // Vidéo « en action » : lecture en boucle seulement quand elle est visible, avec un bouton pause
+  var sr = document.querySelector('.sr-video');
+  if(sr){
+    var srBtn = document.querySelector('.sr-toggle'), srHeld = reduce;
+    var srSync = function(){
+      srBtn.classList.toggle('is-paused', sr.paused);
+      srBtn.setAttribute('aria-label', sr.paused ? 'Lire la vidéo' : 'Mettre la vidéo en pause');
+    };
+    var srPlay = function(){ var pr = sr.play(); if(pr && pr.catch) pr.catch(function(){}); };
+    sr.addEventListener('play', srSync); sr.addEventListener('pause', srSync);
+    new IntersectionObserver(function(es){
+      var vis = es[es.length - 1].isIntersecting;
+      if(vis && !srHeld) srPlay(); else if(!vis) sr.pause();
+    }, { threshold: .25 }).observe(sr);
+    srBtn.addEventListener('click', function(){
+      if(sr.paused){ srHeld = false; srPlay(); } else { srHeld = true; sr.pause(); }
+    });
+    srSync();
   }
 
   // Calendrier Calendly : chargé seulement à l'approche de la section
