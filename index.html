@@ -224,6 +224,9 @@ strong{color:var(--ink);font-weight:700}
 .viz-fallback span{width:132px;height:132px;border-radius:34px;display:grid;place-items:center;color:var(--accent)}
 .viz-fallback .i{width:66px;height:66px}
 .viz.is-ready .viz-fallback{opacity:0;pointer-events:none}
+.viz.no-3d .viz-fallback{background:url(empreinte-3d.webp) center/contain no-repeat}
+.viz.no-3d .viz-fallback span{display:none}
+.viz.no-3d canvas{display:none}
 
 /* ---------- Hero ---------- */
 .hero{position:relative;z-index:1;min-height:100dvh;display:flex;align-items:center;padding:120px 0 56px}
@@ -1127,7 +1130,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
             <span class="step-stage"><b>Le système autonome</b> · Semaine 4</span>
             <h3>L'Autonomie</h3>
             <span class="tag">Un système qui tourne avec vous</span>
-            <p>On met en place vos systèmes automatiques et des agents dans votre quotidien. Votre Système Empreinte est complet, et vous apprenez à le faire évoluer seul.</p>
+            <p>On met en place vos systèmes automatiques et des agents dans votre quotidien. Votre Système Empreinte est complet, et vous apprenez à le faire évoluer vous-même.</p>
             <div class="step-video" data-video="videos/semaine-4.mp4" hidden></div>
             <div class="keep"><span class="label">Ce que vous gardez</span><p>Votre Système Empreinte complet, et le savoir-faire pour le faire grandir.</p></div>
           </div>
@@ -1729,6 +1732,11 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
     srSync();
   }
 
+  // Animation 3D : si elle ne démarre pas (navigateur ancien, WebGL 2 absent, CDN bloqué), on affiche une image fixe
+  setTimeout(function(){
+    if(window.EMPREINTE_3D !== true) $$('.viz').forEach(function(v){ v.classList.add('no-3d'); });
+  }, 5000);
+
   // Calendrier Calendly : chargé seulement à l'approche de la section
   var cal = document.querySelector('.calendly-inline-widget');
   if(cal){
@@ -2305,18 +2313,32 @@ class EmpreinteScene {
   }
 }
 
+// three.js exige WebGL 2 : sans lui, le script principal affiche l'image fixe
+function fallback(host){ host.classList.remove('is-ready'); host.classList.add('no-3d'); }
+function makeScene(host, opts){
+  try{
+    const scene = new EmpreinteScene(host, opts);
+    scene.canvas.addEventListener('webglcontextlost', e => { e.preventDefault(); scene.visible = false; fallback(host); });
+    return scene;
+  }catch(e){ fallback(host); return null; }
+}
+
 function start(){
   try{
-    const probe = document.createElement('canvas');
-    if(!(probe.getContext('webgl2') || probe.getContext('webgl'))) return;
+    if(!document.createElement('canvas').getContext('webgl2')) return;
   }catch(e){ return; }
+  window.EMPREINTE_3D = true;
+  // si l'image fixe s'est affichée pendant un chargement lent, la 3D reprend la main
+  document.querySelectorAll('.viz.no-3d').forEach(v => v.classList.remove('no-3d'));
 
   const heroHost = document.querySelector('[data-viz="hero"]');
   if(heroHost){
-    const hero = new EmpreinteScene(heroHost, { interactive: true, elevation: 58, fit: 16 });
+    const hero = makeScene(heroHost, { interactive: true, elevation: 58, fit: 16 });
     // le script principal pilote les étapes (lecture auto, puis clic sur la légende)
-    hero.setStage(parseInt(heroHost.getAttribute('data-stage'), 10) || 0, reduce);
-    heroHost.addEventListener('empreinte:stage', e => hero.setStage(e.detail, false));
+    if(hero){
+      hero.setStage(parseInt(heroHost.getAttribute('data-stage'), 10) || 0, reduce);
+      heroHost.addEventListener('empreinte:stage', e => hero.setStage(e.detail, false));
+    }
   }
 
   const progHost = document.querySelector('[data-viz="program"]');
@@ -2325,7 +2347,8 @@ function start(){
     new IntersectionObserver((es, obs) => {
       if(!es[es.length - 1].isIntersecting) return;
       obs.disconnect();
-      const prog = new EmpreinteScene(progHost, { interactive: false, elevation: 54, fit: 18, look: -3.2 });
+      const prog = makeScene(progHost, { interactive: false, elevation: 54, fit: 18, look: -3.2 });
+      if(!prog) return;
       prog.setStage(parseInt(progHost.getAttribute('data-stage'), 10) || 1, true);
       progHost.addEventListener('empreinte:stage', e => prog.setStage(e.detail, false));
     }, { rootMargin: '900px 0px' }).observe(progHost);
