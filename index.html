@@ -515,6 +515,26 @@ strong{color:var(--ink);font-weight:700}
 .fit-no{padding:clamp(28px,4vw,44px) 6px}
 .fit-no h3,.fit-no li{color:var(--muted)}
 
+/* ---------- Profils ---------- */
+.fit .intro{margin:-30px 0 30px}
+.profiles{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:clamp(40px,5vw,64px)}
+.fit .profile{display:block;padding:20px 22px;transition:transform .5s var(--ease)}
+.fit .profile:hover{transform:translateY(-3px)}
+.profile-n{display:block;font-family:'General Sans',sans-serif;font-weight:600;font-size:1.1rem;letter-spacing:-.02em;color:var(--ink)}
+.profile-d{display:block;margin-top:4px;font-size:.92rem;color:var(--muted)}
+.profile-d::before{content:"";display:inline-block;width:7px;height:7px;margin-right:8px;border-radius:50%;background:var(--accent);vertical-align:1px}
+
+/* ---------- Comment réserver ---------- */
+.how{max-width:900px;margin:18px auto 0;padding:26px 30px;border-radius:var(--r-core);background:rgba(255,255,255,.5);box-shadow:inset 0 0 0 1px rgba(255,255,255,.8)}
+.how-steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:16px}
+.how-steps li{display:flex;gap:12px;align-items:flex-start;font-size:.93rem;color:var(--muted)}
+.how-steps b{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:'General Sans',sans-serif;font-size:.9rem;color:#fff;background:var(--accent)}
+.how-steps strong{display:block;margin-bottom:2px;font-family:'General Sans',sans-serif;font-weight:600;font-size:1rem;color:var(--ink)}
+.how-contact{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.how-contact a,.foot a{color:var(--accent-deep);font-weight:600;text-decoration:none}
+.how-contact a:hover,.foot a:hover{text-decoration:underline}
+[data-linkedin][hidden]{display:none}
+
 /* ---------- FAQ ---------- */
 .faq-head{margin-bottom:52px}
 .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;align-items:start}
@@ -660,6 +680,8 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   .trainer{grid-template-columns:1fr}
   .trainer-visual{max-width:520px;width:100%;justify-self:center}
   .fit-grid,.faq-grid,.finale-grid{grid-template-columns:1fr}
+  .profiles{grid-template-columns:1fr 1fr}
+  .how-steps{grid-template-columns:1fr}
 }
 
 /* ---------- Mobile ---------- */
@@ -679,6 +701,12 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   .stack li{flex-direction:column;gap:6px}
   .stack-v{margin-left:38px}
   .guar{flex-direction:column}
+  .profiles{gap:10px}
+  .fit .profile{padding:16px}
+  .profile-n{font-size:1rem}
+  .profile-d{font-size:.85rem}
+  .profile-d::before{display:none}
+  .how{padding:22px}
   .trainer-visual{padding-bottom:0}
   .trainer-stats{position:relative;right:auto;width:auto;margin:-64px 12px 0}
   .logo span{display:none}
@@ -796,8 +824,8 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   <div class="wrap">
     <div class="facts-bar glass rv">
       <div class="fact"><span class="ic-s" aria-hidden="true"><svg class="i"><use href="#i-cal"/></svg></span><span><span class="fact-k">Début</span><span class="fact-v">8&nbsp;novembre</span></span></div>
-      <div class="fact"><span class="ic-s" aria-hidden="true"><svg class="i"><use href="#i-play"/></svg></span><span><span class="fact-k">Durée</span><span class="fact-v">4&nbsp;semaines + un préambule de 3&nbsp;h</span></span></div>
-      <div class="fact"><span class="ic-s" aria-hidden="true"><svg class="i"><use href="#i-clock"/></svg></span><span><span class="fact-k">Chaque semaine</span><span class="fact-v">2 à 3&nbsp;h de vidéo + 2 lives de 2&nbsp;h</span></span></div>
+      <div class="fact"><span class="ic-s" aria-hidden="true"><svg class="i"><use href="#i-play"/></svg></span><span><span class="fact-k">Format</span><span class="fact-v">En ligne · 4&nbsp;semaines + un préambule de 3&nbsp;h</span></span></div>
+      <div class="fact"><span class="ic-s" aria-hidden="true"><svg class="i"><use href="#i-clock"/></svg></span><span><span class="fact-k">Chaque semaine</span><span class="fact-v">2 à 3&nbsp;h de vidéo + 2 lives de 1&nbsp;h&nbsp;30</span></span></div>
       <div class="fact"><span class="ic-s" aria-hidden="true"><svg class="i"><use href="#i-users"/></svg></span><span><span class="fact-k">Promo fondateur</span><span class="fact-v">12&nbsp;places maximum</span></span></div>
     </div>
   </div>
@@ -915,6 +943,45 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   </div>
 </section>
 
+<!-- ===== POUR QUI ===== -->
+<section class="fit" aria-labelledby="t-fit">
+  <div class="wrap">
+    <h2 id="t-fit" class="rv">À qui s'adresse <em>ce bootcamp ?</em></h2>
+    <p class="intro rv">Des métiers différents, un point commun : votre valeur passe par ce que vous écrivez et produisez. Quelques exemples de ce que votre système prendra en charge.</p>
+    <ul class="profiles">
+      <li class="profile glass rv"><span class="profile-n">Solopreneur</span><span class="profile-d">Propositions, posts, relances clients</span></li>
+      <li class="profile glass rv"><span class="profile-n">Consultant</span><span class="profile-d">Rapports, recommandations, comptes rendus de mission</span></li>
+      <li class="profile glass rv"><span class="profile-n">Expert-comptable</span><span class="profile-d">Notes de synthèse, mails clients, veille réglementaire</span></li>
+      <li class="profile glass rv"><span class="profile-n">Manager</span><span class="profile-d">Comptes rendus, points d'équipe, arbitrages</span></li>
+      <li class="profile glass rv"><span class="profile-n">Responsable de service</span><span class="profile-d">Procédures, reporting, notes internes</span></li>
+      <li class="profile glass rv"><span class="profile-n">Formateur ou coach</span><span class="profile-d">Programmes, supports, retours aux participants</span></li>
+    </ul>
+    <div class="fit-grid">
+      <div class="fit-yes bezel rv">
+        <div class="core">
+          <h3>C'est fait pour vous si</h3>
+          <ul>
+            <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>Votre valeur passe par ce que vous produisez : propositions, notes, rapports, contenus, supports</li>
+            <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>Votre signature personnelle compte, et un rendu générique vous dessert</li>
+            <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>Vous êtes indépendant ou professionnel avec de vraies responsabilités de production</li>
+            <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>Vous utilisez déjà l'IA de temps en temps, et le résultat vous déçoit</li>
+            <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>Vous n'êtes pas technique, et vous n'avez aucune envie de le devenir</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fit-no rv">
+        <h3>Ce n'est pas fait pour vous si</h3>
+        <ul>
+          <li><span class="li-ic no" aria-hidden="true"><svg class="i"><use href="#i-x"/></svg></span>Vous cherchez une liste d'outils et d'astuces à consommer en vidéo</li>
+          <li><span class="li-ic no" aria-hidden="true"><svg class="i"><use href="#i-x"/></svg></span>Vous voulez déléguer la construction à quelqu'un d'autre sans y passer de temps</li>
+          <li><span class="li-ic no" aria-hidden="true"><svg class="i"><use href="#i-x"/></svg></span>Vous ne pouvez pas dégager le rythme hebdomadaire pendant 4&nbsp;semaines</li>
+          <li><span class="li-ic no" aria-hidden="true"><svg class="i"><use href="#i-x"/></svg></span>Votre métier ne produit ni écrit ni document : le système vous servirait peu</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== LE PROGRAMME ===== -->
 <section id="programme" class="program" aria-labelledby="t-prog">
   <div class="wrap">
@@ -933,18 +1000,18 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
       </article>
       <article class="rh glass rv">
         <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-chats"/></svg></span>
-        <span class="label">En direct · 2&nbsp;h, tout le groupe</span>
+        <span class="label">En direct · 1&nbsp;h&nbsp;30, tout le groupe</span>
         <h3>L'Exploration</h3>
         <p>On déroule ensemble le contenu de la semaine et on répond à vos questions, les cas particuliers comme les hésitations.</p>
       </article>
       <article class="rh glass rv">
         <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-flask"/></svg></span>
-        <span class="label">En direct · 2&nbsp;h, 3&nbsp;personnes max</span>
+        <span class="label">En direct · 1&nbsp;h&nbsp;30, 3&nbsp;personnes max</span>
         <h3>Le Lab</h3>
         <p>En tout petit groupe, chacun avance sur son propre système, écran partagé, avec un retour immédiat sur ce qui bloque. Le mardi ou le jeudi soir, selon votre groupe.</p>
       </article>
     </div>
-    <p class="live-total rv"><span class="big">16&nbsp;h</span><span>de live avec moi sur les 4&nbsp;semaines, en plus des vidéos.</span></p>
+    <p class="live-total rv"><span class="big">12&nbsp;h</span><span>de live avec moi sur les 4&nbsp;semaines, en plus des vidéos.</span></p>
 
     <div class="prog-grid">
       <div class="prog-side">
@@ -1110,15 +1177,15 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         <div class="price-top">
           <div>
             <h3>Empreinte · Session fondateur</h3>
-            <p class="sub">Début le 8&nbsp;novembre · 16&nbsp;h de live · 12&nbsp;places maximum</p>
+            <p class="sub">Début le 8&nbsp;novembre · 12&nbsp;h de live · 12&nbsp;places maximum</p>
           </div>
           <div class="price-amt"><span class="amt-label">Votre prix fondateur</span><span class="amt">850&nbsp;€<small>TTC</small></span><span class="old">au lieu de <s>3&nbsp;250&nbsp;€</s> de valeur · TVA incluse</span></div>
         </div>
         <div class="stack-head"><span>Tout ce qui est inclus</span><span>Valeur</span></div>
         <ul class="stack">
           <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">Le préambule et le parcours vidéo de 4&nbsp;semaines</span><span class="stack-d">Accès à vie aux vidéos, avec toutes leurs mises à jour à venir.</span></span></span><span class="stack-v">850&nbsp;€</span></li>
-          <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">4 Explorations en direct de 2&nbsp;h</span><span class="stack-d">Avec tout le groupe, pour dérouler le contenu et répondre à vos questions.</span></span></span><span class="stack-v">800&nbsp;€</span></li>
-          <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">4 Lab de 2&nbsp;h, à 3&nbsp;personnes maximum</span><span class="stack-d">Sur votre propre système, écran partagé, le mardi ou le jeudi soir. C'est là que tout se construit.</span></span></span><span class="stack-v">400&nbsp;€</span></li>
+          <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">4 Explorations en direct de 1&nbsp;h&nbsp;30</span><span class="stack-d">Avec tout le groupe, pour dérouler le contenu et répondre à vos questions.</span></span></span><span class="stack-v">800&nbsp;€</span></li>
+          <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">4 Labs de 1&nbsp;h&nbsp;30, à 3&nbsp;personnes maximum</span><span class="stack-d">Sur votre propre système, écran partagé, le mardi ou le jeudi soir. C'est là que tout se construit.</span></span></span><span class="stack-v">400&nbsp;€</span></li>
           <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">Le Kit d'Extraction</span><span class="stack-d">Les prompts et les gabarits de vos documents d'empreinte, réutilisables à vie.</span></span></span><span class="stack-v">500&nbsp;€</span></li>
           <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">La Bibliothèque de process</span><span class="stack-d">Des process prêts à adapter : documents, veille, notes de réflexion, comptes rendus.</span></span></span><span class="stack-v">700&nbsp;€</span></li>
         </ul>
@@ -1134,6 +1201,15 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         </div>
       </div>
     </div>
+    <div class="how rv">
+      <span class="label">Comment réserver</span>
+      <ol class="how-steps">
+        <li><b>1</b><span><strong>Choisissez un créneau</strong>Un court échange en visio, pour vérifier ensemble que le bootcamp correspond à votre activité.</span></li>
+        <li><b>2</b><span><strong>Recevez votre lien de paiement</strong>Le paiement se fait via un lien sécurisé que je vous communique directement.</span></li>
+        <li><b>3</b><span><strong>Votre place est confirmée</strong>Vous recevez toutes les informations pour bien démarrer le 8&nbsp;novembre.</span></li>
+      </ol>
+      <p class="how-contact">Une question avant de réserver ? Écrivez-moi à <a href="mailto:djouzar@penseria.fr">djouzar@penseria.fr</a><a data-linkedin hidden target="_blank" rel="noopener"> ou sur LinkedIn</a>.</p>
+    </div>
     <div class="guar glass rv">
       <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-shield"/></svg></span>
       <div>
@@ -1146,36 +1222,6 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
       <div class="tier t1 is-now" role="listitem"><div class="step-track"><span class="here">Vous êtes ici</span><span class="step-bar"></span></div><span class="tier-name">Session fondateur</span><span class="tier-price">850&nbsp;€</span><span class="tier-tag">Le prix le plus bas</span></div>
       <div class="tier t2" role="listitem"><div class="step-track"><span class="inc">+440&nbsp;€</span><span class="step-bar"></span></div><span class="tier-name">Session 2</span><span class="tier-price">1&nbsp;290&nbsp;€</span></div>
       <div class="tier t3" role="listitem"><div class="step-track"><span class="inc">+300&nbsp;€</span><span class="step-bar"></span></div><span class="tier-name">Session 3</span><span class="tier-price">1&nbsp;590&nbsp;€</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== POUR QUI ===== -->
-<section class="fit" aria-labelledby="t-fit">
-  <div class="wrap">
-    <h2 id="t-fit" class="rv">À qui s'adresse <em>ce bootcamp ?</em></h2>
-    <div class="fit-grid">
-      <div class="fit-yes bezel rv">
-        <div class="core">
-          <h3>C'est fait pour vous si</h3>
-          <ul>
-            <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>Votre valeur passe par ce que vous produisez : propositions, notes, rapports, contenus, supports</li>
-            <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>Votre signature personnelle compte, et un rendu générique vous dessert</li>
-            <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>Vous êtes indépendant ou professionnel avec de vraies responsabilités de production</li>
-            <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>Vous utilisez déjà l'IA de temps en temps, et le résultat vous déçoit</li>
-            <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>Vous n'êtes pas technique, et vous n'avez aucune envie de le devenir</li>
-          </ul>
-        </div>
-      </div>
-      <div class="fit-no rv">
-        <h3>Ce n'est pas fait pour vous si</h3>
-        <ul>
-          <li><span class="li-ic no" aria-hidden="true"><svg class="i"><use href="#i-x"/></svg></span>Vous cherchez une liste d'outils et d'astuces à consommer en vidéo</li>
-          <li><span class="li-ic no" aria-hidden="true"><svg class="i"><use href="#i-x"/></svg></span>Vous voulez déléguer la construction à quelqu'un d'autre sans y passer de temps</li>
-          <li><span class="li-ic no" aria-hidden="true"><svg class="i"><use href="#i-x"/></svg></span>Vous ne pouvez pas dégager le rythme hebdomadaire pendant 4&nbsp;semaines</li>
-          <li><span class="li-ic no" aria-hidden="true"><svg class="i"><use href="#i-x"/></svg></span>Votre métier ne produit ni écrit ni document : le système vous servirait peu</li>
-        </ul>
-      </div>
     </div>
   </div>
 </section>
@@ -1195,7 +1241,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         </details>
         <details class="rv">
           <summary>Combien de temps ça demande, concrètement ?<span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
-          <p>Un préambule de 3 heures au démarrage, puis chaque semaine : 2 à 3 heures de vidéos à placer où vous voulez, une Exploration de 2 heures avec tout le groupe et un Lab de 2 heures en petit groupe de 3&nbsp;personnes maximum, le mardi ou le jeudi soir. Soit 16 heures de live au total. Le rythme est exigeant mais cadré, et tout ce que vous y construisez sert directement votre activité, dès la semaine 1.</p>
+          <p>Un préambule de 3 heures au démarrage, puis chaque semaine : 2 à 3 heures de vidéos à placer où vous voulez, une Exploration d'une heure et demie avec tout le groupe et un Lab d'une heure et demie en petit groupe de 3&nbsp;personnes maximum, le mardi ou le jeudi soir. Soit 12 heures de live au total. Le rythme est exigeant mais cadré, et tout ce que vous y construisez sert directement votre activité, dès la semaine 1.</p>
         </details>
         <details class="rv">
           <summary>Je peux apprendre tout ça seul avec des vidéos gratuites.<span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
@@ -1203,7 +1249,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         </details>
         <details class="rv">
           <summary>Sur quel outil se déroule le bootcamp ?<span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
-          <p>Sur Claude ou sur ChatGPT, au choix : les démonstrations et les gabarits sont fournis pour les deux. La méthode, elle, reste la même sur Copilot ou Gemini : vos documents d'empreinte et vos process sont écrits dans un format neutre, réutilisable d'un outil à l'autre. Si votre entreprise vous impose un outil, on l'adapte pendant les Lab.</p>
+          <p>Sur Claude ou sur ChatGPT, au choix : les démonstrations et les gabarits sont fournis pour les deux. La méthode, elle, reste la même sur Copilot ou Gemini : vos documents d'empreinte et vos process sont écrits dans un format neutre, réutilisable d'un outil à l'autre. Si votre entreprise vous impose un outil, on l'adapte pendant les Labs.</p>
         </details>
       </div>
       <div class="faq-col">
@@ -1214,6 +1260,10 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         <details class="rv">
           <summary>Est-ce que ça va me rendre dépendant de l'IA ?<span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
           <p>C'est la bonne question, et c'est le fil rouge du parcours. Votre système signale ce qui ne vous ressemble pas et ce qui exige encore votre jugement. On délègue l'exécution, jamais le jugement. Une IA qui porte votre empreinte ne pense pas à votre place, elle arrête de penser à votre place.</p>
+        </details>
+        <details class="rv">
+          <summary>Skills, connecteurs, agents : de quoi parle-t-on ?<span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
+          <p>Un skill est une méthode que vous apprenez une fois à l'IA, pour qu'elle l'applique à chaque fois : rédiger une proposition comme vous, préparer un compte rendu à votre façon. Un connecteur relie l'IA à vos outils : mails, documents, agenda. Un agent enchaîne seul plusieurs tâches, dans le cadre que vous avez fixé. Tout se met en place en conversation, sans écrire de code.</p>
         </details>
         <details class="rv">
           <summary>Et mes données, la confidentialité ?<span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
@@ -1260,7 +1310,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
 <footer class="foot">
   <div class="wrap foot-in">
     <a href="#top" class="logo"><svg class="i" aria-hidden="true"><use href="#i-fp"/></svg><span>Empreinte<b>.</b></span></a>
-    <p>Empreinte · Un bootcamp Penseria</p>
+    <p>Empreinte · Un bootcamp Penseria · <a href="mailto:djouzar@penseria.fr">djouzar@penseria.fr</a><a data-linkedin hidden target="_blank" rel="noopener"> · LinkedIn</a></p>
   </div>
 </footer>
 
@@ -1271,8 +1321,11 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   var $$ = function(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
 
   // Lien de réservation (calendrier) : à renseigner ici, il remplace l'e-mail sur tous les boutons
-  var RESERVATION_URL = '';
+  var RESERVATION_URL = 'https://calendly.com/lamachinepensante/cafe-virtuel-avec-djouzar';
   if(RESERVATION_URL) $$('[data-cta]').forEach(function(a){ a.href = RESERVATION_URL; a.target = '_blank'; a.rel = 'noopener'; });
+  // Profil LinkedIn : à renseigner ici, les liens « LinkedIn » restent masqués tant qu'il est vide
+  var LINKEDIN_URL = '';
+  $$('[data-linkedin]').forEach(function(a){ if(LINKEDIN_URL){ a.href = LINKEDIN_URL; a.hidden = false; } });
 
   // Places restantes : à mettre à jour ici, une seule fois pour toute la page
   var SEATS = { total: 12, left: 9 };
