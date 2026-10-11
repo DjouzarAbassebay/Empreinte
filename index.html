@@ -4,32 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Empreinte. Construisez l'IA qui écrit comme vous.</title>
-<meta name="description" content="En 5 semaines, construisez l'IA qui porte votre empreinte. Bootcamp hybride : 5 semaines + 1 journée en présentiel à Paris.">
+<meta name="description" content="En 4 semaines, construisez l'IA qui porte votre empreinte. Session fondateur : début le 8 novembre, 12 places maximum.">
 <meta name="theme-color" content="#edeef1">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="Empreinte. Construisez l'IA qui écrit comme vous.">
-<meta property="og:description" content="En 5 semaines, construisez l'IA qui porte votre empreinte. Bootcamp hybride : 5 semaines + 1 journée en présentiel à Paris.">
-<meta property="og:image" content="https://empreinte-bootcamp.vercel.app/hero.jpg">
+<meta property="og:description" content="En 4 semaines, construisez l'IA qui porte votre empreinte. Session fondateur : début le 8 novembre, 12 places maximum.">
+<meta property="og:image" content="https://empreinte-bootcamp.vercel.app/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preload" as="image" href="hero.webp" type="image/webp" fetchpriority="high">
 <link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
-   Design system Empreinte v2
+   Design system Empreinte v3
    Concept : un monde gris, votre empreinte en couleur.
-   Rayons : pilule pour l'interactif (boutons, onglets, labels),
-   coque 30px / noyau 24px pour les cartes, 18px pour les lignes,
-   28px pour les portraits.
-   Calques : fond 0, contenu 1, menu 45, nav 50, grain 70.
+   Rayons : pilule pour l'interactif, coque 30px / noyau 24px
+   pour les cartes, 18px pour les lignes.
+   Calques : fond 0, contenu 1, visuel collant 2, menu 45,
+   nav 50, grain 70.
    Le "liquid glass" web est une approximation (backdrop-filter,
    bords et reflets), pas un composant officiel Apple.
    ========================================================= */
 :root{
-  --bg:#edeef1; --bg-deep:#e3e5ea;
+  --bg:#edeef1;
   --ink:#15151c; --ink-2:#34353f; --muted:#5f616c;
   --line:rgba(21,21,28,.08); --line-2:rgba(21,21,28,.14);
   --accent:#6a4cf0; --accent-deep:#5236d6; --accent-soft:rgba(106,76,240,.11);
@@ -49,13 +49,12 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 html.menu-open body{overflow:hidden}
-img{display:block;max-width:100%;height:auto}
+img,video{display:block;max-width:100%;height:auto}
 a{color:inherit}
 button{font:inherit;color:inherit}
 :focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:8px}
 section[id],header[id]{scroll-margin-top:96px}
 .sentinel{position:absolute;top:0;left:0;width:1px;height:40px}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 .skip{position:absolute;left:16px;top:-80px;z-index:80;background:var(--ink);color:#fff;padding:10px 18px;border-radius:var(--r-pill);font-weight:600;text-decoration:none;transition:top .4s var(--ease)}
 .skip:focus{top:14px}
 .i{width:1em;height:1em;fill:currentColor;flex:none;display:block}
@@ -64,10 +63,10 @@ section[id],header[id]{scroll-margin-top:96px}
 .bg{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
 .orb{position:absolute;border-radius:50%;filter:blur(110px)}
 .o1{width:640px;height:640px;background:#b9a8ff;opacity:.42;top:-180px;right:-180px}
-.o2{width:520px;height:520px;background:#ffc6a6;opacity:.32;top:21%;left:-240px}
-.o3{width:580px;height:580px;background:#aebcff;opacity:.34;top:45%;right:-240px}
-.o4{width:500px;height:500px;background:#c9bdff;opacity:.34;top:69%;left:-200px}
-.o5{width:540px;height:540px;background:#ffd2b8;opacity:.26;top:89%;right:-180px}
+.o2{width:520px;height:520px;background:#ffc6a6;opacity:.3;top:22%;left:-240px}
+.o3{width:580px;height:580px;background:#aebcff;opacity:.34;top:47%;right:-240px}
+.o4{width:500px;height:500px;background:#c9bdff;opacity:.34;top:72%;left:-200px}
+.o5{width:540px;height:540px;background:#ffd2b8;opacity:.24;top:90%;right:-180px}
 .grain{
   position:fixed;inset:0;z-index:70;pointer-events:none;opacity:.055;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
@@ -75,11 +74,11 @@ section[id],header[id]{scroll-margin-top:96px}
 
 /* ---------- Structure ---------- */
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter);position:relative;z-index:1}
-section{position:relative;z-index:1;padding:clamp(88px,11vw,148px) 0 clamp(96px,12vw,160px)}
+section{position:relative;z-index:1;padding:clamp(84px,10vw,136px) 0 clamp(92px,11vw,148px)}
 
 /* ---------- Typographie ---------- */
 h1,h2,h3{font-family:'General Sans',sans-serif;font-weight:600;color:var(--ink);letter-spacing:-.035em;text-wrap:balance}
-h1{font-size:clamp(2.35rem,3.9vw,3.45rem);line-height:1.03;letter-spacing:-.042em}
+h1{font-size:clamp(2.35rem,3.9vw,3.45rem);line-height:1.04;letter-spacing:-.042em}
 h2{font-size:clamp(2.05rem,3.7vw,3.15rem);line-height:1.05;max-width:24ch}
 h3{font-size:1.28rem;line-height:1.25;letter-spacing:-.02em}
 h1 em,h2 em{font-style:normal;color:var(--accent)}
@@ -112,24 +111,19 @@ strong{color:var(--ink);font-weight:700}
              inset 0 1px 1px rgba(255,255,255,.95),
              inset 0 0 0 1px rgba(255,255,255,.35);
 }
-/* reflet qui suit le curseur (coin haut gauche par défaut) */
 .glass::before,.core::before{
   content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
   background:radial-gradient(44% 48% at var(--mx,16%) var(--my,0%),rgba(255,255,255,.92),rgba(255,255,255,0) 62%);
   opacity:.7;transition:opacity .45s var(--ease);
 }
 .glass:hover::before,.core:hover::before{opacity:1}
-/* bord de verre qui accroche la lumière */
 .glass::after{
   content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
   background:linear-gradient(140deg,rgba(255,255,255,.95),rgba(255,255,255,.08) 40%,rgba(106,76,240,.26) 76%,rgba(255,255,255,.6));
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
           mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;
 }
-/* flou réservé aux éléments posés sur une image ou fixes (perf) */
-.blur{background:rgba(255,255,255,.52);-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%)}
-
-/* double bord : une plaque de verre posée dans un plateau */
+.blur{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%)}
 .bezel{
   padding:6px;border-radius:var(--r-shell);background:rgba(255,255,255,.34);
   box-shadow:inset 0 0 0 1px rgba(21,21,28,.06),0 44px 90px -46px rgba(var(--shadow-tint),.34);
@@ -140,7 +134,7 @@ strong{color:var(--ink);font-weight:700}
   box-shadow:inset 0 1px 1px rgba(255,255,255,1),inset 0 0 0 1px rgba(255,255,255,.6);
 }
 
-/* ---------- Boutons (couleur unie, icône imbriquée) ---------- */
+/* ---------- Bouton (couleur unie, icône imbriquée) ---------- */
 .btn{
   display:inline-flex;align-items:center;gap:14px;min-height:54px;padding:8px 8px 8px 24px;
   border-radius:var(--r-pill);background:var(--accent);color:#fff;font-weight:600;font-size:1rem;
@@ -157,7 +151,15 @@ strong{color:var(--ink);font-weight:700}
 .btn:hover{background:var(--accent-deep);box-shadow:0 22px 42px -14px rgba(82,54,214,.82),inset 0 1px 0 rgba(255,255,255,.25)}
 .btn:hover .btn-ic{transform:translate(2px,-2px) scale(1.06)}
 .btn:active{transform:scale(.98)}
-.btn-note{margin-top:14px;font-size:13.5px;color:var(--muted)}
+.cta-block{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+.btn-note{font-size:13.5px;color:var(--muted)}
+
+/* ---------- Compteur de places (12 briques) ---------- */
+.seats{display:inline-flex;align-items:center;gap:12px;font-size:.92rem;color:var(--ink-2)}
+.seats-bricks{display:grid;grid-template-columns:repeat(6,11px);gap:3px}
+.seats-bricks i{width:11px;height:11px;border-radius:3px;background:var(--accent);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.seats-bricks i.taken{background:#cfd1d8;box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
+.seats b{color:var(--accent-deep)}
 
 /* ---------- Navigation : pilule flottante ---------- */
 .nav{position:fixed;top:14px;left:0;right:0;z-index:50;display:flex;justify-content:center;padding:0 16px;pointer-events:none}
@@ -185,8 +187,6 @@ strong{color:var(--ink);font-weight:700}
 .menu-btn span:last-child{top:26px}
 .menu-open .menu-btn span:first-child{transform:translateY(3.5px) rotate(45deg)}
 .menu-open .menu-btn span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
-
-/* menu plein écran (mobile) */
 .menu{
   position:fixed;inset:0;z-index:45;display:flex;flex-direction:column;justify-content:center;padding:110px 28px 48px;
   background:rgba(237,238,241,.84);-webkit-backdrop-filter:blur(30px) saturate(160%);backdrop-filter:blur(30px) saturate(160%);
@@ -200,8 +200,17 @@ strong{color:var(--ink);font-weight:700}
 .menu-open .m-link:nth-child(3){transition-delay:.12s}
 .menu-open .m-link:nth-child(4){transition-delay:.18s}
 
+/* ---------- Visuel 3D (three.js) ---------- */
+.viz{position:relative;width:100%}
+.viz canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1.2s var(--ease)}
+.viz.is-ready canvas{opacity:1}
+.viz-fallback{position:absolute;inset:0;display:grid;place-items:center;transition:opacity .6s var(--ease)}
+.viz-fallback span{width:132px;height:132px;border-radius:34px;display:grid;place-items:center;color:var(--accent)}
+.viz-fallback .i{width:66px;height:66px}
+.viz.is-ready .viz-fallback{opacity:0;pointer-events:none}
+
 /* ---------- Hero ---------- */
-.hero{position:relative;z-index:1;min-height:100dvh;display:flex;align-items:center;padding:132px 0 72px}
+.hero{position:relative;z-index:1;min-height:100dvh;display:flex;align-items:center;padding:120px 0 56px}
 .hero-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .ribbon{
   position:absolute;border-radius:50%;border:1.5px solid transparent;
@@ -213,35 +222,28 @@ strong{color:var(--ink);font-weight:700}
 .hero .r1{width:1180px;height:440px;right:-300px;bottom:3%;transform:rotate(-9deg)}
 .hero .r2{width:940px;height:300px;right:-200px;bottom:-4%;transform:rotate(-4deg);opacity:.55}
 .dots{position:absolute;background:radial-gradient(circle,rgba(21,21,28,.22) 1.3px,transparent 1.8px) 0 0/22px 22px;-webkit-mask:radial-gradient(closest-side,#000,transparent);mask:radial-gradient(closest-side,#000,transparent)}
-.hero .dots{left:2%;top:58%;width:260px;height:220px}
-.hero-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:40px;align-items:center;width:100%}
-.hero .lead{margin-top:24px;max-width:52ch;font-size:1.08rem;color:var(--muted)}
+.hero .dots{left:2%;top:60%;width:260px;height:220px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:32px;align-items:center;width:100%}
+.hero .lead{margin-top:24px;max-width:48ch;font-size:1.1rem;color:var(--muted)}
 .hero .cta-block{margin-top:34px}
-.hero-visual{position:relative;justify-self:center}
-.hero-img img{height:min(78dvh,740px);width:auto;max-width:100%;object-fit:cover}
-.sphere{position:absolute;z-index:2;border-radius:50%;transition:transform .9s var(--ease-out);
-  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95) 0,rgba(255,255,255,0) 24%),radial-gradient(circle at 50% 58%,#8f6dff,#5a43e0 56%,#2f2a9e 100%);
-  box-shadow:inset -6px -8px 14px rgba(20,10,80,.35),0 14px 26px -10px rgba(80,60,200,.5)}
-.sphere.orange{background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95) 0,rgba(255,255,255,0) 24%),radial-gradient(circle at 50% 58%,#ffa86e,#f2793a 56%,#c4501a 100%);box-shadow:inset -4px -6px 10px rgba(110,40,10,.3),0 12px 22px -10px rgba(242,121,58,.55)}
-.hero .s1{width:58px;height:58px;left:-6%;top:16%}
-.hero .s2{width:34px;height:34px;right:-2%;top:34%}
-.hero .s3{width:22px;height:22px;left:4%;bottom:20%}
+.hero .seats{margin-top:22px}
+.hero-viz{height:min(76dvh,700px)}
 
-/* bords des images fondus (aucun contour visible) */
-.feather img{
-  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 16%,#000 84%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 11%,#000 85%,transparent 100%);
-  -webkit-mask-composite:source-in;-webkit-mask-repeat:no-repeat;
-          mask-image:linear-gradient(to right,transparent 0,#000 16%,#000 84%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 11%,#000 85%,transparent 100%);
-          mask-composite:intersect;mask-repeat:no-repeat;
-}
-/* photos du "monde gris" */
-.mono img{filter:grayscale(.85) contrast(1.03)}
+/* ---------- L'essentiel (bande de repères) ---------- */
+.facts{padding:0 0 clamp(40px,5vw,64px)}
+.facts-bar{display:grid;grid-template-columns:repeat(4,1fr);padding:8px}
+.fact{display:flex;gap:14px;align-items:center;padding:16px 18px}
+.fact+.fact{border-left:1px solid var(--line)}
+.fact .ic-s{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--accent-soft);color:var(--accent)}
+.fact .ic-s .i{width:20px;height:20px}
+.fact-k{display:block;font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.fact-v{display:block;font-family:'General Sans',sans-serif;font-weight:600;font-size:1.02rem;line-height:1.3;letter-spacing:-.015em;color:var(--ink)}
 
 /* ---------- Le problème : bento ---------- */
 .problem h2{margin-bottom:52px}
 .bento{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
 .b-stat{grid-column:1/span 7;grid-row:1/span 3}
-.b-stat .core{height:100%;min-height:540px;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(28px,4vw,44px)}
+.b-stat .core{height:100%;min-height:520px;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(28px,4vw,44px)}
 .dotfield{position:absolute;inset:0 0 36% 0;z-index:-1;background:radial-gradient(circle,rgba(21,21,28,.2) 1.4px,transparent 2px) 0 0/20px 20px;-webkit-mask:linear-gradient(#000 45%,transparent);mask:linear-gradient(#000 45%,transparent)}
 .you{position:absolute;left:68%;top:36%;width:16px;height:16px;border-radius:50%;
   background:radial-gradient(circle at 35% 30%,#fff 0,rgba(255,255,255,0) 38%),radial-gradient(circle,#8f6dff,#5236d6);
@@ -286,126 +288,46 @@ strong{color:var(--ink);font-weight:700}
 .cmp-with{box-shadow:0 0 0 1px rgba(106,76,240,.32),0 34px 64px -32px rgba(106,76,240,.5),inset 0 1px 1px #fff}
 .cmp-with .cmp-label{color:var(--accent-deep)}
 .cmp-with p{color:var(--ink)}
+.sphere{position:absolute;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95) 0,rgba(255,255,255,0) 24%),radial-gradient(circle at 50% 58%,#ffa86e,#f2793a 56%,#c4501a 100%);
+  box-shadow:inset -4px -6px 10px rgba(110,40,10,.3),0 12px 22px -10px rgba(242,121,58,.55)}
 .cmp-with .sphere{width:18px;height:18px;right:22px;top:24px}
 
-/* ---------- Le format : flux de la semaine + présentiel ---------- */
-.format .intro{margin-bottom:60px}
-.flow{list-style:none;position:relative;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:clamp(24px,4vw,56px)}
-.flow::before{content:"";position:absolute;top:27px;left:28px;right:0;height:1.5px;background:linear-gradient(90deg,rgba(106,76,240,.55),rgba(21,21,28,.12) 72%)}
-.ic{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;position:relative;color:var(--accent);
+/* ---------- Le programme ---------- */
+.prog-head{max-width:780px}
+.rhythm{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:48px 0 clamp(64px,8vw,104px)}
+.rh{padding:26px 26px 28px}
+.ic{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:var(--accent);margin-bottom:20px;
   background:var(--glass-strong);border:1px solid rgba(255,255,255,.85);box-shadow:0 14px 30px -16px rgba(var(--shadow-tint),.5),inset 0 1px 1px #fff}
-.ic .i{width:26px;height:26px}
-.flow-step .ic{margin-bottom:26px}
-.flow-step .label{margin-bottom:10px}
-.flow-step h3{margin-bottom:12px}
-.flow-step:first-child h3{font-size:1.55rem}
-.flow-step p{color:var(--muted);font-size:.98rem;max-width:42ch}
-.presentiel{display:grid;grid-template-columns:repeat(12,1fr);align-items:center;margin-top:clamp(80px,10vw,128px)}
-.pres-card{grid-column:1/span 6;grid-row:1;z-index:2;padding:clamp(28px,4vw,44px)}
-.pres-card .ic{margin-bottom:22px}
-.pres-card .label{margin-bottom:12px}
-.pres-card h3{font-size:1.7rem;margin-bottom:14px}
-.pres-card p{color:var(--ink-2)}
-.pres-media{grid-column:6/span 7;grid-row:1}
-.pres-media img{width:100%;height:clamp(420px,46vw,640px);object-fit:cover;object-position:50% 55%}
-
-/* ---------- Le parcours : numéro collant + semaines au scroll ---------- */
-.journey-head{max-width:780px;margin-bottom:68px}
-.journey-grid{display:grid;grid-template-columns:.8fr 1.5fr;gap:clamp(32px,6vw,88px);align-items:start}
-.journey-side{position:sticky;top:124px}
-.jn-stage{position:relative;height:clamp(150px,16vw,226px)}
-.jn-num{position:absolute;left:0;top:0;font-family:'General Sans',sans-serif;font-weight:600;font-size:clamp(150px,16vw,226px);line-height:.85;letter-spacing:-.06em;color:var(--accent);
-  opacity:0;transform:translateY(34px);transition:opacity .6s var(--ease),transform .7s var(--ease)}
-.jn-num.is-past{transform:translateY(-34px)}
-.jn-num.is-active{opacity:1;transform:none}
-.jn-label{margin-top:20px;font-family:'General Sans',sans-serif;font-weight:600;font-size:1.08rem;color:var(--ink)}
-.jn-progress{display:flex;gap:6px;max-width:240px;margin-top:16px}
-.jn-progress i{flex:1;height:4px;border-radius:4px;background:rgba(21,21,28,.1);transition:background .5s var(--ease)}
-.jn-progress i.on{background:var(--accent)}
-.journey-list{list-style:none;display:flex;flex-direction:column;gap:14px}
-.wk-card{padding:26px 30px;transition:background .5s var(--ease),box-shadow .5s var(--ease)}
-.js .wk:not(.is-active) .wk-card{background:rgba(255,255,255,.4);box-shadow:inset 0 1px 1px rgba(255,255,255,.8)}
-.wk-head{display:flex;align-items:baseline;gap:20px;cursor:pointer}
-.wk-label{flex:none;min-width:94px;font-size:.76rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);transition:color .5s var(--ease)}
-.wk.is-active .wk-label{color:var(--accent-deep)}
-.wk-head h3{font-size:1.36rem}
+.ic .i{width:24px;height:24px}
+.rh .label{margin-bottom:8px}
+.rh h3{margin-bottom:8px}
+.rh p{font-size:.97rem;color:var(--muted)}
+.prog-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(28px,5vw,72px);align-items:start}
+.prog-side{position:sticky;top:96px;z-index:2}
+.prog-viz{height:min(68dvh,600px)}
+.hud{position:absolute;left:16px;bottom:16px;z-index:3;padding:14px 18px;border-radius:var(--r-item);min-width:230px}
+.hud-step{display:block;font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.hud-name{display:block;font-family:'General Sans',sans-serif;font-weight:600;font-size:1.15rem;letter-spacing:-.02em;color:var(--ink)}
+.hud-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:10px}
+.hud-bar i{height:6px;border-radius:2px;background:rgba(21,21,28,.1);transition:background .5s var(--ease)}
+.hud-bar i.on{background:var(--accent)}
+.steps{list-style:none;display:flex;flex-direction:column;gap:14px}
+.step-card{padding:26px 28px;transition:box-shadow .5s var(--ease),background .5s var(--ease)}
+.js .step:not(.is-active) .step-card{background:rgba(255,255,255,.42)}
+.step.is-active .step-card{box-shadow:0 0 0 1px rgba(106,76,240,.3),0 30px 60px -32px rgba(106,76,240,.45),inset 0 1px 1px #fff}
+.step-stage{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:.74rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.step-stage b{color:var(--accent-deep);font-weight:700}
+.step-card h3{font-size:1.4rem}
 .tag{display:block;margin-top:4px;font-size:.96rem;font-weight:600;color:var(--accent-deep)}
-.wk-body{display:grid;grid-template-rows:1fr}
-.js .wk-body{grid-template-rows:0fr;transition:grid-template-rows .7s var(--ease)}
-.js .wk.is-active .wk-body{grid-template-rows:1fr}
-.wk-inner{min-height:0;overflow:hidden}
-.wk-content{padding:18px 0 0 114px}
-.js .wk-content{opacity:0;transition:opacity .45s var(--ease)}
-.js .wk.is-active .wk-content{opacity:1;transition-delay:.18s}
-.wk-content ul{list-style:none;display:grid;gap:8px;margin-top:14px}
-.wk-content li{position:relative;padding-left:22px;color:var(--muted)}
-.wk-content li::before{content:"";position:absolute;left:3px;top:.68em;width:7px;height:7px;border-radius:50%;background:var(--accent)}
-.keep{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line-2)}
+.step-card>p{margin-top:12px;color:var(--ink-2)}
+.keep{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line-2)}
 .keep .label{font-size:.72rem;margin-bottom:6px}
 .keep p{color:var(--ink);font-weight:500}
-.badge{display:inline-block;margin:0 0 12px 114px;padding:6px 12px;border-radius:var(--r-pill);background:var(--accent);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.1em}
-
-/* ---------- Ce que vous obtenez : accordéon condensé ---------- */
-.offer .wrap{max-width:880px}
-.offer h2{margin:0 auto 52px;text-align:center;max-width:26ch}
-.offer-list{padding:10px}
-.offer-list details{border-radius:var(--r-item);transition:background .4s var(--ease)}
-.offer-list details+details{margin-top:4px}
-.offer-list details[open]{background:var(--accent-soft)}
-.offer-list summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:19px 22px;border-radius:var(--r-item);transition:background .4s var(--ease)}
-.offer-list summary::-webkit-details-marker{display:none}
-.offer-list summary:hover{background:rgba(21,21,28,.035)}
-.stack-h{font-family:'General Sans',sans-serif;font-weight:600;font-size:1.06rem;line-height:1.3;letter-spacing:-.015em;color:var(--ink)}
-.stack-right{display:flex;align-items:center;gap:16px;flex:none}
-.stack-val{font-family:'General Sans',sans-serif;font-weight:600;font-size:1.12rem;color:var(--accent-deep);font-variant-numeric:tabular-nums}
-.plus{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;flex:none;background:rgba(21,21,28,.06);color:var(--ink);transition:transform .5s var(--ease),background .4s var(--ease),color .4s var(--ease)}
-.plus .i{width:16px;height:16px}
-details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);color:#fff}
-.offer-list details p{padding:0 22px 20px;color:var(--muted);max-width:60ch}
-.stack-total{display:flex;justify-content:space-between;align-items:baseline;gap:18px;margin:10px 12px 6px;padding:22px 10px 8px;border-top:1px solid var(--line-2)}
-.stack-total .lbl{font-weight:600;color:var(--ink)}
-.stack-total .amt{font-family:'General Sans',sans-serif;font-weight:600;font-size:1.7rem;color:var(--muted);text-decoration:line-through;text-decoration-thickness:2px;font-variant-numeric:tabular-nums}
-
-/* ---------- Garantie ---------- */
-.guarantee h2{margin-bottom:56px}
-.guar{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,6vw,84px);align-items:center}
-.guar-media{position:relative;max-width:470px;width:100%}
-.guar-media img{width:100%}
-.seal{position:absolute;right:6%;bottom:18%;z-index:2;overflow:visible;width:98px;height:98px;border-radius:50%;display:grid;place-items:center;color:var(--accent);
-  border:1px solid rgba(255,255,255,.8);box-shadow:0 24px 44px -20px rgba(var(--shadow-tint),.5),inset 0 1px 1px #fff}
-.seal .i{width:44px;height:44px}
-.seal .sphere{width:20px;height:20px;right:-6px;top:-4px}
-.guar-copy h3{font-size:clamp(1.75rem,2.8vw,2.4rem);line-height:1.1;letter-spacing:-.035em;max-width:16ch;margin-bottom:22px}
-.guar-copy p{font-size:1.1rem;max-width:52ch}
-
-/* ---------- Tarif ---------- */
-.pricing-head{text-align:center;margin-bottom:56px}
-.pricing-head h2{margin:0 auto}
-.price{max-width:900px;margin:0 auto}
-.price .core{padding:clamp(28px,4vw,48px)}
-.price-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;padding-bottom:28px;border-bottom:1px solid var(--line)}
-.price-top h3{font-size:1.5rem}
-.price .sub{margin-top:6px;color:var(--muted)}
-.price-amt{text-align:right}
-.price-amt .amt{display:block;font-family:'General Sans',sans-serif;font-weight:600;font-size:clamp(3rem,6vw,4.4rem);line-height:.95;letter-spacing:-.05em;color:var(--ink);font-variant-numeric:tabular-nums}
-.price-amt .old{display:block;margin-top:8px;font-size:.95rem;color:var(--muted)}
-.price-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px 34px;margin:28px 0 34px}
-.price-list li{display:flex;gap:12px;align-items:flex-start;color:var(--ink)}
-.li-ic{flex:none;width:24px;height:24px;margin-top:1px;border-radius:50%;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
-.li-ic .i{width:14px;height:14px}
-.li-ic.no{background:rgba(21,21,28,.06);color:#767883}
-.price .btn{width:100%;justify-content:space-between}
-.price-note{max-width:620px;margin:44px auto 0;text-align:center;color:var(--muted)}
-.stairs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:620px;margin:36px auto 0}
-.step-track{height:190px;display:flex;align-items:flex-end}
-.step-bar{width:100%;border-radius:18px 18px 8px 8px;background:#dcdee4;box-shadow:inset 0 1px 1px rgba(255,255,255,.8)}
-.s1 .step-bar{height:42%}
-.s2 .step-bar{height:70%}
-.s3 .step-bar{height:100%}
-.step.is-now .step-bar{background:var(--accent);box-shadow:0 18px 30px -14px rgba(82,54,214,.6),inset 0 1px 0 rgba(255,255,255,.3)}
-.step-name{display:block;margin-top:14px;font-size:.95rem;font-weight:600;color:var(--ink)}
-.step-price{display:block;font-family:'General Sans',sans-serif;font-weight:600;font-size:1.3rem;color:var(--muted);font-variant-numeric:tabular-nums}
-.step.is-now .step-price{color:var(--accent-deep)}
+.step-video{margin-top:18px;border-radius:16px;overflow:hidden;background:#1d1d24;aspect-ratio:16/9;box-shadow:0 20px 40px -24px rgba(var(--shadow-tint),.6)}
+.step-video video{width:100%;height:100%;object-fit:cover}
+.step-video[hidden]{display:none}
+.prog-cta{margin-top:clamp(56px,7vw,88px)}
 
 /* ---------- Formateur ---------- */
 .trainer{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(40px,7vw,96px);align-items:center}
@@ -422,6 +344,47 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
 .bio p+p{margin-top:14px}
 .quote{margin-top:32px;padding:6px 0 6px 22px;border-left:2px solid var(--accent);font-family:'General Sans',sans-serif;font-weight:500;font-size:1.3rem;line-height:1.35;letter-spacing:-.02em;color:var(--ink)}
 
+/* ---------- Offre et tarif ---------- */
+.pricing-head{text-align:center;margin-bottom:52px}
+.pricing-head h2{margin:0 auto}
+.price{max-width:900px;margin:0 auto}
+.price .core{padding:clamp(26px,4vw,46px)}
+.price-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;padding-bottom:26px;border-bottom:1px solid var(--line)}
+.price-top h3{font-size:1.5rem}
+.price .sub{margin-top:6px;color:var(--muted)}
+.price-amt{text-align:right}
+.price-amt .amt{display:block;font-family:'General Sans',sans-serif;font-weight:600;font-size:clamp(3rem,6vw,4.4rem);line-height:.95;letter-spacing:-.05em;color:var(--ink);font-variant-numeric:tabular-nums}
+.price-amt .old{display:block;margin-top:8px;font-size:.95rem;color:var(--muted)}
+.stack{list-style:none;margin:10px 0 0}
+.stack li{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:16px 0}
+.stack li+li{border-top:1px solid var(--line)}
+.stack-l{display:flex;gap:14px;align-items:flex-start}
+.stack-t{display:block;font-family:'General Sans',sans-serif;font-weight:600;font-size:1.04rem;line-height:1.35;letter-spacing:-.015em;color:var(--ink)}
+.stack-d{display:block;margin-top:2px;font-size:.92rem;color:var(--muted)}
+.stack-v{flex:none;font-family:'General Sans',sans-serif;font-weight:600;color:var(--accent-deep);font-variant-numeric:tabular-nums}
+.li-ic{flex:none;width:24px;height:24px;margin-top:1px;border-radius:50%;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.li-ic .i{width:14px;height:14px}
+.li-ic.no{background:rgba(21,21,28,.06);color:#767883}
+.stack-total{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:18px 0 4px;border-top:1px solid var(--line-2)}
+.stack-total .lbl{font-weight:600;color:var(--ink)}
+.stack-total .amt{font-family:'General Sans',sans-serif;font-weight:600;font-size:1.5rem;color:var(--muted);text-decoration:line-through;text-decoration-thickness:2px;font-variant-numeric:tabular-nums}
+.price-cta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px 24px;margin-top:28px}
+.guar{display:flex;gap:22px;align-items:flex-start;max-width:900px;margin:18px auto 0;padding:26px 30px}
+.guar .ic{margin-bottom:0;flex:none}
+.guar h3{font-size:1.3rem;margin-bottom:8px}
+.guar p{color:var(--ink-2)}
+.price-note{max-width:620px;margin:44px auto 0;text-align:center;color:var(--muted)}
+.stairs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:620px;margin:36px auto 0}
+.step-track{height:190px;display:flex;align-items:flex-end}
+.step-bar{width:100%;border-radius:18px 18px 8px 8px;background:#dcdee4;box-shadow:inset 0 1px 1px rgba(255,255,255,.8)}
+.t1 .step-bar{height:42%}
+.t2 .step-bar{height:70%}
+.t3 .step-bar{height:100%}
+.tier.is-now .step-bar{background:var(--accent);box-shadow:0 18px 30px -14px rgba(82,54,214,.6),inset 0 1px 0 rgba(255,255,255,.3)}
+.tier-name{display:block;margin-top:14px;font-size:.95rem;font-weight:600;color:var(--ink)}
+.tier-price{display:block;font-family:'General Sans',sans-serif;font-weight:600;font-size:1.3rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.tier.is-now .tier-price{color:var(--accent-deep)}
+
 /* ---------- Pour qui ---------- */
 .fit h2{margin-bottom:52px}
 .fit-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(20px,4vw,52px);align-items:start}
@@ -431,8 +394,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
 .fit li{display:flex;gap:14px;align-items:flex-start}
 .fit-yes li{color:var(--ink)}
 .fit-no{padding:clamp(28px,4vw,44px) 6px}
-.fit-no h3{color:var(--muted)}
-.fit-no li{color:var(--muted)}
+.fit-no h3,.fit-no li{color:var(--muted)}
 
 /* ---------- FAQ ---------- */
 .faq-head{margin-bottom:52px}
@@ -443,20 +405,23 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
 .faq-grid summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:21px 22px;font-family:'General Sans',sans-serif;font-weight:600;font-size:1.03rem;line-height:1.35;letter-spacing:-.015em;color:var(--ink)}
 .faq-grid summary::-webkit-details-marker{display:none}
 .faq-grid details p{padding:0 22px 22px;color:var(--muted);font-size:.98rem}
+.plus{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;flex:none;background:rgba(21,21,28,.06);color:var(--ink);transition:transform .5s var(--ease),background .4s var(--ease),color .4s var(--ease)}
+.plus .i{width:16px;height:16px}
+details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);color:#fff}
 
 /* ---------- Clôture ---------- */
 .finale .core{padding:clamp(30px,5vw,64px);background:linear-gradient(150deg,rgba(255,255,255,.88),rgba(238,234,255,.8))}
 .finale-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
 .finale .r1{width:1000px;height:360px;left:-200px;bottom:-120px;transform:rotate(8deg);opacity:.7}
 .finale .dots{right:6%;top:8%;width:220px;height:180px}
-.finale-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,64px);align-items:center}
+.finale-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(28px,5vw,64px);align-items:center}
 .finale h2{max-width:22ch}
 .finale .lead{margin-top:22px;max-width:50ch;font-size:1.08rem;color:var(--muted)}
 .finale .cta-block{margin-top:30px}
-.founder-box{margin-top:34px;padding:24px 26px;border-radius:var(--r-item);background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.85);box-shadow:inset 0 1px 1px #fff}
+.finale .btn-note{margin-top:16px}
+.founder-box{padding:26px 28px;border-radius:var(--r-item);background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.85);box-shadow:inset 0 1px 1px #fff}
 .founder-box .label{font-size:.72rem;margin-bottom:10px}
 .founder-box p{font-size:.96rem;color:var(--ink-2)}
-.finale-media img{width:100%;max-height:620px;object-fit:cover;object-position:center 30%}
 
 /* ---------- Pied de page ---------- */
 .foot{position:relative;z-index:1;padding:0 0 48px}
@@ -470,24 +435,20 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   .hero-copy .hero-in:nth-child(2){animation-delay:.08s}
   .hero-copy .hero-in:nth-child(3){animation-delay:.16s}
   .hero-copy .hero-in:nth-child(4){animation-delay:.24s}
-  .hero-visual.hero-in{animation-delay:.14s;animation-duration:1.4s}
+  .hero-copy .hero-in:nth-child(5){animation-delay:.32s}
   .js .rv{opacity:0;transform:translateY(40px);filter:blur(8px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out),filter .9s var(--ease-out)}
   .js .rv.in{opacity:1;transform:none;filter:none}
-  .bento .rv:nth-child(3),.flow .rv:nth-child(2),.fit-grid .rv:nth-child(2),.faq-col .rv:nth-child(2){transition-delay:.08s}
-  .bento .rv:nth-child(4),.flow .rv:nth-child(3),.faq-col .rv:nth-child(3){transition-delay:.16s}
-  .bento .rv:nth-child(5),.faq-col .rv:nth-child(4){transition-delay:.24s}
+  .bento .rv:nth-child(3),.rhythm .rv:nth-child(2),.fit-grid .rv:nth-child(2),.faq-col .rv:nth-child(2){transition-delay:.08s}
+  .bento .rv:nth-child(4),.rhythm .rv:nth-child(3),.faq-col .rv:nth-child(3){transition-delay:.16s}
+  .faq-col .rv:nth-child(4){transition-delay:.24s}
   .js .day-panel.is-active{animation:panelIn .6s var(--ease-out)}
   @keyframes panelIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   .js .step-bar{transform:scaleY(0);transform-origin:bottom;transition:transform 1.1s var(--ease-out)}
   .js .stairs.in .step-bar{transform:scaleY(1)}
-  .js .stairs .s2 .step-bar{transition-delay:.12s}
-  .js .stairs .s3 .step-bar{transition-delay:.24s}
+  .js .stairs .t2 .step-bar{transition-delay:.12s}
+  .js .stairs .t3 .step-bar{transition-delay:.24s}
   .js .portrait .gray{transition:opacity 1.8s var(--ease) .35s}
   .js .trainer-visual.in .gray{opacity:0}
-  @supports (animation-timeline:view()){
-    .hero-img{animation:drift linear both;animation-timeline:view();animation-range:exit 0% exit 100%}
-    @keyframes drift{to{transform:translateY(-70px) scale(1.02)}}
-  }
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -496,7 +457,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   *,*::before,*::after{transition-duration:.01ms!important}
 }
 @media (prefers-reduced-transparency:reduce){
-  .glass,.blur,.nav-pill,.menu,.eyebrow,.bezel>.core,.cmp-with,.seal{-webkit-backdrop-filter:none;backdrop-filter:none;background:#f8f8fa}
+  .glass,.blur,.nav-pill,.menu,.eyebrow,.bezel>.core,.cmp-with{-webkit-backdrop-filter:none;backdrop-filter:none;background:#f8f8fa}
 }
 
 /* ---------- Tablette ---------- */
@@ -504,31 +465,27 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   .nav-links{display:none}
   .menu-btn{display:block}
   .nav-pill{gap:12px}
-  .hero{min-height:auto;padding:124px 0 64px}
-  .hero-grid{grid-template-columns:1fr;gap:28px}
-  .hero-visual{justify-self:center}
-  .hero-img img{height:min(64dvh,620px)}
+  .hero{min-height:auto;padding:116px 0 48px}
+  .hero-grid{grid-template-columns:1fr;gap:12px}
+  .hero-viz{height:min(56dvh,520px)}
+  .facts-bar{grid-template-columns:1fr 1fr}
+  .fact:nth-child(3){border-left:0}
+  .fact:nth-child(n+3){border-top:1px solid var(--line)}
   .b-stat{grid-column:1/-1;grid-row:auto}
-  .b-stat .core{min-height:440px}
+  .b-stat .core{min-height:420px}
   .b-item{grid-column:span 4}
   .days-ui{grid-template-columns:1fr}
   .days-tabs{flex-direction:row;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;-webkit-overflow-scrolling:touch}
   .day-tab{flex:0 0 min(78%,320px);scroll-snap-align:start}
-  .flow{grid-template-columns:1fr;gap:36px}
-  .flow::before{top:28px;bottom:28px;left:27px;right:auto;width:1.5px;height:auto;background:linear-gradient(180deg,rgba(106,76,240,.55),rgba(21,21,28,.12))}
-  .flow-step{display:grid;grid-template-columns:56px 1fr;column-gap:22px}
-  .flow-step .ic{grid-column:1;grid-row:1/span 4;margin-bottom:0}
-  .presentiel{grid-template-columns:1fr}
-  .pres-media{grid-column:1;grid-row:1}
-  .pres-card{grid-column:1;grid-row:2;margin-top:-90px;margin-inline:4%}
-  .journey-grid{grid-template-columns:1fr}
-  .journey-side{display:none}
-  .guar{grid-template-columns:1fr}
-  .guar-media{max-width:400px;justify-self:center}
+  .rhythm{grid-template-columns:1fr}
+  .prog-grid{grid-template-columns:1fr}
+  .prog-side{top:76px;margin:0 calc(var(--gutter) * -1);padding:0 var(--gutter) 12px;background:linear-gradient(var(--bg) 82%,rgba(237,238,241,0))}
+  .prog-viz{height:34dvh}
+  .hud{left:8px;bottom:8px;min-width:0;padding:10px 14px}
+  .hud-name{font-size:1rem}
   .trainer{grid-template-columns:1fr}
   .trainer-visual{max-width:520px;width:100%;justify-self:center}
   .fit-grid,.faq-grid,.finale-grid{grid-template-columns:1fr}
-  .finale-media{max-width:440px;justify-self:center}
 }
 
 /* ---------- Mobile ---------- */
@@ -536,22 +493,20 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   :root{--gutter:18px}
   .nav .btn{display:none}
   .btn{white-space:normal;text-align:left;line-height:1.3}
-  .hero{padding-top:112px}
+  .hero{padding-top:108px}
+  .facts-bar{grid-template-columns:1fr}
+  .fact+.fact{border-left:0;border-top:1px solid var(--line)}
   .b-item{grid-column:1/-1}
-  .b-stat .core{min-height:400px}
+  .b-stat .core{min-height:380px}
   .day-panel{grid-template-columns:1fr}
-  .wk-card{padding:22px}
-  .wk-head{flex-direction:column;gap:6px}
-  .wk-content{padding-left:0}
-  .badge{margin-left:0}
+  .step-card{padding:22px}
   .price-top{flex-direction:column;align-items:flex-start}
   .price-amt{text-align:left}
-  .price-list{grid-template-columns:1fr}
+  .stack li{flex-direction:column;gap:6px}
+  .stack-v{margin-left:38px}
+  .guar{flex-direction:column}
   .trainer-visual{padding-bottom:0}
   .trainer-stats{position:relative;right:auto;width:auto;margin:-64px 12px 0}
-  .stack-total{flex-direction:column;align-items:flex-start;gap:4px}
-  .seal{width:80px;height:80px}
-  .seal .i{width:36px;height:36px}
 }
 </style>
 </head>
@@ -566,6 +521,8 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   <symbol id="i-chats" viewBox="0 0 256 256"><path d="M229.93,186.58A78,78,0,0,0,168.16,74.42,78,78,0,1,0,26.07,138.58L18.58,164A14,14,0,0,0,36,181.42l25.46-7.49a78,78,0,0,0,26.39,7.63,78,78,0,0,0,106.77,40.37L220,229.42A14,14,0,0,0,237.42,212ZM62,161.5a6.05,6.05,0,0,0-1.69.24l-27.77,8.17a2,2,0,0,1-2.48-2.48l8.17-27.77a6.05,6.05,0,0,0-.47-4.53,66,66,0,1,1,27.08,27.08A6,6,0,0,0,62,161.5Zm155.71,26.16,8.17,27.77a2,2,0,0,1-2.48,2.48l-27.77-8.17a6.06,6.06,0,0,0-4.53.47,66,66,0,0,1-90-28.4,77.92,77.92,0,0,0,71-94.68,66,66,0,0,1,46.07,96A6.05,6.05,0,0,0,217.74,187.66Z"/></symbol>
   <symbol id="i-flask" viewBox="0 0 256 256"><path d="M220,200.8,158,97.48V38h10a6,6,0,0,0,0-12H88a6,6,0,0,0,0,12H98V97.48L36,200.8A14,14,0,0,0,48,222H208a14,14,0,0,0,12-21.2ZM109.15,102.23a6,6,0,0,0,.85-3.09V38h36V99.14a6,6,0,0,0,.85,3.09l39.65,66.08c-12.41,3.16-30.86,3-55.79-9.66-16.94-8.58-33-12.8-47.83-12.64ZM209.72,209a2,2,0,0,1-1.74,1H48a2,2,0,0,1-1.71-3l29-48.41c14.89-2.08,31.68,1.55,49.94,10.79C144,178.8,159.67,182,172.42,182A67.89,67.89,0,0,0,192.89,179l16.8,28A2,2,0,0,1,209.72,209Z"/></symbol>
   <symbol id="i-cal" viewBox="0 0 256 256"><path d="M208,34H182V24a6,6,0,0,0-12,0V34H86V24a6,6,0,0,0-12,0V34H48A14,14,0,0,0,34,48V208a14,14,0,0,0,14,14H208a14,14,0,0,0,14-14V48A14,14,0,0,0,208,34ZM48,46H74V56a6,6,0,0,0,12,0V46h84V56a6,6,0,0,0,12,0V46h26a2,2,0,0,1,2,2V82H46V48A2,2,0,0,1,48,46ZM208,210H48a2,2,0,0,1-2-2V94H210V208A2,2,0,0,1,208,210Z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 256 256"><path d="M128,26A102,102,0,1,0,230,128,102.12,102.12,0,0,0,128,26Zm0,192a90,90,0,1,1,90-90A90.1,90.1,0,0,1,128,218Zm62-90a6,6,0,0,1-6,6H128a6,6,0,0,1-6-6V72a6,6,0,0,1,12,0v50h50A6,6,0,0,1,190,128Z"/></symbol>
+  <symbol id="i-users" viewBox="0 0 256 256"><path d="M243.6,148.8a6,6,0,0,1-8.4-1.2A53.58,53.58,0,0,0,192,126a6,6,0,0,1,0-12,26,26,0,1,0-25.18-32.5,6,6,0,0,1-11.62-3,38,38,0,1,1,59.91,39.63A65.69,65.69,0,0,1,244.8,140.4,6,6,0,0,1,243.6,148.8ZM189.19,213a6,6,0,0,1-2.19,8.2,5.9,5.9,0,0,1-3,.81,6,6,0,0,1-5.2-3,59,59,0,0,0-101.62,0,6,6,0,1,1-10.38-6A70.1,70.1,0,0,1,103,182.55a46,46,0,1,1,50.1,0A70.1,70.1,0,0,1,189.19,213ZM128,178a34,34,0,1,0-34-34A34,34,0,0,0,128,178ZM70,120a6,6,0,0,0-6-6A26,26,0,1,1,89.18,81.49a6,6,0,1,0,11.62-3,38,38,0,1,0-59.91,39.63A65.69,65.69,0,0,0,11.2,140.4a6,6,0,1,0,9.6,7.2A53.58,53.58,0,0,1,64,126,6,6,0,0,0,70,120Z"/></symbol>
   <symbol id="i-shield" viewBox="0 0 256 256"><path d="M208,42H48A14,14,0,0,0,34,56v56c0,51.94,25.12,83.4,46.2,100.64,22.73,18.6,45.27,24.89,46.22,25.15a6,6,0,0,0,3.16,0c.95-.26,23.49-6.55,46.22-25.15C196.88,195.4,222,163.94,222,112V56A14,14,0,0,0,208,42Zm2,70c0,37.76-13.94,68.39-41.44,91.06A131.17,131.17,0,0,1,128,225.72a130.94,130.94,0,0,1-40.56-22.66C59.94,180.39,46,149.76,46,112V56a2,2,0,0,1,2-2H208a2,2,0,0,1,2,2ZM172.24,99.76a6,6,0,0,1,0,8.48l-56,56a6,6,0,0,1-8.48,0l-24-24a6,6,0,0,1,8.48-8.48L112,151.51l51.76-51.75A6,6,0,0,1,172.24,99.76Z"/></symbol>
   <symbol id="i-check" viewBox="0 0 256 256"><path d="M228.24,76.24l-128,128a6,6,0,0,1-8.48,0l-56-56a6,6,0,0,1,8.48-8.48L96,191.51,219.76,67.76a6,6,0,0,1,8.48,8.48Z"/></symbol>
   <symbol id="i-x" viewBox="0 0 256 256"><path d="M204.24,195.76a6,6,0,1,1-8.48,8.48L128,136.49,60.24,204.24a6,6,0,0,1-8.48-8.48L119.51,128,51.76,60.24a6,6,0,0,1,8.48-8.48L128,119.51l67.76-67.75a6,6,0,0,1,8.48,8.48L136.49,128Z"/></symbol>
@@ -595,20 +552,20 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   <div class="nav-pill">
     <a href="#top" class="logo"><svg class="i" aria-hidden="true"><use href="#i-fp"/></svg><span>Empreinte<b>.</b></span></a>
     <div class="nav-links">
-      <a href="#format">Le format</a>
-      <a href="#parcours">Le parcours</a>
+      <a href="#programme">Le programme</a>
       <a href="#formateur">Votre formateur</a>
       <a href="#prix">Tarif</a>
+      <a href="#faq">Questions</a>
     </div>
     <a href="#prix" class="btn">Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
     <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"><span></span><span></span></button>
   </div>
 </nav>
 <div class="menu" id="menu" aria-hidden="true">
-  <a class="m-link" href="#format">Le format</a>
-  <a class="m-link" href="#parcours">Le parcours</a>
+  <a class="m-link" href="#programme">Le programme</a>
   <a class="m-link" href="#formateur">Votre formateur</a>
   <a class="m-link" href="#prix">Tarif</a>
+  <a class="m-link" href="#faq">Questions</a>
   <a href="#prix" class="btn">Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
 </div>
 
@@ -620,27 +577,35 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   </div>
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <span class="eyebrow hero-in">Bootcamp hybride · 5 semaines + 1 journée en présentiel</span>
-      <h1 class="hero-in">En 5 semaines, construisez l'IA qui porte <em>votre empreinte.</em></h1>
-      <p class="lead hero-in">Pour les indépendants et professionnels qui produisent et décident au quotidien. En 5 semaines, sans ligne de commande, vous repartez avec un système qui produit dans votre style, branché sur vos outils, et que vous savez faire évoluer seul. Pour rester remarquable dans un monde qui s'uniformise.</p>
+      <span class="eyebrow hero-in">Session fondateur · Début le 8&nbsp;novembre</span>
+      <h1 class="hero-in">En 4&nbsp;semaines, construisez l'IA qui porte <em>votre empreinte.</em></h1>
+      <p class="lead hero-in">Pour les indépendants et les professionnels : un système IA qui produit dans votre style, branché sur vos outils, que vous savez faire évoluer seul. Sans ligne de commande.</p>
       <div class="cta-block hero-in">
-        <a href="mailto:djouzar@penseria.fr?subject=R%C3%A9servation%20Empreinte%20-%20Session%20fondateur&amp;body=Bonjour%20Djouzar%2C%0D%0A%0D%0AJe%20souhaite%20r%C3%A9server%20ma%20place%20pour%20la%20session%20fondateur%20du%20bootcamp%20Empreinte.%0D%0A%0D%0AMon%20nom%20%3A%0D%0AMon%20activit%C3%A9%20%3A%0D%0A%0D%0AMerci%20%21" class="btn">Réserver ma place en session fondateur<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-        <p class="btn-note">Satisfait ou remboursé à la fin du bootcamp</p>
+        <a href="mailto:djouzar@penseria.fr?subject=R%C3%A9servation%20Empreinte%20-%20Session%20fondateur&amp;body=Bonjour%20Djouzar%2C%0D%0A%0D%0AJe%20souhaite%20r%C3%A9server%20ma%20place%20pour%20la%20session%20fondateur%20du%20bootcamp%20Empreinte.%0D%0A%0D%0AMon%20nom%20%3A%0D%0AMon%20activit%C3%A9%20%3A%0D%0A%0D%0AMerci%20%21" class="btn">Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+        <span class="btn-note">Satisfait ou remboursé à la fin du bootcamp</span>
       </div>
+      <div class="seats hero-in" data-seats>Il reste 9&nbsp;places sur 12</div>
     </div>
-    <div class="hero-visual hero-in">
-      <span class="sphere s1" data-depth="22" aria-hidden="true"></span>
-      <span class="sphere s2" data-depth="-14" aria-hidden="true"></span>
-      <span class="sphere s3 orange" data-depth="30" aria-hidden="true"></span>
-      <picture class="hero-img feather">
-        <source type="image/webp" srcset="hero.webp">
-        <img src="hero.jpg" width="1024" height="1536" decoding="async" fetchpriority="high" alt="Un professionnel montre une courbe de progression sur une interface en verre">
-      </picture>
+    <div class="viz hero-viz hero-in" data-viz="hero" aria-hidden="true">
+      <div class="viz-fallback"><span class="glass"><svg class="i"><use href="#i-fp"/></svg></span></div>
+      <canvas></canvas>
     </div>
   </div>
 </header>
 
 <main id="contenu">
+
+<!-- ===== L'ESSENTIEL ===== -->
+<section class="facts" aria-label="L'essentiel du bootcamp">
+  <div class="wrap">
+    <div class="facts-bar glass rv">
+      <div class="fact"><span class="ic-s" aria-hidden="true"><svg class="i"><use href="#i-cal"/></svg></span><span><span class="fact-k">Début</span><span class="fact-v">8&nbsp;novembre</span></span></div>
+      <div class="fact"><span class="ic-s" aria-hidden="true"><svg class="i"><use href="#i-play"/></svg></span><span><span class="fact-k">Durée</span><span class="fact-v">4&nbsp;semaines + un préambule de 3&nbsp;h</span></span></div>
+      <div class="fact"><span class="ic-s" aria-hidden="true"><svg class="i"><use href="#i-clock"/></svg></span><span><span class="fact-k">Chaque semaine</span><span class="fact-v">2 à 3&nbsp;h de vidéo + 2 lives de 2&nbsp;h</span></span></div>
+      <div class="fact"><span class="ic-s" aria-hidden="true"><svg class="i"><use href="#i-users"/></svg></span><span><span class="fact-k">Promo fondateur</span><span class="fact-v">12&nbsp;places maximum</span></span></div>
+    </div>
+  </div>
+</section>
 
 <!-- ===== LE PROBLÈME ===== -->
 <section class="problem" aria-labelledby="t-problem">
@@ -689,7 +654,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
             <p>Vous demandez à l'IA un premier jet. Elle ne connaît ni votre offre, ni ce client, ni votre façon de structurer une proposition. Le texte est correct et impersonnel. Vous passez une heure à le réécrire pour qu'il vous ressemble, en vous demandant si vous n'auriez pas été plus vite seul.</p>
           </div>
           <div class="cmp cmp-with glass">
-            <span class="sphere orange" aria-hidden="true"></span>
+            <span class="sphere" aria-hidden="true"></span>
             <span class="cmp-label">Avec votre système</span>
             <p>Votre process Proposition charge votre Voix, votre Méthode et l'historique de ce client. Le document sort dans votre structure, avec votre vocabulaire et vos arguments. Vous relisez, vous ajustez deux passages qui demandent votre jugement, et vous envoyez.</p>
           </div>
@@ -701,7 +666,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
             <p>Vous ouvrez LinkedIn et trois newsletters, vous survolez, vous enregistrez des articles que vous ne relirez jamais. Vous avez le sentiment permanent de courir derrière, sans savoir ce qui compte vraiment pour votre activité.</p>
           </div>
           <div class="cmp cmp-with glass">
-            <span class="sphere orange" aria-hidden="true"></span>
+            <span class="sphere" aria-hidden="true"></span>
             <span class="cmp-label">Avec votre système</span>
             <p>Votre veille arrive, déjà filtrée sur vos sujets, reliée à vos projets en cours, avec ce que chaque information change ou ne change pas pour vous. Dix minutes de lecture, et vous savez où vous en êtes.</p>
           </div>
@@ -713,7 +678,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
             <p>Vous demandez son avis à l'IA sur une décision. Elle valide poliment tout ce que vous dites. Vous refermez la fenêtre sans être plus avancé, parce qu'un miroir qui approuve n'aide pas à trancher.</p>
           </div>
           <div class="cmp cmp-with glass">
-            <span class="sphere orange" aria-hidden="true"></span>
+            <span class="sphere" aria-hidden="true"></span>
             <span class="cmp-label">Avec votre système</span>
             <p>Votre note hebdomadaire confronte vos décisions de la semaine à vos objectifs et à votre méthode. Elle bouscule vos idées au lieu de les valider, et pointe la question que vous évitez. C'est vous qui tranchez, mieux armé.</p>
           </div>
@@ -723,215 +688,105 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   </div>
 </section>
 
-<!-- ===== LE FORMAT ===== -->
-<section id="format" class="format" aria-labelledby="t-format">
+<!-- ===== LE PROGRAMME ===== -->
+<section id="programme" class="program" aria-labelledby="t-prog">
   <div class="wrap">
-    <h2 id="t-format" class="rv">Une semaine type. <em>Trois temps, un rythme réaliste.</em></h2>
-    <p class="intro rv">Le contenu est en vidéo, quand vous voulez. Les temps en direct servent à construire et à débloquer. Chaque semaine suit la même structure.</p>
-    <ol class="flow">
-      <li class="flow-step rv">
-        <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-play"/></svg></span>
-        <span class="label">En autonomie · 1 à 2 h</span>
-        <h3>Les vidéos de la semaine</h3>
-        <p>Entre 1 et 2 heures de vidéo par semaine, à regarder quand votre agenda le permet, avec des exercices à faire et des applications directes à mettre en place sur votre propre situation, pas sur un cas d'école. C'est votre matière première pour le Lab.</p>
-      </li>
-      <li class="flow-step rv">
-        <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-chats"/></svg></span>
-        <span class="label">En direct · 90 min</span>
-        <h3>La session de formation</h3>
-        <p>Le premier temps en direct de la semaine, au format formation et FAQ : on déroule le contenu et on répond à vos questions, les cas particuliers, les hésitations, ce que les vidéos ne couvrent pas. Vous ne restez jamais bloqué plus de quelques jours.</p>
-      </li>
-      <li class="flow-step rv">
-        <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-flask"/></svg></span>
-        <span class="label">En direct · 90 min</span>
-        <h3>Le Lab</h3>
-        <p>En petit groupe, chacun avance sur son propre système, écran partagé. C'est ici que votre empreinte et vos process se construisent réellement, avec un retour immédiat sur ce qui bloque.</p>
-      </li>
-    </ol>
-
-    <div class="presentiel">
-      <div class="pres-card glass blur rv">
-        <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-cal"/></svg></span>
-        <span class="label">Pour finir · 1 journée en présentiel à Paris, le samedi 3 octobre</span>
-        <h3>La journée de clôture</h3>
-        <p>À la fin des 5 semaines, une journée complète en présentiel, en petite communauté, pour pousser le fonctionnement plus loin : on approfondit chaque brique de votre système, on met en place votre protocole de mise à jour, et vous repartez avec un système qui tourne, pas avec une liste de choses à finir. Cette journée est comprise dans le forfait de la formation ; seul le repas du midi n'est pas inclus.</p>
-      </div>
-      <div class="pres-media feather rv">
-        <picture>
-          <source type="image/webp" srcset="communaute.webp">
-          <img src="communaute.jpg" width="1024" height="1536" loading="lazy" decoding="async" alt="Quatre professionnels travaillent ensemble autour d'un ordinateur">
-        </picture>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== LE PARCOURS ===== -->
-<section id="parcours" class="journey" aria-labelledby="t-journey">
-  <div class="wrap">
-    <header class="journey-head">
-      <span class="eyebrow rv">Le parcours</span>
-      <h2 id="t-journey" class="rv">Cinq semaines. <em>Cinq livrables.</em> Un système qui reste.</h2>
-      <p class="intro rv">Chaque semaine produit quelque chose que vous gardez. À la fin, vous ne repartez pas avec des notes de cours mais avec un système qui tourne.</p>
+    <header class="prog-head">
+      <span class="eyebrow rv">Le programme</span>
+      <h2 id="t-prog" class="rv">Quatre étapes. <em>Un système qui reste.</em></h2>
+      <p class="intro rv">Chaque étape pose une brique de votre système. À la fin, vous ne repartez pas avec des notes de cours mais avec un système qui tourne.</p>
     </header>
-    <div class="journey-grid">
-      <aside class="journey-side" aria-hidden="true">
-        <div class="jn-stage">
-          <span class="jn-num is-active">01</span><span class="jn-num">02</span><span class="jn-num">03</span><span class="jn-num">04</span><span class="jn-num">05</span>
+
+    <div class="rhythm">
+      <article class="rh glass rv">
+        <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-play"/></svg></span>
+        <span class="label">En autonomie · 2 à 3&nbsp;h</span>
+        <h3>Les vidéos de la semaine</h3>
+        <p>À regarder quand vous voulez, avec des exercices et des applications directes sur votre propre situation.</p>
+      </article>
+      <article class="rh glass rv">
+        <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-chats"/></svg></span>
+        <span class="label">En direct · 2&nbsp;h, tout le groupe</span>
+        <h3>L'Exploration</h3>
+        <p>On déroule ensemble le contenu de la semaine et on répond à vos questions, les cas particuliers comme les hésitations.</p>
+      </article>
+      <article class="rh glass rv">
+        <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-flask"/></svg></span>
+        <span class="label">En direct · 2&nbsp;h, 3&nbsp;personnes max</span>
+        <h3>Le Lab</h3>
+        <p>En tout petit groupe, chacun avance sur son propre système, écran partagé, avec un retour immédiat sur ce qui bloque.</p>
+      </article>
+    </div>
+
+    <div class="prog-grid">
+      <div class="prog-side">
+        <div class="viz prog-viz" data-viz="program" data-stage="1" aria-hidden="true">
+          <div class="viz-fallback"><span class="glass"><svg class="i"><use href="#i-fp"/></svg></span></div>
+          <canvas></canvas>
+          <div class="hud glass blur">
+            <span class="hud-step" id="hud-step">Étape 1 sur 4</span>
+            <span class="hud-name" id="hud-name">Les fondations</span>
+            <div class="hud-bar"><i class="on"></i><i></i><i></i><i></i></div>
+          </div>
         </div>
-        <p class="jn-label" id="jn-label">Semaine 1</p>
-        <div class="jn-progress"><i class="on"></i><i></i><i></i><i></i><i></i></div>
-      </aside>
-      <ol class="journey-list" id="timeline">
-        <li class="wk is-active">
-          <div class="wk-card glass">
-            <div class="wk-head"><span class="wk-label">Semaine 1</span><div><h3>L'Empreinte</h3><span class="tag">Qui êtes-vous avant l'IA ?</span></div></div>
-            <div class="wk-body"><div class="wk-inner"><div class="wk-content">
-              <p>On sort de votre tête ce qui fait votre valeur : votre manière d'écrire, de raisonner, de trancher. On pose un cadre pour sortir de l'IA générique (l'AI slop) et commencer à rendre vos contenus uniques. Vos productions passées servent de matière première, et dès le vendredi, vous faites le test avant-après sur un document réel.</p>
-              <div class="keep"><span class="label">Ce que vous gardez</span><p>Vos trois documents d'empreinte : Voix, Contexte, Méthode.</p></div>
-            </div></div></div>
+      </div>
+      <ol class="steps">
+        <li class="step is-active" data-stage="1">
+          <div class="step-card glass">
+            <span class="step-stage"><b>Les fondations</b> · Préambule, 3&nbsp;h</span>
+            <h3>Le préambule</h3>
+            <span class="tag">Les bases pour utiliser l'IA sereinement</span>
+            <p>Trois heures pour poser les bases : le prompting, les interfaces et leurs fonctionnalités, la différence entre IA bureautique et IA système, la sécurité de vos données. Vous démarrez sur un terrain solide.</p>
+            <div class="step-video" data-video="videos/preambule.mp4" hidden></div>
+            <div class="keep"><span class="label">Ce que vous gardez</span><p>Des bases claires et un usage serein, avant de construire.</p></div>
           </div>
         </li>
-        <li class="wk">
-          <div class="wk-card glass">
-            <div class="wk-head"><span class="wk-label">Semaine 2</span><div><h3>La Cartographie</h3><span class="tag">Votre terrain, mis à plat</span></div></div>
-            <div class="wk-body"><div class="wk-inner"><div class="wk-content">
-              <p>On passe votre semaine réelle au crible : ce qui se répète, ce qui peut partir, ce qui ne doit jamais partir. Vos process récurrents, vos projets en cours, vos dossiers. Ce que vous connaissez par coeur et n'avez jamais écrit devient lisible.</p>
-              <div class="keep"><span class="label">Ce que vous gardez</span><p>La carte de vos process et de vos projets vivants.</p></div>
-            </div></div></div>
+        <li class="step" data-stage="1">
+          <div class="step-card glass">
+            <span class="step-stage"><b>Les fondations</b> · Semaine 1</span>
+            <h3>L'Ancrage</h3>
+            <span class="tag">Se connaître et cartographier</span>
+            <p>On sort de votre tête ce qui fait votre valeur : votre manière d'écrire, de raisonner, de trancher. Puis on cartographie vos projets et vos process : ce qui se répète, ce qui peut partir, ce qui ne doit jamais partir.</p>
+            <div class="step-video" data-video="videos/semaine-1.mp4" hidden></div>
+            <div class="keep"><span class="label">Ce que vous gardez</span><p>Vos documents d'empreinte (Voix, Contexte, Méthode) et la carte de vos process.</p></div>
           </div>
         </li>
-        <li class="wk">
-          <div class="wk-card glass">
-            <div class="wk-head"><span class="wk-label">Semaine 3</span><div><h3>L'Amplification</h3><span class="tag">Travailler sans vous effacer</span></div></div>
-            <div class="wk-body"><div class="wk-inner"><div class="wk-content">
-              <p>Votre empreinte devient exécutable. Vos premiers process produisent dans votre style, avec un garde-fou qui signale ce qui ne vous ressemble pas. Par exemple :</p>
-              <ul>
-                <li>Générer vos présentations et documents de travail directement dans votre format</li>
-                <li>Recevoir une veille structurée sur un sujet que vous suivez</li>
-                <li>Des notes hebdomadaires qui bousculent vos idées au lieu de les valider</li>
-              </ul>
-              <div class="keep"><span class="label">Ce que vous gardez</span><p>Vos deux premiers process, optimisés avec votre empreinte.</p></div>
-            </div></div></div>
+        <li class="step" data-stage="2">
+          <div class="step-card glass">
+            <span class="step-stage"><b>La connexion</b> · Semaine 2</span>
+            <h3>La Connexion</h3>
+            <span class="tag">L'étape clé du bootcamp</span>
+            <p>Le ciment entre tous les éléments. On crée vos premiers skills et on met en place ceux qui vont changer complètement votre façon de travailler.</p>
+            <div class="step-video" data-video="videos/semaine-2.mp4" hidden></div>
+            <div class="keep"><span class="label">Ce que vous gardez</span><p>Vos premiers skills, opérationnels.</p></div>
           </div>
         </li>
-        <li class="wk">
-          <div class="wk-card glass">
-            <div class="wk-head"><span class="wk-label">Semaine 4</span><div><h3>L'Orchestration</h3><span class="tag">Créer avec l'IA sans perdre sa voix</span></div></div>
-            <div class="wk-body"><div class="wk-inner"><div class="wk-content">
-              <p>On va encore plus loin en connectant vos outils du quotidien (vos mails, vos documents, vos dossiers clients) et en faisant travailler tout cet écosystème de manière intelligente, là où vous travaillez déjà.</p>
-              <div class="keep"><span class="label">Ce que vous gardez</span><p>Vos connexions actives et un système structuré autour de vos outils.</p></div>
-            </div></div></div>
+        <li class="step" data-stage="3">
+          <div class="step-card glass">
+            <span class="step-stage"><b>L'amplification</b> · Semaine 3</span>
+            <h3>L'Amplification</h3>
+            <span class="tag">Faire grandir votre système</span>
+            <p>On connecte vos outils à votre empreinte (vos mails, vos documents, vos dossiers clients) et on amplifie le lien avec votre système. Il travaille là où vous travaillez déjà.</p>
+            <div class="step-video" data-video="videos/semaine-3.mp4" hidden></div>
+            <div class="keep"><span class="label">Ce que vous gardez</span><p>Vos outils connectés à votre empreinte.</p></div>
           </div>
         </li>
-        <li class="wk">
-          <div class="wk-card glass">
-            <span class="badge">INCLUT LA JOURNÉE EN PRÉSENTIEL</span>
-            <div class="wk-head"><span class="wk-label">Semaine 5</span><div><h3>L'Autonomie</h3><span class="tag">Devenir architecte de votre propre système</span></div></div>
-            <div class="wk-body"><div class="wk-inner"><div class="wk-content">
-              <p>Vous fabriquez vous-même un process à partir de n'importe quelle tâche encore manuelle. Lors d'une journée en présentiel, en petite communauté, on ouvre la porte sur la suite et on finalise vos systèmes. Cette journée est comprise dans le forfait de la formation ; seul le repas du midi n'est pas inclus.</p>
-              <div class="keep"><span class="label">Ce que vous gardez</span><p>Le système complet et son protocole de mise à jour.</p></div>
-            </div></div></div>
+        <li class="step" data-stage="4">
+          <div class="step-card glass">
+            <span class="step-stage"><b>L'autonomie</b> · Semaine 4</span>
+            <h3>L'Autonomie</h3>
+            <span class="tag">Un système qui tourne avec vous</span>
+            <p>On met en place vos systèmes automatiques et des agents dans votre quotidien. Votre Système Empreinte est complet, et vous apprenez à le faire évoluer seul.</p>
+            <div class="step-video" data-video="videos/semaine-4.mp4" hidden></div>
+            <div class="keep"><span class="label">Ce que vous gardez</span><p>Votre Système Empreinte complet, et le savoir-faire pour le faire grandir.</p></div>
           </div>
         </li>
       </ol>
     </div>
-  </div>
-</section>
 
-<!-- ===== CE QUE VOUS OBTENEZ ===== -->
-<section id="offre" class="offer" aria-labelledby="t-offer">
-  <div class="wrap">
-    <h2 id="t-offer" class="rv">Tout ce qui compose le bootcamp, <em>et tout ce que vous conservez après.</em></h2>
-    <div class="bezel rv">
-      <div class="core offer-list">
-        <details>
-          <summary><span class="stack-h">Le parcours vidéo de 5 semaines</span><span class="stack-right"><span class="stack-val">850 €</span><span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></span></summary>
-          <p>Empreinte, cartographie, amplification, orchestration, autonomie. Un livrable par semaine, construit sur votre situation, pas sur un cas d'école. Accès à vie aux vidéos et à leurs mises à jour.</p>
-        </details>
-        <details>
-          <summary><span class="stack-h">Les 4 Lab hebdomadaires de 90 minutes</span><span class="stack-right"><span class="stack-val">400 €</span><span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></span></summary>
-          <p>En petit groupe, sur votre propre système, écran partagé. C'est là que tout se construit réellement.</p>
-        </details>
-        <details>
-          <summary><span class="stack-h">Les 4 sessions de formation et FAQ de 90 minutes</span><span class="stack-right"><span class="stack-val">800 €</span><span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></span></summary>
-          <p>La formation de la semaine en direct, et vos cas particuliers traités sur le moment. Vous ne restez jamais bloqué.</p>
-        </details>
-        <details>
-          <summary><span class="stack-h">La journée de clôture en présentiel</span><span class="stack-right"><span class="stack-val">400 €</span><span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></span></summary>
-          <p>Une journée complète à Paris, le samedi 3 octobre, pour approfondir chaque brique du système et installer votre protocole de mise à jour. Comprise dans le forfait, hors repas du midi.</p>
-        </details>
-        <details>
-          <summary><span class="stack-h">Le Kit d'Extraction</span><span class="stack-right"><span class="stack-val">500 €</span><span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></span></summary>
-          <p>Les prompts et les gabarits qui produisent vos documents d'empreinte. Réutilisables à vie, y compris pour refaire l'exercice quand votre activité évolue.</p>
-        </details>
-        <details>
-          <summary><span class="stack-h">La Bibliothèque de process</span><span class="stack-right"><span class="stack-val">700 €</span><span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></span></summary>
-          <p>Des process déjà construits, prêts à adapter : documents dans votre format, veille, notes de réflexion, comptes rendus. Vous partez d'exemples qui marchent, pas d'une page blanche.</p>
-        </details>
-        <div class="stack-total">
-          <span class="lbl">Valeur totale de l'ensemble</span>
-          <span class="amt">3 650 €</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== GARANTIE ===== -->
-<section class="guarantee" aria-labelledby="t-guar">
-  <div class="wrap">
-    <h2 id="t-guar" class="rv">Une garantie. <em>Simple et écrite noir sur blanc.</em></h2>
-    <div class="guar">
-      <div class="guar-media feather mono rv">
-        <picture>
-          <source type="image/webp" srcset="cliente.webp">
-          <img src="cliente.png" width="1122" height="1402" loading="lazy" decoding="async" alt="Une cliente satisfaite, les bras croisés">
-        </picture>
-        <span class="seal glass blur" aria-hidden="true"><svg class="i"><use href="#i-shield"/></svg><span class="sphere orange"></span></span>
-      </div>
-      <div class="guar-copy rv">
-        <h3>Satisfait ou remboursé, à la fin du bootcamp</h3>
-        <p>Vous suivez toutes les vidéos et les sessions en direct, et vous jouez le jeu des exercices. Si, à la fin du bootcamp, vous ne sentez pas la différence entre votre travail d'avant et votre travail d'après, on en parle lors d'un appel ensemble, et <strong>je vous rembourse intégralement.</strong> Pas de formulaire à rallonge, pas de conditions cachées : vous avez fait le travail, le résultat n'est pas là, vous êtes remboursé.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== TARIF ===== -->
-<section id="prix" class="pricing" aria-labelledby="t-price">
-  <div class="wrap">
-    <div class="pricing-head">
-      <span class="eyebrow rv">Session fondateur</span>
-      <h2 id="t-price" class="rv">Une formule. <em>Un prix qui n'existera qu'une fois.</em></h2>
-    </div>
-    <div class="price bezel rv">
-      <div class="core">
-        <div class="price-top">
-          <div>
-            <h3>Empreinte · Session fondateur</h3>
-            <p class="sub">Le bootcamp hybride complet, présentiel inclus</p>
-          </div>
-          <div class="price-amt"><span class="amt">1 290 €</span><span class="old">valeur 3 650 €</span></div>
-        </div>
-        <ul class="price-list">
-          <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>Le parcours vidéo complet sur 5 semaines</li>
-          <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>1 à 2 h de vidéos par semaine, en autonomie</li>
-          <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>Le Lab hebdomadaire de 90 minutes en petit groupe</li>
-          <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>La session de formation hebdomadaire de 90 minutes</li>
-          <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>La journée de clôture en présentiel à Paris, le samedi 3 octobre</li>
-          <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>Kit d'Extraction et Bibliothèque de process, conservés à vie</li>
-          <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>Accès à vie aux vidéos et à leurs mises à jour</li>
-          <li><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>Garantie satisfait ou remboursé à la fin du bootcamp</li>
-        </ul>
-        <a href="mailto:djouzar@penseria.fr?subject=R%C3%A9servation%20Empreinte%20-%20Session%20fondateur&amp;body=Bonjour%20Djouzar%2C%0D%0A%0D%0AJe%20souhaite%20r%C3%A9server%20ma%20place%20pour%20la%20session%20fondateur%20du%20bootcamp%20Empreinte.%0D%0A%0D%0AMon%20nom%20%3A%0D%0AMon%20activit%C3%A9%20%3A%0D%0A%0D%0AMerci%20%21" class="btn">Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-      </div>
-    </div>
-    <p class="price-note rv">Le tarif fondateur n'existe qu'une fois. <strong>Chaque session suivante augmente, et c'est annoncé à l'avance, pas inventé au dernier moment.</strong></p>
-    <div class="stairs rv" role="list" aria-label="Évolution du tarif selon la session">
-      <div class="step s1 is-now" role="listitem"><div class="step-track"><span class="step-bar"></span></div><span class="step-name">Session fondateur</span><span class="step-price">1 290 €</span></div>
-      <div class="step s2" role="listitem"><div class="step-track"><span class="step-bar"></span></div><span class="step-name">Session 2</span><span class="step-price">1 590 €</span></div>
-      <div class="step s3" role="listitem"><div class="step-track"><span class="step-bar"></span></div><span class="step-name">Session 3</span><span class="step-price">1 890 €</span></div>
+    <div class="prog-cta cta-block rv">
+      <a href="mailto:djouzar@penseria.fr?subject=R%C3%A9servation%20Empreinte%20-%20Session%20fondateur&amp;body=Bonjour%20Djouzar%2C%0D%0A%0D%0AJe%20souhaite%20r%C3%A9server%20ma%20place%20pour%20la%20session%20fondateur%20du%20bootcamp%20Empreinte.%0D%0A%0D%0AMon%20nom%20%3A%0D%0AMon%20activit%C3%A9%20%3A%0D%0A%0D%0AMerci%20%21" class="btn">Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+      <div class="seats" data-seats>Il reste 9&nbsp;places sur 12</div>
     </div>
   </div>
 </section>
@@ -951,8 +806,8 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         </picture>
       </figure>
       <div class="trainer-stats glass blur">
-        <div><span class="st-num count" data-target="1400">1 400</span><span class="st-label">personnes formées</span></div>
-        <div><span class="st-num count" data-target="25000">25 000</span><span class="st-label">personnes le suivent sur le réseau</span></div>
+        <div><span class="st-num count" data-target="1400">1&nbsp;400</span><span class="st-label">personnes formées</span></div>
+        <div><span class="st-num count" data-target="25000">25&nbsp;000</span><span class="st-label">personnes le suivent sur le réseau</span></div>
         <div><span class="st-num">Des dizaines</span><span class="st-label">d'entreprises accompagnées</span></div>
         <div><span class="st-num">Pionnier</span><span class="st-label">de la vulgarisation IA en France, sur YouTube depuis plus de 3 ans</span></div>
       </div>
@@ -966,6 +821,52 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         <p>Aujourd'hui, je mets mon bagage technique au service des entreprises et des indépendants : je vous aide à intégrer, de manière raisonnée et efficace, les outils d'IA pour booster votre productivité et votre créativité.</p>
       </div>
       <blockquote class="quote rv">Une IA vraiment utile n'est pas la plus puissante. C'est celle qui vous ressemble.</blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OFFRE ET TARIF ===== -->
+<section id="prix" class="pricing" aria-labelledby="t-price">
+  <div class="wrap">
+    <div class="pricing-head">
+      <span class="eyebrow rv">Session fondateur</span>
+      <h2 id="t-price" class="rv">Une formule. <em>Un prix qui n'existera qu'une fois.</em></h2>
+    </div>
+    <div class="price bezel rv">
+      <div class="core">
+        <div class="price-top">
+          <div>
+            <h3>Empreinte · Session fondateur</h3>
+            <p class="sub">Début le 8&nbsp;novembre · 12&nbsp;places maximum</p>
+          </div>
+          <div class="price-amt"><span class="amt">1&nbsp;290&nbsp;€</span><span class="old">valeur 3&nbsp;250&nbsp;€</span></div>
+        </div>
+        <ul class="stack">
+          <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">Le préambule et le parcours vidéo de 4&nbsp;semaines</span><span class="stack-d">Accès à vie aux vidéos et à leurs mises à jour.</span></span></span><span class="stack-v">850&nbsp;€</span></li>
+          <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">4 Explorations en direct de 2&nbsp;h</span><span class="stack-d">Avec tout le groupe, pour dérouler le contenu et répondre à vos questions.</span></span></span><span class="stack-v">800&nbsp;€</span></li>
+          <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">4 Lab de 2&nbsp;h, à 3&nbsp;personnes maximum</span><span class="stack-d">Sur votre propre système, écran partagé. C'est là que tout se construit.</span></span></span><span class="stack-v">400&nbsp;€</span></li>
+          <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">Le Kit d'Extraction</span><span class="stack-d">Les prompts et les gabarits de vos documents d'empreinte, réutilisables à vie.</span></span></span><span class="stack-v">500&nbsp;€</span></li>
+          <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">La Bibliothèque de process</span><span class="stack-d">Des process prêts à adapter : documents, veille, notes de réflexion, comptes rendus.</span></span></span><span class="stack-v">700&nbsp;€</span></li>
+        </ul>
+        <div class="stack-total"><span class="lbl">Valeur totale de l'ensemble</span><span class="amt">3&nbsp;250&nbsp;€</span></div>
+        <div class="price-cta">
+          <div class="seats" data-seats>Il reste 9&nbsp;places sur 12</div>
+          <a href="mailto:djouzar@penseria.fr?subject=R%C3%A9servation%20Empreinte%20-%20Session%20fondateur&amp;body=Bonjour%20Djouzar%2C%0D%0A%0D%0AJe%20souhaite%20r%C3%A9server%20ma%20place%20pour%20la%20session%20fondateur%20du%20bootcamp%20Empreinte.%0D%0A%0D%0AMon%20nom%20%3A%0D%0AMon%20activit%C3%A9%20%3A%0D%0A%0D%0AMerci%20%21" class="btn">Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+        </div>
+      </div>
+    </div>
+    <div class="guar glass rv">
+      <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-shield"/></svg></span>
+      <div>
+        <h3>Satisfait ou remboursé, à la fin du bootcamp</h3>
+        <p>Vous suivez toutes les vidéos et les sessions en direct, et vous jouez le jeu des exercices. Si, à la fin du bootcamp, vous ne sentez pas la différence entre votre travail d'avant et votre travail d'après, on en parle lors d'un appel ensemble, et <strong>je vous rembourse intégralement.</strong> Pas de formulaire à rallonge, pas de conditions cachées : vous avez fait le travail, le résultat n'est pas là, vous êtes remboursé.</p>
+      </div>
+    </div>
+    <p class="price-note rv">Le tarif fondateur n'existe qu'une fois. <strong>Chaque session suivante augmente, et c'est annoncé à l'avance, pas inventé au dernier moment.</strong></p>
+    <div class="stairs rv" role="list" aria-label="Évolution du tarif selon la session">
+      <div class="tier t1 is-now" role="listitem"><div class="step-track"><span class="step-bar"></span></div><span class="tier-name">Session fondateur</span><span class="tier-price">1&nbsp;290&nbsp;€</span></div>
+      <div class="tier t2" role="listitem"><div class="step-track"><span class="step-bar"></span></div><span class="tier-name">Session 2</span><span class="tier-price">1&nbsp;590&nbsp;€</span></div>
+      <div class="tier t3" role="listitem"><div class="step-track"><span class="step-bar"></span></div><span class="tier-name">Session 3</span><span class="tier-price">1&nbsp;890&nbsp;€</span></div>
     </div>
   </div>
 </section>
@@ -992,7 +893,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         <ul>
           <li><span class="li-ic no" aria-hidden="true"><svg class="i"><use href="#i-x"/></svg></span>Vous cherchez une liste d'outils et d'astuces à consommer en vidéo</li>
           <li><span class="li-ic no" aria-hidden="true"><svg class="i"><use href="#i-x"/></svg></span>Vous voulez déléguer la construction à quelqu'un d'autre sans y passer de temps</li>
-          <li><span class="li-ic no" aria-hidden="true"><svg class="i"><use href="#i-x"/></svg></span>Vous ne pouvez pas dégager le rythme hebdomadaire pendant 5 semaines</li>
+          <li><span class="li-ic no" aria-hidden="true"><svg class="i"><use href="#i-x"/></svg></span>Vous ne pouvez pas dégager le rythme hebdomadaire pendant 4&nbsp;semaines</li>
           <li><span class="li-ic no" aria-hidden="true"><svg class="i"><use href="#i-x"/></svg></span>Votre métier ne produit ni écrit ni document : le système vous servirait peu</li>
         </ul>
       </div>
@@ -1001,7 +902,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
 </section>
 
 <!-- ===== FAQ ===== -->
-<section class="faq" aria-labelledby="t-faq">
+<section id="faq" class="faq" aria-labelledby="t-faq">
   <div class="wrap">
     <div class="faq-head">
       <span class="eyebrow rv">Questions directes, réponses directes</span>
@@ -1015,7 +916,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         </details>
         <details class="rv">
           <summary>Combien de temps ça demande, concrètement ?<span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
-          <p>Chaque semaine : 1 à 2 heures de vidéos à placer où vous voulez, une session de formation de 90 minutes et un Lab de 90 minutes en direct. Plus la journée de clôture en présentiel à Paris, le samedi 3 octobre. Le rythme est exigeant mais cadré, et tout ce que vous y construisez sert directement votre activité, dès la semaine 1.</p>
+          <p>Un préambule de 3 heures au démarrage, puis chaque semaine : 2 à 3 heures de vidéos à placer où vous voulez, une Exploration de 2 heures avec tout le groupe et un Lab de 2 heures en petit groupe de 3&nbsp;personnes maximum. Le rythme est exigeant mais cadré, et tout ce que vous y construisez sert directement votre activité, dès la semaine 1.</p>
         </details>
         <details class="rv">
           <summary>Je peux apprendre tout ça seul avec des vidéos gratuites.<span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
@@ -1033,11 +934,11 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         </details>
         <details class="rv">
           <summary>Est-ce que ça va me rendre dépendant de l'IA ?<span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
-          <p>C'est la bonne question, et c'est le fil rouge du parcours. Le garde-fou construit en semaine 3 fait l'inverse d'un pilote automatique : il signale ce qui ne vous ressemble pas et ce qui exige encore votre jugement. On délègue l'exécution, jamais le jugement. Une IA qui porte votre empreinte ne pense pas à votre place, elle arrête de penser à votre place.</p>
+          <p>C'est la bonne question, et c'est le fil rouge du parcours. Votre système signale ce qui ne vous ressemble pas et ce qui exige encore votre jugement. On délègue l'exécution, jamais le jugement. Une IA qui porte votre empreinte ne pense pas à votre place, elle arrête de penser à votre place.</p>
         </details>
         <details class="rv">
           <summary>Et mes données, la confidentialité ?<span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
-          <p>Le sujet est traité dès la construction, pas en disclaimer de fin. On définit ensemble ce qui peut entrer dans le système, sous quelle forme, et ce qui n'y entre jamais. Pour un professionnel qui manipule des données clients, c'est une condition d'exercice, pas une option.</p>
+          <p>Le sujet est traité dès le préambule, pas en disclaimer de fin. On définit ensemble ce qui peut entrer dans le système, sous quelle forme, et ce qui n'y entre jamais. Pour un professionnel qui manipule des données clients, c'est une condition d'exercice, pas une option.</p>
         </details>
         <details class="rv">
           <summary>La formation est-elle finançable (CPF, OPCO) ?<span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
@@ -1057,21 +958,16 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         <div class="finale-grid">
           <div class="finale-copy">
             <h2 id="t-finale">Les autres apprennent à utiliser l'IA générique. <em>Vous, vous construisez la vôtre.</em></h2>
-            <p class="lead">Dans 5 semaines, vous avez un système qui travaille comme vous, connaît vos projets, et que vous savez faire évoluer sans moi. Ou vous êtes remboursé.</p>
+            <p class="lead">Dans 4&nbsp;semaines, vous avez un système qui travaille comme vous, connaît vos projets, et que vous savez faire évoluer sans moi. Ou vous êtes remboursé.</p>
             <div class="cta-block">
-              <a href="mailto:djouzar@penseria.fr?subject=R%C3%A9servation%20Empreinte%20-%20Session%20fondateur&amp;body=Bonjour%20Djouzar%2C%0D%0A%0D%0AJe%20souhaite%20r%C3%A9server%20ma%20place%20pour%20la%20session%20fondateur%20du%20bootcamp%20Empreinte.%0D%0A%0D%0AMon%20nom%20%3A%0D%0AMon%20activit%C3%A9%20%3A%0D%0A%0D%0AMerci%20%21" class="btn">Réserver ma place en session fondateur<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-              <p class="btn-note">Session fondateur à 1 290 € · Les sessions suivantes seront à 1 590 € puis 1 890 €</p>
+              <a href="mailto:djouzar@penseria.fr?subject=R%C3%A9servation%20Empreinte%20-%20Session%20fondateur&amp;body=Bonjour%20Djouzar%2C%0D%0A%0D%0AJe%20souhaite%20r%C3%A9server%20ma%20place%20pour%20la%20session%20fondateur%20du%20bootcamp%20Empreinte.%0D%0A%0D%0AMon%20nom%20%3A%0D%0AMon%20activit%C3%A9%20%3A%0D%0A%0D%0AMerci%20%21" class="btn">Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+              <div class="seats" data-seats>Il reste 9&nbsp;places sur 12</div>
             </div>
-            <div class="founder-box">
-              <span class="label">POURQUOI LE TARIF FONDATEUR EXISTE</span>
-              <p>1 290 € au lieu du prix des sessions suivantes, ce n'est pas une remise, c'est un échange. Les participants de la première session s'engagent à un retour d'expérience honnête et à un témoignage à la fin du parcours. Vous bénéficiez du meilleur tarif que cette formation aura jamais ; les sessions suivantes bénéficient de votre retour. C'est pour ça que le prix remontera ensuite.</p>
-            </div>
+            <p class="btn-note">Session fondateur à 1&nbsp;290&nbsp;€ · Les sessions suivantes seront à 1&nbsp;590&nbsp;€ puis 1&nbsp;890&nbsp;€</p>
           </div>
-          <div class="finale-media feather mono">
-            <picture>
-              <source type="image/webp" srcset="bureau.webp">
-              <img src="bureau.png" width="1122" height="1402" loading="lazy" decoding="async" alt="Djouzar à son bureau, sur son ordinateur">
-            </picture>
+          <div class="founder-box">
+            <span class="label">POURQUOI LE TARIF FONDATEUR EXISTE</span>
+            <p>1&nbsp;290&nbsp;€ au lieu du prix des sessions suivantes, ce n'est pas une remise, c'est un échange. Les participants de la première session s'engagent à un retour d'expérience honnête et à un témoignage à la fin du parcours. Vous bénéficiez du meilleur tarif que cette formation aura jamais ; les sessions suivantes bénéficient de votre retour. C'est pour ça que le prix remontera ensuite.</p>
           </div>
         </div>
       </div>
@@ -1095,19 +991,27 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $$ = function(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
 
-  // 1. Révélation au scroll
+  // Places restantes : à mettre à jour ici, une seule fois pour toute la page
+  var SEATS = { total: 12, left: 9 };
+  $$('[data-seats]').forEach(function(el){
+    var taken = SEATS.total - SEATS.left, html = '<span class="seats-bricks" aria-hidden="true">';
+    for(var i = 0; i < SEATS.total; i++) html += '<i' + (i < taken ? ' class="taken"' : '') + '></i>';
+    el.innerHTML = html + '</span><span>Il reste <b>' + SEATS.left + ' places</b> sur ' + SEATS.total + '</span>';
+  });
+
+  // Révélation au scroll
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: .15, rootMargin: '0px 0px -8% 0px' });
   $$('.rv').forEach(function(el){ io.observe(el); });
 
-  // 2. Nav plus opaque dès qu'on quitte le haut de page (sentinelle, pas d'écouteur de scroll)
+  // Nav plus opaque dès qu'on quitte le haut de page
   var nav = document.getElementById('nav');
   new IntersectionObserver(function(entries){
     nav.classList.toggle('is-scrolled', !entries[0].isIntersecting);
   }).observe(document.getElementById('nav-sentinel'));
 
-  // 3. Lien de nav actif selon la section visible
+  // Lien de nav actif selon la section visible
   var links = {};
   $$('.nav-links a').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
   var navIO = new IntersectionObserver(function(entries){
@@ -1117,10 +1021,9 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
       if(links[e.target.id]) links[e.target.id].setAttribute('aria-current', 'true');
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
-  // toutes les sections sont observées : hors des 4 du menu, aucun lien n'est surligné
   $$('header.hero, main > section').forEach(function(s){ navIO.observe(s); });
 
-  // 4. Menu mobile
+  // Menu mobile
   var menuBtn = document.getElementById('menu-btn');
   var menu = document.getElementById('menu');
   function setMenu(open){
@@ -1137,7 +1040,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
     if(e.key === 'Escape' && doc.classList.contains('menu-open')){ setMenu(false); menuBtn.focus(); }
   });
 
-  // 5. Onglets de la journée (clic + flèches du clavier)
+  // Onglets de la journée (clic + flèches du clavier)
   var tabs = $$('.day-tab');
   function selectTab(i, focus){
     tabs.forEach(function(t, j){
@@ -1160,27 +1063,47 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
     });
   });
 
-  // 6. Parcours : la semaine qui traverse le milieu de l'écran s'ouvre, les autres se ferment
-  var weeks = $$('.wk');
-  var nums = $$('.jn-num');
-  var segs = $$('.jn-progress i');
-  var jnLabel = document.getElementById('jn-label');
-  function setWeek(i){
-    weeks.forEach(function(w, j){ w.classList.toggle('is-active', i === j); });
-    nums.forEach(function(n, j){ n.classList.toggle('is-active', i === j); n.classList.toggle('is-past', j < i); });
-    segs.forEach(function(s, j){ s.classList.toggle('on', j <= i); });
-    if(jnLabel) jnLabel.textContent = 'Semaine ' + (i + 1);
+  // Programme : l'étape qui traverse le milieu de l'écran pilote la construction 3D
+  var STAGES = ['Les fondations', 'La connexion', "L'amplification", "L'autonomie"];
+  var steps = $$('.step');
+  var progViz = document.querySelector('[data-viz="program"]');
+  var hudStep = document.getElementById('hud-step'), hudName = document.getElementById('hud-name');
+  var hudBars = $$('.hud-bar i');
+  function setStep(idx){
+    var stage = parseInt(steps[idx].getAttribute('data-stage'), 10);
+    steps.forEach(function(s, j){ s.classList.toggle('is-active', j === idx); });
+    hudStep.textContent = 'Étape ' + stage + ' sur 4';
+    hudName.textContent = STAGES[stage - 1];
+    hudBars.forEach(function(b, j){ b.classList.toggle('on', j < stage); });
+    if(progViz.getAttribute('data-stage') !== String(stage)){
+      progViz.setAttribute('data-stage', stage);
+      progViz.dispatchEvent(new CustomEvent('empreinte:stage', { detail: stage }));
+    }
   }
-  var wkIO = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting) setWeek(weeks.indexOf(e.target)); });
-  }, { rootMargin: '-42% 0px -56% 0px' });
-  weeks.forEach(function(w, i){
-    wkIO.observe(w);
-    w.querySelector('.wk-head').addEventListener('click', function(){ setWeek(i); });
-  });
-  setWeek(0);
+  var stepIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) setStep(steps.indexOf(e.target)); });
+  }, { rootMargin: '-46% 0px -52% 0px' });
+  steps.forEach(function(s){ stepIO.observe(s); });
 
-  // 7. Comptage animé des chiffres du formateur
+  // Vidéos des semaines : chaque emplacement s'affiche dès que le fichier existe dans /videos
+  var videoIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      videoIO.unobserve(e.target);
+      var slot = e.target.querySelector('[data-video]'), src = slot.getAttribute('data-video');
+      fetch(src, { method: 'HEAD' }).then(function(r){
+        var type = r.headers.get('content-type') || '';
+        if(!r.ok || type.indexOf('video') !== 0) return;
+        var v = document.createElement('video');
+        v.src = src; v.controls = true; v.playsInline = true; v.preload = 'metadata';
+        slot.appendChild(v); slot.hidden = false;
+      }).catch(function(){});
+    });
+  }, { rootMargin: '400px 0px' });
+  // on observe la carte : un emplacement masqué n'a pas de taille et ne serait jamais détecté
+  $$('[data-video]').forEach(function(s){ videoIO.observe(s.closest('.step-card')); });
+
+  // Comptage animé des chiffres du formateur
   var fmt = function(n){ return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); };
   var cIO = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
@@ -1200,7 +1123,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   }, { threshold: .6 });
   $$('.count').forEach(function(el){ cIO.observe(el); });
 
-  // 8. Reflet du verre qui suit le curseur
+  // Reflet du verre qui suit le curseur
   $$('.glass, .core').forEach(function(el){
     el.addEventListener('pointermove', function(e){
       var r = el.getBoundingClientRect();
@@ -1208,27 +1131,339 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
       el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
     });
   });
-
-  // 9. Sphères du hero en parallaxe (souris uniquement, pas sur écran tactile)
-  if(!reduce && window.matchMedia('(pointer: fine)').matches){
-    var hero = document.querySelector('.hero');
-    var spheres = $$('[data-depth]', hero);
-    var raf = 0, tx = 0, ty = 0;
-    hero.addEventListener('pointermove', function(e){
-      var r = hero.getBoundingClientRect();
-      tx = (e.clientX - r.left) / r.width - .5;
-      ty = (e.clientY - r.top) / r.height - .5;
-      if(raf) return;
-      raf = requestAnimationFrame(function(){
-        raf = 0;
-        spheres.forEach(function(s){
-          var d = parseFloat(s.getAttribute('data-depth'));
-          s.style.transform = 'translate3d(' + (tx * d) + 'px,' + (ty * d) + 'px,0)';
-        });
-      });
-    });
-  }
 })();
+</script>
+
+<!-- Animation 3D : l'empreinte se construit en briques (three.js) -->
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const COLS = 22, ROWS = 26, H = 0.62, PLATE_TOP = 0.2;
+
+// Grille de l'empreinte : anneaux concentriques décentrés vers le haut, comme une boucle digitale
+function buildCells(){
+  const cells = [], index = new Map();
+  for(let j = 0; j < ROWS; j++) for(let i = 0; i < COLS; i++){
+    const x = (i - (COLS - 1) / 2) / (COLS / 2);
+    const y = ((ROWS - 1) / 2 - j) / (ROWS / 2);
+    if(Math.hypot(x / 0.94, (y + 0.03) / 0.98) > 0.97) continue;
+    const r0 = Math.min(1, Math.hypot(x, y));
+    const shift = 0.34 * (1 - r0);
+    // anneaux en haut, arcs plus plats en bas (comme la base d'une vraie empreinte)
+    const ring = Math.hypot(x / 0.8, y - shift);
+    const flat = 0.5 - y * 1.1 + 0.25 * x * x;
+    const w = Math.min(1, Math.max(0, (y + 0.05) / -0.5));
+    const r = ring + (flat - ring) * w * w * (3 - 2 * w);
+    const ang = Math.atan2(y - shift, x);
+    const f = (r * 4.4 + 0.1 * Math.sin(ang * 2) + 0.75) % 1;
+    if(f > 0.5) continue;
+    const layers = 1 + Math.round(2 * Math.max(0, 1 - r * 1.3));
+    const c = { i, j, x: i - (COLS - 1) / 2, z: j - (ROWS - 1) / 2, r, layers };
+    index.set(i + ',' + j, cells.length);
+    cells.push(c);
+  }
+  cells.forEach(c => {
+    c.n = [[1,0],[-1,0],[0,1],[0,-1]].map(([di, dj]) => index.get((c.i + di) + ',' + (c.j + dj))).filter(v => v !== undefined);
+  });
+  return cells;
+}
+const CELLS = buildCells();
+
+const easeOutBack = t => { const c1 = 1.5, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); };
+const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+
+const C_FOUND = new THREE.Color('#cdd0d8');
+const C_GROW = new THREE.Color('#bdb2f6');
+const C_DEEP = new THREE.Color('#5a3fe3');
+const C_LIGHT = new THREE.Color('#a996ff');
+
+class EmpreinteScene {
+  constructor(host, opts){
+    this.host = host; this.opts = opts;
+    this.canvas = host.querySelector('canvas');
+    this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    this.renderer.setClearColor(0x000000, 0);
+    this.renderer.shadowMap.enabled = true;
+    this.renderer.shadowMap.type = THREE.PCFShadowMap;
+    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    this.renderer.toneMappingExposure = 1.05;
+
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(30, 1, 0.5, 400);
+    this.group = new THREE.Group();
+    this.scene.add(this.group);
+
+    this.scene.add(new THREE.HemisphereLight(0xffffff, 0xc9c3e6, 1.15));
+    const sun = new THREE.DirectionalLight(0xffffff, 2.3);
+    sun.position.set(-14, 30, 16);
+    sun.castShadow = true;
+    sun.shadow.mapSize.set(1024, 1024);
+    Object.assign(sun.shadow.camera, { left: -20, right: 20, top: 20, bottom: -20, near: 1, far: 90 });
+    sun.shadow.bias = -0.0006;
+    this.scene.add(sun);
+    const rim = new THREE.PointLight(0x8f6dff, 60, 60, 2);
+    rim.position.set(14, 10, -12);
+    this.scene.add(rim);
+
+    this.buildPlate();
+    this.buildBricks();
+    this.buildCement();
+    this.buildAgents();
+
+    this.stage = 0; this.p4 = 0; this.time = 0;
+    this.rotTarget = { x: 0, y: 0 }; this.rot = { x: 0, y: 0 };
+    this.visible = false; this.running = false; this.dirty = true;
+    this.tick = this.tick.bind(this);
+
+    new ResizeObserver(() => this.resize()).observe(host);
+    this.resize();
+    new IntersectionObserver(es => { this.visible = es[0].isIntersecting; this.loop(); }).observe(host);
+    document.addEventListener('visibilitychange', () => this.loop());
+    if(opts.interactive && !reduce && matchMedia('(pointer: fine)').matches){
+      host.parentElement.addEventListener('pointermove', e => {
+        const r = host.getBoundingClientRect();
+        this.rotTarget.y = ((e.clientX - r.left) / r.width - .5) * 0.5;
+        this.rotTarget.x = ((e.clientY - r.top) / r.height - .5) * 0.16;
+      });
+    }
+  }
+
+  buildPlate(){
+    const plateMat = new THREE.MeshStandardMaterial({ color: 0xe6e7ec, roughness: .55 });
+    const plate = new THREE.Mesh(new RoundedBoxGeometry(COLS + 1.2, 0.4, ROWS + 1.2, 3, 0.18), plateMat);
+    plate.receiveShadow = true;
+    this.group.add(plate);
+    const stud = new THREE.CylinderGeometry(0.26, 0.26, 0.14, 18);
+    const studs = new THREE.InstancedMesh(stud, new THREE.MeshStandardMaterial({ color: 0xdcdde3, roughness: .5 }), COLS * ROWS);
+    const m = new THREE.Matrix4();
+    let k = 0;
+    for(let j = 0; j < ROWS; j++) for(let i = 0; i < COLS; i++){
+      m.makeTranslation(i - (COLS - 1) / 2, PLATE_TOP + 0.07, j - (ROWS - 1) / 2);
+      studs.setMatrixAt(k++, m);
+    }
+    studs.receiveShadow = true;
+    this.group.add(studs);
+  }
+
+  buildBricks(){
+    let body = new RoundedBoxGeometry(0.86, H, 0.86, 2, 0.07);
+    if(body.index) body = body.toNonIndexed();
+    const top = new THREE.CylinderGeometry(0.25, 0.25, 0.16, 18).toNonIndexed();
+    top.translate(0, H / 2 + 0.08, 0);
+    const geo = mergeGeometries([body, top]);
+    const entries = [];
+    CELLS.forEach(c => {
+      for(let l = 1; l <= c.layers; l++){
+        entries.push({
+          c, l, stage: l === 1 ? 1 : 3,
+          delay: l === 1 ? c.r * 0.9 + Math.random() * 0.18 : (l - 2) * 0.32 + c.r * 0.55 + Math.random() * 0.12,
+          v: 0, start: 0, last: -1, color: new THREE.Color()
+        });
+      }
+    });
+    this.bricks = entries;
+    this.brickMesh = new THREE.InstancedMesh(geo, new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: .38, metalness: 0 }), entries.length);
+    this.brickMesh.castShadow = true; this.brickMesh.receiveShadow = true;
+    this.brickMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+    entries.forEach((e, k) => { e.color.copy(e.l === 1 ? C_FOUND : C_GROW); this.brickMesh.setColorAt(k, e.color); });
+    this.group.add(this.brickMesh);
+  }
+
+  buildCement(){
+    const pairs = [];
+    CELLS.forEach((c, a) => c.n.forEach(b => { if(b > a) pairs.push([c, CELLS[b]]); }));
+    this.cement = pairs.map(([a, b]) => ({
+      x: (a.x + b.x) / 2, z: (a.z + b.z) / 2, alongX: a.x !== b.x,
+      delay: Math.min(a.r, b.r) * 0.8 + Math.random() * 0.15, v: 0, start: 0, last: -1
+    }));
+    this.cementMat = new THREE.MeshStandardMaterial({ color: 0x7c5cff, emissive: 0x6a4cf0, emissiveIntensity: 1.1, roughness: .3 });
+    this.cementMesh = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), this.cementMat, this.cement.length);
+    this.cementMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+    this.group.add(this.cementMesh);
+  }
+
+  buildAgents(){
+    const mat = new THREE.MeshStandardMaterial({ color: 0xf2793a, emissive: 0xf2793a, emissiveIntensity: .55, roughness: .25 });
+    this.agents = [];
+    const pool = CELLS.map((c, k) => k).filter(k => CELLS[k].n.length);
+    for(let a = 0; a < 5; a++){
+      const mesh = new THREE.Mesh(new THREE.SphereGeometry(0.3, 24, 16), mat);
+      mesh.castShadow = true; mesh.scale.setScalar(0.0001);
+      this.group.add(mesh);
+      const from = pool[Math.floor(Math.random() * pool.length)];
+      this.agents.push({ mesh, from, to: CELLS[from].n[0], prev: -1, t: Math.random(), speed: 1.3 + Math.random() * 0.6 });
+    }
+  }
+
+  topOf(c){ return PLATE_TOP + c.layers * H + 0.5; }
+
+  setStage(n, instant){
+    n = Math.max(0, Math.min(4, n));
+    if(n === this.stage) return;
+    const now = this.time;
+    const rising = n > this.stage;
+    if(rising){
+      this.bricks.forEach(e => { if(e.stage > this.stage && e.stage <= n) e.start = now + (instant ? 0 : e.delay); });
+      if(this.stage < 2 && n >= 2) this.cement.forEach(e => { e.start = now + (instant ? 0 : e.delay); });
+    }
+    this.stage = n;
+    if(instant || reduce){
+      this.bricks.forEach(e => { e.v = this.stage >= e.stage ? 1 : 0; });
+      this.cement.forEach(e => { e.v = this.stage >= 2 ? 1 : 0; });
+      this.p4 = this.stage >= 4 ? 1 : 0;
+    }
+    this.dirty = true;
+    this.loop();
+  }
+
+  resize(){
+    const w = this.host.clientWidth, h = this.host.clientHeight;
+    if(!w || !h) return;
+    this.renderer.setSize(w, h, false);
+    const aspect = w / h;
+    this.camera.aspect = aspect;
+    const fov = THREE.MathUtils.degToRad(this.camera.fov);
+    const R = this.opts.fit || 14;
+    const d = Math.max(R / Math.tan(fov / 2) / Math.min(aspect, 1.15), 20);
+    const el = THREE.MathUtils.degToRad(this.opts.elevation || 56);
+    this.camera.position.set(0, Math.sin(el) * d, Math.cos(el) * d);
+    this.camera.lookAt(0, 0.6, 0.6);
+    this.camera.updateProjectionMatrix();
+    this.dirty = true;
+    this.loop();
+  }
+
+  loop(){
+    const should = this.visible && !document.hidden;
+    if(should && !this.running){
+      this.running = true; this.last = performance.now();
+      this.update(0); this.renderer.render(this.scene, this.camera);
+      this.host.classList.add('is-ready');
+      requestAnimationFrame(this.tick);
+    }
+  }
+
+  tick(now){
+    if(!this.visible || document.hidden){ this.running = false; return; }
+    const dt = Math.min(0.05, (now - this.last) / 1000);
+    this.last = now; this.time += dt;
+    this.update(dt);
+    this.renderer.render(this.scene, this.camera);
+    if(!this.host.classList.contains('is-ready')) this.host.classList.add('is-ready');
+    requestAnimationFrame(this.tick);
+  }
+
+  update(dt){
+    const m = new THREE.Matrix4(), q = new THREE.Quaternion(), s = new THREE.Vector3(), p = new THREE.Vector3();
+    const t = this.time;
+    let moved = false;
+
+    this.bricks.forEach((e, k) => {
+      const on = this.stage >= e.stage;
+      if(on){ if(t >= e.start && e.v < 1) e.v = Math.min(1, e.v + dt / 0.62); }
+      else if(e.v > 0) e.v = Math.max(0, e.v - dt / 0.3);
+      if(e.v === e.last) return;
+      e.last = e.v; moved = true;
+      const y = PLATE_TOP + (e.l - 0.5) * H + (1 - easeOutBack(e.v)) * 5;
+      const sc = e.v <= 0.001 ? 0.0001 : 1;
+      m.compose(p.set(e.c.x, y, e.c.z), q, s.set(sc, sc, sc));
+      this.brickMesh.setMatrixAt(k, m);
+    });
+    if(moved) this.brickMesh.instanceMatrix.needsUpdate = true;
+
+    let cmoved = false;
+    this.cement.forEach((e, k) => {
+      const on = this.stage >= 2;
+      if(on){ if(t >= e.start && e.v < 1) e.v = Math.min(1, e.v + dt / 0.5); }
+      else if(e.v > 0) e.v = Math.max(0, e.v - dt / 0.3);
+      if(e.v === e.last) return;
+      e.last = e.v; cmoved = true;
+      const hgt = Math.max(0.0001, easeOutCubic(e.v) * H * 0.82);
+      m.compose(p.set(e.x, PLATE_TOP + hgt / 2, e.z), q, e.alongX ? s.set(0.15, hgt, 0.8) : s.set(0.8, hgt, 0.15));
+      this.cementMesh.setMatrixAt(k, m);
+    });
+    if(cmoved) this.cementMesh.instanceMatrix.needsUpdate = true;
+    if(this.stage >= 2) this.cementMat.emissiveIntensity = 0.95 + 0.35 * Math.sin(t * 2.6);
+
+    // Autonomie : le gris devient violet, une vague lumineuse parcourt l'empreinte
+    const target4 = this.stage >= 4 ? 1 : 0;
+    if(this.p4 !== target4) this.p4 = target4 ? Math.min(1, this.p4 + dt / 1.6) : Math.max(0, this.p4 - dt / 0.6);
+    if(this.p4 > 0 || this.colorsDirty){
+      const tmp = new THREE.Color();
+      this.bricks.forEach((e, k) => {
+        const wave = 0.5 + 0.5 * Math.sin(t * 2.1 - e.c.r * 8);
+        const base = e.l === 1 ? C_FOUND : C_GROW;
+        tmp.copy(C_DEEP).lerp(C_LIGHT, Math.min(1, (e.l - 1) / 2 * 0.7 + wave * 0.45));
+        e.color.copy(base).lerp(tmp, this.p4);
+        this.brickMesh.setColorAt(k, e.color);
+      });
+      this.brickMesh.instanceColor.needsUpdate = true;
+      this.colorsDirty = this.p4 > 0;
+    }
+
+    // Agents : de petites sphères qui sautent de brique en brique, seules
+    this.agents.forEach(a => {
+      const sc = this.p4 <= 0.001 ? 0.0001 : easeOutCubic(this.p4);
+      a.mesh.scale.setScalar(sc);
+      if(this.p4 <= 0) return;
+      a.t += dt * a.speed;
+      if(a.t >= 1){
+        a.t -= 1;
+        const opts = CELLS[a.to].n.filter(k => k !== a.from);
+        const next = opts.length ? opts[Math.floor(Math.random() * opts.length)] : a.from;
+        a.from = a.to; a.to = next;
+      }
+      const A = CELLS[a.from], B = CELLS[a.to];
+      const k = a.t;
+      a.mesh.position.set(A.x + (B.x - A.x) * k, this.topOf(A) + (this.topOf(B) - this.topOf(A)) * k + Math.sin(Math.PI * k) * 0.9, A.z + (B.z - A.z) * k);
+    });
+
+    // Légère respiration du plateau, et suivi doux du curseur
+    const sway = reduce ? 0 : Math.sin(t * 0.3) * 0.12;
+    this.rot.x += (this.rotTarget.x - this.rot.x) * 0.06;
+    this.rot.y += (this.rotTarget.y - this.rot.y) * 0.06;
+    this.group.rotation.set(this.rot.x, sway + this.rot.y, 0);
+  }
+}
+
+function start(){
+  try{
+    const probe = document.createElement('canvas');
+    if(!(probe.getContext('webgl2') || probe.getContext('webgl'))) return;
+  }catch(e){ return; }
+
+  const heroHost = document.querySelector('[data-viz="hero"]');
+  if(heroHost){
+    const hero = new EmpreinteScene(heroHost, { interactive: true, elevation: 58, fit: 14.2 });
+    if(reduce){ hero.setStage(4, true); }
+    else{
+      let played = false;
+      new IntersectionObserver((es, obs) => {
+        if(!es[0].isIntersecting || played) return;
+        played = true; obs.disconnect();
+        [[350, 1], [1900, 2], [3300, 3], [5000, 4]].forEach(([ms, n]) => setTimeout(() => hero.setStage(n), ms));
+      }, { threshold: .3 }).observe(heroHost);
+    }
+  }
+
+  const progHost = document.querySelector('[data-viz="program"]');
+  if(progHost){
+    const prog = new EmpreinteScene(progHost, { interactive: false, elevation: 54, fit: 17 });
+    prog.setStage(parseInt(progHost.getAttribute('data-stage'), 10) || 1, true);
+    progHost.addEventListener('empreinte:stage', e => prog.setStage(e.detail, false));
+  }
+}
+start();
 </script>
 </body>
 </html>
