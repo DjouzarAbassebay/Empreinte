@@ -454,6 +454,7 @@ strong{color:var(--ink);font-weight:700}
 .amt-label{display:block;margin-bottom:6px;font-size:.74rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-deep)}
 .price-amt .amt{display:block;font-family:'General Sans',sans-serif;font-weight:600;font-size:clamp(3.2rem,6.4vw,4.8rem);line-height:.95;letter-spacing:-.05em;color:var(--accent);font-variant-numeric:tabular-nums}
 .price-amt .old{display:block;margin-top:8px;font-size:.95rem;color:var(--muted)}
+.price-amt .amt small,.pay-amt small{margin-left:6px;font-size:.3em;font-weight:600;letter-spacing:.02em;color:var(--accent-deep)}
 .stack-head{display:flex;justify-content:space-between;padding:22px 0 0;font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
 .stack{list-style:none;margin:10px 0 0}
 .stack li{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:16px 0}
@@ -471,7 +472,10 @@ strong{color:var(--ink);font-weight:700}
 .pay{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px 24px;margin-top:18px;padding:20px 24px;border-radius:20px;background:linear-gradient(120deg,rgba(106,76,240,.14),rgba(106,76,240,.05));box-shadow:inset 0 0 0 1px rgba(106,76,240,.25)}
 .pay-k{display:block;font-family:'General Sans',sans-serif;font-weight:600;font-size:1.15rem;color:var(--ink)}
 .pay-d{display:block;font-size:.9rem;color:var(--muted)}
+.pay-life{display:flex;align-items:center;gap:7px;margin-top:8px;font-size:.88rem;font-weight:700;color:var(--accent-deep)}
+.pay-life .i{width:15px;height:15px}
 .pay-r{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.pay-amt small{font-size:.38em}
 .pay-amt{font-family:'General Sans',sans-serif;font-weight:600;font-size:2.4rem;line-height:1;letter-spacing:-.04em;color:var(--accent);font-variant-numeric:tabular-nums}
 .pay-save{padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;color:#fff;background:var(--spark)}
 .price-cta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px 24px;margin-top:28px}
@@ -564,10 +568,10 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   .js .stairs .t3 .step-bar{transition-delay:.24s}
   .js .portrait .gray{transition:opacity 1.8s var(--ease) .35s}
   .js .trainer-visual.in .gray{opacity:0}
-  .btn.nudge{animation:nudge .9s var(--ease-out)}
-  .btn.nudge::after{animation:nudgeRing 1.1s ease-out}
-  @keyframes nudge{0%{transform:scale(1)}35%{transform:scale(1.07)}62%{transform:scale(.985)}100%{transform:scale(1)}}
-  @keyframes nudgeRing{0%{box-shadow:0 0 0 0 rgba(106,76,240,.5)}100%{box-shadow:0 0 0 18px rgba(106,76,240,0)}}
+  .btn.nudge{animation:nudge 1.4s ease-in-out}
+  .btn.nudge::after{animation:nudgeRing 1.6s ease-out}
+  @keyframes nudge{0%,100%{transform:scale(1)}45%{transform:scale(1.025)}}
+  @keyframes nudgeRing{0%{box-shadow:0 0 0 0 rgba(106,76,240,.22)}100%{box-shadow:0 0 0 10px rgba(106,76,240,0)}}
   /* maquettes : elles se jouent quand l'onglet s'affiche */
   @keyframes mPop{from{opacity:0;transform:translateY(8px) scale(.9)}}
   @keyframes mType{from{width:0}}
@@ -1108,11 +1112,11 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
             <h3>Empreinte · Session fondateur</h3>
             <p class="sub">Début le 8&nbsp;novembre · 16&nbsp;h de live · 12&nbsp;places maximum</p>
           </div>
-          <div class="price-amt"><span class="amt-label">Votre prix fondateur</span><span class="amt">850&nbsp;€</span><span class="old">au lieu de <s>3&nbsp;250&nbsp;€</s> de valeur</span></div>
+          <div class="price-amt"><span class="amt-label">Votre prix fondateur</span><span class="amt">850&nbsp;€<small>TTC</small></span><span class="old">au lieu de <s>3&nbsp;250&nbsp;€</s> de valeur · TVA incluse</span></div>
         </div>
         <div class="stack-head"><span>Tout ce qui est inclus</span><span>Valeur</span></div>
         <ul class="stack">
-          <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">Le préambule et le parcours vidéo de 4&nbsp;semaines</span><span class="stack-d">Accès à vie aux vidéos et à leurs mises à jour.</span></span></span><span class="stack-v">850&nbsp;€</span></li>
+          <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">Le préambule et le parcours vidéo de 4&nbsp;semaines</span><span class="stack-d">Accès à vie aux vidéos, avec toutes leurs mises à jour à venir.</span></span></span><span class="stack-v">850&nbsp;€</span></li>
           <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">4 Explorations en direct de 2&nbsp;h</span><span class="stack-d">Avec tout le groupe, pour dérouler le contenu et répondre à vos questions.</span></span></span><span class="stack-v">800&nbsp;€</span></li>
           <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">4 Lab de 2&nbsp;h, à 3&nbsp;personnes maximum</span><span class="stack-d">Sur votre propre système, écran partagé, le mardi ou le jeudi soir. C'est là que tout se construit.</span></span></span><span class="stack-v">400&nbsp;€</span></li>
           <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">Le Kit d'Extraction</span><span class="stack-d">Les prompts et les gabarits de vos documents d'empreinte, réutilisables à vie.</span></span></span><span class="stack-v">500&nbsp;€</span></li>
@@ -1120,8 +1124,9 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         </ul>
         <div class="stack-total"><span class="lbl">Valeur totale de l'ensemble</span><span class="amt">3&nbsp;250&nbsp;€</span></div>
         <div class="pay">
-          <div><span class="pay-k">Ce que vous payez</span><span class="pay-d">Tout ce qui est listé ci-dessus est inclus dans ce prix.</span></div>
-          <div class="pay-r"><span class="pay-amt">850&nbsp;€</span><span class="pay-save">Soit 2&nbsp;400&nbsp;€ d'économie</span></div>
+          <div><span class="pay-k">Ce que vous payez</span><span class="pay-d">Tout ce qui est listé ci-dessus est inclus dans ce prix.</span>
+            <span class="pay-life"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Fondateurs : accès à vie à toutes les mises à jour des vidéos du bootcamp</span></div>
+          <div class="pay-r"><span class="pay-amt">850&nbsp;€<small>TTC</small></span><span class="pay-save">Soit 2&nbsp;400&nbsp;€ d'économie</span></div>
         </div>
         <div class="price-cta">
           <div class="seats" data-seats>Il reste 9&nbsp;places sur 12</div>
@@ -1136,7 +1141,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         <p>Vous suivez toutes les vidéos et les sessions en direct, et vous jouez le jeu des exercices. Si, à la fin du bootcamp, vous ne sentez pas la différence entre votre travail d'avant et votre travail d'après, on en parle lors d'un appel ensemble, et <strong>je vous rembourse intégralement.</strong> Pas de formulaire à rallonge, pas de conditions cachées : vous avez fait le travail, le résultat n'est pas là, vous êtes remboursé.</p>
       </div>
     </div>
-    <p class="price-note rv">Le tarif fondateur n'existe qu'une fois. <strong>Chaque session suivante augmente, et c'est annoncé à l'avance, pas inventé au dernier moment.</strong></p>
+    <p class="price-note rv">Le tarif fondateur n'existe qu'une fois. <strong>Chaque session suivante augmente, et c'est annoncé à l'avance, pas inventé au dernier moment.</strong> Tous les tarifs sont indiqués TTC, TVA incluse.</p>
     <div class="stairs rv" role="list" aria-label="Évolution du tarif selon la session">
       <div class="tier t1 is-now" role="listitem"><div class="step-track"><span class="here">Vous êtes ici</span><span class="step-bar"></span></div><span class="tier-name">Session fondateur</span><span class="tier-price">850&nbsp;€</span><span class="tier-tag">Le prix le plus bas</span></div>
       <div class="tier t2" role="listitem"><div class="step-track"><span class="inc">+440&nbsp;€</span><span class="step-bar"></span></div><span class="tier-name">Session 2</span><span class="tier-price">1&nbsp;290&nbsp;€</span></div>
@@ -1197,8 +1202,8 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
           <p>C'est vrai, pour quelqu'un de très assidu, au prix de plusieurs mois de tâtonnements et d'un vrai risque d'abandon en route. Ce que vous achetez ici, c'est le chemin direct, un système structuré, et quelqu'un qui débloque en direct ce qui vous aurait arrêté. Vous payez pour arriver au bout.</p>
         </details>
         <details class="rv">
-          <summary>Je suis sur ChatGPT ou Copilot, pas sur Claude.<span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
-          <p>Les démonstrations et les gabarits sont fournis pour Claude, l'outil de référence du parcours. La méthode, elle, est transposable : vos documents d'empreinte et vos process sont écrits dans un format neutre, et on choisit l'emballage à la fin. Si votre entreprise vous impose un outil, on l'adapte pendant les Lab.</p>
+          <summary>Sur quel outil se déroule le bootcamp ?<span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
+          <p>Sur Claude ou sur ChatGPT, au choix : les démonstrations et les gabarits sont fournis pour les deux. La méthode, elle, reste la même sur Copilot ou Gemini : vos documents d'empreinte et vos process sont écrits dans un format neutre, réutilisable d'un outil à l'autre. Si votre entreprise vous impose un outil, on l'adapte pendant les Lab.</p>
         </details>
       </div>
       <div class="faq-col">
@@ -1215,8 +1220,8 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
           <p>Le sujet est traité dès le préambule, pas en disclaimer de fin. On définit ensemble ce qui peut entrer dans le système, sous quelle forme, et ce qui n'y entre jamais. Pour un professionnel qui manipule des données clients, c'est une condition d'exercice, pas une option.</p>
         </details>
         <details class="rv">
-          <summary>La formation est-elle finançable (CPF, OPCO) ?<span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
-          <p>Non. Cette formation n'est éligible ni au CPF ni à une prise en charge OPCO. Le tarif affiché est le tarif réel, et la garantie satisfait ou remboursé tient lieu de filet de sécurité : si le bootcamp ne change pas votre façon de travailler, vous êtes remboursé.</p>
+          <summary>La formation est-elle financée par le CPF ou un OPCO ?<span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
+          <p>Non. Cette formation n'est éligible ni au CPF ni à une prise en charge OPCO. Le tarif affiché est le tarif réel, TTC, TVA incluse : 850&nbsp;€ pour la session fondateur, sans frais cachés. La garantie satisfait ou remboursé tient lieu de filet de sécurité : si le bootcamp ne change pas votre façon de travailler, vous êtes remboursé.</p>
         </details>
       </div>
     </div>
@@ -1237,7 +1242,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
               <a href="mailto:djouzar@penseria.fr?subject=R%C3%A9servation%20Empreinte%20-%20Session%20fondateur&amp;body=Bonjour%20Djouzar%2C%0D%0A%0D%0AJe%20souhaite%20r%C3%A9server%20ma%20place%20pour%20la%20session%20fondateur%20du%20bootcamp%20Empreinte.%0D%0A%0D%0AMon%20nom%20%3A%0D%0AMon%20activit%C3%A9%20%3A%0D%0A%0D%0AMerci%20%21" class="btn" data-cta>Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
               <div class="seats" data-seats>Il reste 9&nbsp;places sur 12</div>
             </div>
-            <p class="btn-note">Session fondateur à 850&nbsp;€ · Les sessions suivantes seront à 1&nbsp;290&nbsp;€ puis 1&nbsp;590&nbsp;€</p>
+            <p class="btn-note">Session fondateur à 850&nbsp;€ TTC · Les sessions suivantes seront à 1&nbsp;290&nbsp;€ puis 1&nbsp;590&nbsp;€ TTC</p>
           </div>
           <div class="founder-box">
             <span class="label">POURQUOI LE TARIF FONDATEUR EXISTE</span>
@@ -1492,7 +1497,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   // Témoignages : à remplir ici, la section reste masquée tant que la liste est vide
   var TEMOIGNAGES = [
     { texte: "Merci Djouzar pour sa passion, son professionnalisme et sa très grande patience ! Nous avions tous des objectifs perso au-delà de ceux de la formation, et je pense que tout le monde les a atteints ! Donc Djouzar, bravo !! C'est un carton plein pour toi ! Ravie d'avoir passé ces 2 jours avec vous !", nom: 'Marie' },
-    { texte: "Merci beaucoup pour la formation 5/5. Très complet pour une première approche avec l'IA. Et franchement pour avoir eu beaucoup de formations et formateurs, Djouzar, tu es vraiment top !!!", nom: 'Participant anonyme' },
+    { texte: "Merci beaucoup pour la formation 5/5. Très complet pour une première approche avec l'IA. Et franchement pour avoir eu beaucoup de formations et formateurs, Djouzar, tu es vraiment top !!!", nom: 'Marie' },
     { texte: "Formation au top ! Djouzar, bravo pour le format et la qualité des modules, vraiment à la hauteur des attentes.", nom: 'Diego' },
     { texte: "Merci Djouzar ! Tu es très pédagogique ! Sacrée formation hyper dense mais tellement passionnante…", nom: 'Noelle' },
     { texte: "Oui très grand merci à Djouzar pour cette formation/conseil first class. Et également merci à tou.te.s pour l'excellente ambiance durant ces deux jours. N'oubliez pas de pratiquer !!!", nom: 'Franck' },
