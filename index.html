@@ -181,6 +181,12 @@ strong{color:var(--ink);font-weight:700}
 .nav-links a[aria-current]{color:var(--ink)}
 .nav .btn{min-height:46px;padding:5px 5px 5px 18px;gap:10px;font-size:.92rem}
 .nav .btn-ic{width:34px;height:34px}
+.countdown{display:inline-flex;align-items:center;gap:10px;padding:6px 14px 6px 12px;border-radius:var(--r-pill);background:rgba(255,255,255,.55);box-shadow:inset 0 0 0 1px rgba(21,21,28,.06),inset 0 1px 1px #fff;font-size:.82rem;color:var(--muted);white-space:nowrap}
+.countdown[hidden]{display:none}
+.cd-dot{width:7px;height:7px;border-radius:50%;background:var(--spark);box-shadow:0 0 0 4px rgba(242,121,58,.16)}
+.cd-time{display:inline-flex;gap:6px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.cd-time b{font-family:'General Sans',sans-serif;font-weight:600;font-size:.98rem;letter-spacing:-.01em}
+.cd-time small{font-size:.74rem;color:var(--muted);margin-left:1px}
 .menu-btn{display:none;position:relative;width:46px;height:46px;border:0;border-radius:50%;background:var(--ink);cursor:pointer;flex:none}
 .menu-btn span{position:absolute;left:14px;right:14px;height:1.6px;border-radius:2px;background:#fff;transition:transform .5s var(--ease)}
 .menu-btn span:first-child{top:19px}
@@ -227,7 +233,18 @@ strong{color:var(--ink);font-weight:700}
 .hero .lead{margin-top:24px;max-width:48ch;font-size:1.1rem;color:var(--muted)}
 .hero .cta-block{margin-top:34px}
 .hero .seats{margin-top:22px}
-.hero-viz{height:min(76dvh,700px)}
+.hero-stage{position:relative}
+.hero-viz{height:min(72dvh,660px)}
+.legend{position:relative;z-index:3;margin:-58px auto 0;width:min(520px,100%);padding:8px;border-radius:24px}
+.legend-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.legend-tabs button{display:grid;gap:1px;justify-items:start;padding:9px 12px 10px;border:0;border-radius:17px;background:transparent;cursor:pointer;text-align:left;color:var(--muted);transition:background .45s var(--ease),color .45s var(--ease),box-shadow .45s var(--ease)}
+.legend-tabs button small{font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.legend-tabs button span{font-family:'General Sans',sans-serif;font-weight:600;font-size:.92rem;letter-spacing:-.015em}
+.legend-tabs button:hover{background:rgba(255,255,255,.5);color:var(--ink)}
+.legend-tabs button[aria-pressed="true"]{background:#fff;color:var(--ink);box-shadow:0 10px 22px -14px rgba(var(--shadow-tint),.5),inset 0 0 0 1px rgba(106,76,240,.22)}
+.legend-tabs button[aria-pressed="true"] small{color:var(--accent-deep)}
+.legend-text{padding:10px 12px 6px;font-size:.92rem;line-height:1.5;color:var(--ink-2);min-height:3.2em}
+.legend-text b{color:var(--accent-deep)}
 
 /* ---------- L'essentiel (bande de repères) ---------- */
 .facts{padding:0 0 clamp(40px,5vw,64px)}
@@ -295,7 +312,7 @@ strong{color:var(--ink);font-weight:700}
 
 /* ---------- Le programme ---------- */
 .prog-head{max-width:780px}
-.rhythm{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:48px 0 clamp(64px,8vw,104px)}
+.rhythm{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:48px 0 60px}
 .rh{padding:26px 26px 28px}
 .ic{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:var(--accent);margin-bottom:20px;
   background:var(--glass-strong);border:1px solid rgba(255,255,255,.85);box-shadow:0 14px 30px -16px rgba(var(--shadow-tint),.5),inset 0 1px 1px #fff}
@@ -303,12 +320,15 @@ strong{color:var(--ink);font-weight:700}
 .rh .label{margin-bottom:8px}
 .rh h3{margin-bottom:8px}
 .rh p{font-size:.97rem;color:var(--muted)}
+.live-total{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:-36px 0 clamp(64px,8vw,104px);color:var(--ink-2)}
+.live-total .big{font-family:'General Sans',sans-serif;font-weight:600;font-size:2rem;line-height:1;letter-spacing:-.04em;color:var(--accent-deep)}
 .prog-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(28px,5vw,72px);align-items:start}
 .prog-side{position:sticky;top:96px;z-index:2}
 .prog-viz{height:min(68dvh,600px)}
 .hud{position:absolute;left:16px;bottom:16px;z-index:3;padding:14px 18px;border-radius:var(--r-item);min-width:230px}
 .hud-step{display:block;font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
 .hud-name{display:block;font-family:'General Sans',sans-serif;font-weight:600;font-size:1.15rem;letter-spacing:-.02em;color:var(--ink)}
+.hud-sub{display:block;max-width:34ch;margin-top:4px;font-size:.84rem;line-height:1.4;color:var(--muted)}
 .hud-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:10px}
 .hud-bar i{height:6px;border-radius:2px;background:rgba(21,21,28,.1);transition:background .5s var(--ease)}
 .hud-bar i.on{background:var(--accent)}
@@ -329,6 +349,17 @@ strong{color:var(--ink);font-weight:700}
 .step-video[hidden]{display:none}
 .prog-cta{margin-top:clamp(56px,7vw,88px)}
 
+/* Fenêtre vidéo : extrait de la semaine en cours, en boucle */
+.pip{position:absolute;top:6px;right:6px;z-index:4;width:min(42%,300px);margin:0;padding:5px;border-radius:18px;background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(16px) saturate(170%);backdrop-filter:blur(16px) saturate(170%);box-shadow:0 30px 50px -26px rgba(var(--shadow-tint),.55),inset 0 0 0 1px rgba(255,255,255,.85)}
+.pip-bar{display:flex;align-items:center;gap:5px;padding:4px 6px 7px}
+.pip-bar i{width:8px;height:8px;border-radius:50%;background:#d6d7dd}
+.pip-bar i:first-child{background:var(--spark)}
+.pip-title{margin-left:6px;font-size:.74rem;font-weight:700;letter-spacing:.02em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pip-screen{position:relative;aspect-ratio:16/10;border-radius:13px;overflow:hidden;background:#e4e5ea}
+.pip-screen video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s var(--ease)}
+.pip-screen video.is-on{opacity:1}
+.pip-cap{padding:6px 6px 2px;font-size:.7rem;color:var(--muted)}
+
 /* ---------- Formateur ---------- */
 .trainer{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(40px,7vw,96px);align-items:center}
 .trainer-visual{position:relative;padding-bottom:74px}
@@ -343,6 +374,35 @@ strong{color:var(--ink);font-weight:700}
 .trainer-copy .label{margin:12px 0 26px}
 .bio p+p{margin-top:14px}
 .quote{margin-top:32px;padding:6px 0 6px 22px;border-left:2px solid var(--accent);font-family:'General Sans',sans-serif;font-weight:500;font-size:1.3rem;line-height:1.35;letter-spacing:-.02em;color:var(--ink)}
+
+/* ---------- Sur le terrain : photos + témoignages ---------- */
+.proof{padding-top:0;overflow:hidden}
+.proof-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px 40px;margin-bottom:44px}
+.proof-head p{max-width:40ch;color:var(--muted)}
+.reel{position:relative;-webkit-mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.reel-track{display:flex;gap:18px;width:max-content;padding:10px 0 30px}
+.reel figure{flex:none;width:clamp(260px,30vw,380px);aspect-ratio:4/3;border-radius:22px;overflow:hidden;background:#d8dade;box-shadow:0 30px 50px -34px rgba(var(--shadow-tint),.55)}
+.reel figure:nth-child(even){margin-top:34px}
+.reel img{width:100%;height:100%;object-fit:cover;filter:saturate(.82);transition:filter .6s var(--ease),transform 1.2s var(--ease)}
+.reel figure:hover img{filter:none;transform:scale(1.04)}
+.quotes{margin-top:clamp(48px,6vw,80px)}
+.quotes[hidden]{display:none}
+.quotes-top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}
+.quotes-top h3{font-size:1.5rem}
+.q-nav{display:flex;gap:8px}
+.q-nav button{width:46px;height:46px;border-radius:50%;border:0;display:grid;place-items:center;cursor:pointer;background:var(--glass-strong);color:var(--ink);box-shadow:0 12px 24px -16px rgba(var(--shadow-tint),.5),inset 0 0 0 1px rgba(21,21,28,.06);transition:background .4s var(--ease),color .4s var(--ease)}
+.q-nav button:hover{background:var(--accent);color:#fff}
+.q-nav .i{width:18px;height:18px}
+.q-prev .i{transform:rotate(-135deg)}
+.q-next .i{transform:rotate(45deg)}
+.q-track{display:grid;grid-auto-flow:column;grid-auto-columns:min(440px,86%);gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:24px;scrollbar-width:none;padding:12px 24px 72px;margin:-12px -24px -44px}
+.q-track::-webkit-scrollbar{display:none}
+.q-card{scroll-snap-align:start;display:flex;flex-direction:column;gap:22px;padding:30px}
+.q-card blockquote{font-size:1.05rem;line-height:1.6;color:var(--ink)}
+.q-card figcaption{margin-top:auto;display:flex;align-items:center;gap:12px}
+.q-av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--accent-soft);color:var(--accent-deep);font-family:'General Sans',sans-serif;font-weight:600}
+.q-name{display:block;font-family:'General Sans',sans-serif;font-weight:600;color:var(--ink)}
+.q-role{display:block;font-size:.9rem;color:var(--muted)}
 
 /* ---------- Offre et tarif ---------- */
 .pricing-head{text-align:center;margin-bottom:52px}
@@ -377,8 +437,8 @@ strong{color:var(--ink);font-weight:700}
 .stairs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:620px;margin:36px auto 0}
 .step-track{height:190px;display:flex;align-items:flex-end}
 .step-bar{width:100%;border-radius:18px 18px 8px 8px;background:#dcdee4;box-shadow:inset 0 1px 1px rgba(255,255,255,.8)}
-.t1 .step-bar{height:42%}
-.t2 .step-bar{height:70%}
+.t1 .step-bar{height:53%}
+.t2 .step-bar{height:81%}
 .t3 .step-bar{height:100%}
 .tier.is-now .step-bar{background:var(--accent);box-shadow:0 18px 30px -14px rgba(82,54,214,.6),inset 0 1px 0 rgba(255,255,255,.3)}
 .tier-name{display:block;margin-top:14px;font-size:.95rem;font-weight:600;color:var(--ink)}
@@ -449,11 +509,15 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   .js .stairs .t3 .step-bar{transition-delay:.24s}
   .js .portrait .gray{transition:opacity 1.8s var(--ease) .35s}
   .js .trainer-visual.in .gray{opacity:0}
+  .reel.is-moving .reel-track{animation:reel 70s linear infinite}
+  .reel.is-moving:hover .reel-track{animation-play-state:paused}
+  @keyframes reel{to{transform:translateX(-50%)}}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .you::after{animation:none;display:none}
   .portrait .gray{opacity:0}
+  .reel{overflow-x:auto}
   *,*::before,*::after{transition-duration:.01ms!important}
 }
 @media (prefers-reduced-transparency:reduce){
@@ -467,7 +531,8 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   .nav-pill{gap:12px}
   .hero{min-height:auto;padding:116px 0 48px}
   .hero-grid{grid-template-columns:1fr;gap:12px}
-  .hero-viz{height:min(56dvh,520px)}
+  .hero-viz{height:min(54dvh,500px)}
+  .countdown .cd-label{display:none}
   .facts-bar{grid-template-columns:1fr 1fr}
   .fact:nth-child(3){border-left:0}
   .fact:nth-child(n+3){border-top:1px solid var(--line)}
@@ -483,6 +548,9 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   .prog-viz{height:34dvh}
   .hud{left:8px;bottom:8px;min-width:0;padding:10px 14px}
   .hud-name{font-size:1rem}
+  .hud-sub{display:none}
+  .pip{top:4px;right:0;width:44%;padding:4px;border-radius:14px}
+  .pip-cap{display:none}
   .trainer{grid-template-columns:1fr}
   .trainer-visual{max-width:520px;width:100%;justify-self:center}
   .fit-grid,.faq-grid,.finale-grid{grid-template-columns:1fr}
@@ -507,6 +575,14 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   .guar{flex-direction:column}
   .trainer-visual{padding-bottom:0}
   .trainer-stats{position:relative;right:auto;width:auto;margin:-64px 12px 0}
+  .logo span{display:none}
+  .countdown{margin-left:auto;padding:6px 12px}
+  .cd-time .cd-s{display:none}
+  .legend{margin-top:-36px}
+  .legend-tabs button{padding:8px 8px 9px}
+  .legend-tabs button span{font-size:.8rem}
+  .live-total{margin-top:-28px}
+  .reel figure:nth-child(even){margin-top:22px}
 }
 </style>
 </head>
@@ -551,6 +627,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
 <nav class="nav" id="nav" aria-label="Navigation principale">
   <div class="nav-pill">
     <a href="#top" class="logo"><svg class="i" aria-hidden="true"><use href="#i-fp"/></svg><span>Empreinte<b>.</b></span></a>
+    <div class="countdown" data-countdown hidden><span class="cd-dot" aria-hidden="true"></span><span class="cd-label">Début dans</span><span class="cd-time" role="timer" aria-label="Temps restant avant le début du bootcamp"></span></div>
     <div class="nav-links">
       <a href="#programme">Le programme</a>
       <a href="#formateur">Votre formateur</a>
@@ -586,9 +663,20 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
       </div>
       <div class="seats hero-in" data-seats>Il reste 9&nbsp;places sur 12</div>
     </div>
-    <div class="viz hero-viz hero-in" data-viz="hero" aria-hidden="true">
-      <div class="viz-fallback"><span class="glass"><svg class="i"><use href="#i-fp"/></svg></span></div>
-      <canvas></canvas>
+    <div class="hero-stage hero-in">
+      <div class="viz hero-viz" data-viz="hero" data-stage="0" aria-hidden="true">
+        <div class="viz-fallback"><span class="glass"><svg class="i"><use href="#i-fp"/></svg></span></div>
+        <canvas></canvas>
+      </div>
+      <div class="legend glass blur">
+        <div class="legend-tabs" role="group" aria-label="Les quatre étapes de votre système">
+          <button type="button" data-go="1" aria-pressed="false"><small>Semaine 1</small><span>Contexte</span></button>
+          <button type="button" data-go="2" aria-pressed="false"><small>Semaine 2</small><span>Skills</span></button>
+          <button type="button" data-go="3" aria-pressed="false"><small>Semaine 3</small><span>Connecteurs</span></button>
+          <button type="button" data-go="4" aria-pressed="false"><small>Semaine 4</small><span>Autonomie</span></button>
+        </div>
+        <p class="legend-text" id="legend-text" aria-live="polite">Votre système se construit en quatre étapes, brique par brique.</p>
+      </div>
     </div>
   </div>
 </header>
@@ -714,18 +802,30 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-flask"/></svg></span>
         <span class="label">En direct · 2&nbsp;h, 3&nbsp;personnes max</span>
         <h3>Le Lab</h3>
-        <p>En tout petit groupe, chacun avance sur son propre système, écran partagé, avec un retour immédiat sur ce qui bloque.</p>
+        <p>En tout petit groupe, chacun avance sur son propre système, écran partagé, avec un retour immédiat sur ce qui bloque. Le mardi ou le jeudi soir, selon votre groupe.</p>
       </article>
     </div>
+    <p class="live-total rv"><span class="big">16&nbsp;h</span><span>de live avec moi sur les 4&nbsp;semaines, en plus des vidéos.</span></p>
 
     <div class="prog-grid">
       <div class="prog-side">
+        <figure class="pip" data-pip>
+          <div class="pip-bar" aria-hidden="true"><i></i><i></i><i></i><span class="pip-title" id="pip-title">Prompting avancé</span></div>
+          <div class="pip-screen">
+            <video data-src="videos/extraits/contexte.mp4" muted loop playsinline preload="none" class="is-on"></video>
+            <video data-src="videos/extraits/skills.mp4" muted loop playsinline preload="none"></video>
+            <video data-src="videos/extraits/connecteurs.mp4" muted loop playsinline preload="none"></video>
+            <video data-src="videos/extraits/autonomie.mp4" muted loop playsinline preload="none"></video>
+          </div>
+          <figcaption class="pip-cap">Extrait du bootcamp, en accéléré</figcaption>
+        </figure>
         <div class="viz prog-viz" data-viz="program" data-stage="1" aria-hidden="true">
           <div class="viz-fallback"><span class="glass"><svg class="i"><use href="#i-fp"/></svg></span></div>
           <canvas></canvas>
           <div class="hud glass blur">
-            <span class="hud-step" id="hud-step">Étape 1 sur 4</span>
-            <span class="hud-name" id="hud-name">Les fondations</span>
+            <span class="hud-step" id="hud-step">Étape 1 sur 4 · L'ancrage</span>
+            <span class="hud-name" id="hud-name">Le contexte</span>
+            <span class="hud-sub" id="hud-sub">Votre voix, votre méthode et vos projets deviennent les fondations.</span>
             <div class="hud-bar"><i class="on"></i><i></i><i></i><i></i></div>
           </div>
         </div>
@@ -743,7 +843,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         </li>
         <li class="step" data-stage="1">
           <div class="step-card glass">
-            <span class="step-stage"><b>Les fondations</b> · Semaine 1</span>
+            <span class="step-stage"><b>Le contexte</b> · Semaine 1</span>
             <h3>L'Ancrage</h3>
             <span class="tag">Se connaître et cartographier</span>
             <p>On sort de votre tête ce qui fait votre valeur : votre manière d'écrire, de raisonner, de trancher. Puis on cartographie vos projets et vos process : ce qui se répète, ce qui peut partir, ce qui ne doit jamais partir.</p>
@@ -753,7 +853,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         </li>
         <li class="step" data-stage="2">
           <div class="step-card glass">
-            <span class="step-stage"><b>La connexion</b> · Semaine 2</span>
+            <span class="step-stage"><b>Les skills</b> · Semaine 2</span>
             <h3>La Connexion</h3>
             <span class="tag">L'étape clé du bootcamp</span>
             <p>Le ciment entre tous les éléments. On crée vos premiers skills et on met en place ceux qui vont changer complètement votre façon de travailler.</p>
@@ -763,7 +863,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         </li>
         <li class="step" data-stage="3">
           <div class="step-card glass">
-            <span class="step-stage"><b>L'amplification</b> · Semaine 3</span>
+            <span class="step-stage"><b>Les connecteurs</b> · Semaine 3</span>
             <h3>L'Amplification</h3>
             <span class="tag">Faire grandir votre système</span>
             <p>On connecte vos outils à votre empreinte (vos mails, vos documents, vos dossiers clients) et on amplifie le lien avec votre système. Il travaille là où vous travaillez déjà.</p>
@@ -773,7 +873,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         </li>
         <li class="step" data-stage="4">
           <div class="step-card glass">
-            <span class="step-stage"><b>L'autonomie</b> · Semaine 4</span>
+            <span class="step-stage"><b>Le système autonome</b> · Semaine 4</span>
             <h3>L'Autonomie</h3>
             <span class="tag">Un système qui tourne avec vous</span>
             <p>On met en place vos systèmes automatiques et des agents dans votre quotidien. Votre Système Empreinte est complet, et vous apprenez à le faire évoluer seul.</p>
@@ -806,8 +906,8 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         </picture>
       </figure>
       <div class="trainer-stats glass blur">
-        <div><span class="st-num count" data-target="1400">1&nbsp;400</span><span class="st-label">personnes formées</span></div>
-        <div><span class="st-num count" data-target="25000">25&nbsp;000</span><span class="st-label">personnes le suivent sur le réseau</span></div>
+        <div><span class="st-num count" data-target="1500" data-prefix="+">+1&nbsp;500</span><span class="st-label">personnes formées</span></div>
+        <div><span class="st-num count" data-target="30000" data-prefix="+">+30&nbsp;000</span><span class="st-label">personnes le suivent sur ses réseaux</span></div>
         <div><span class="st-num">Des dizaines</span><span class="st-label">d'entreprises accompagnées</span></div>
         <div><span class="st-num">Pionnier</span><span class="st-label">de la vulgarisation IA en France, sur YouTube depuis plus de 3 ans</span></div>
       </div>
@@ -825,6 +925,40 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   </div>
 </section>
 
+<!-- ===== SUR LE TERRAIN ===== -->
+<section class="proof" aria-labelledby="t-proof">
+  <div class="wrap">
+    <div class="proof-head">
+      <h2 id="t-proof" class="rv">Plus de 1&nbsp;500 personnes formées. <em>Chacune avec sa façon de travailler.</em></h2>
+      <p class="rv">En entreprise, en école ou en petit groupe, toujours sur des cas réels apportés par les participants.</p>
+    </div>
+  </div>
+  <div class="reel rv" data-reel>
+    <div class="reel-track">
+        <figure><picture><source type="image/webp" srcset="formations/formation-1.webp"><img src="formations/formation-1.jpg" width="1200" height="900" loading="lazy" decoding="async" alt="Djouzar présente Perplexity devant une salle d'une trentaine de participants"></picture></figure>
+        <figure><picture><source type="image/webp" srcset="formations/formation-2.webp"><img src="formations/formation-2.jpg" width="1200" height="900" loading="lazy" decoding="async" alt="Djouzar montre un scénario d'automatisation à l'écran pendant une formation"></picture></figure>
+        <figure><picture><source type="image/webp" srcset="formations/formation-3.webp"><img src="formations/formation-3.jpg" width="1200" height="900" loading="lazy" decoding="async" alt="Djouzar en atelier avec un groupe, ordinateurs ouverts"></picture></figure>
+        <figure><picture><source type="image/webp" srcset="formations/formation-4.webp"><img src="formations/formation-4.jpg" width="1200" height="900" loading="lazy" decoding="async" alt="Djouzar et un groupe à la fin de la formation Deep Focus IA"></picture></figure>
+        <figure><picture><source type="image/webp" srcset="formations/formation-5.webp"><img src="formations/formation-5.jpg" width="1200" height="900" loading="lazy" decoding="async" alt="Djouzar et un groupe de professionnels dans une salle de réunion"></picture></figure>
+        <figure><picture><source type="image/webp" srcset="formations/formation-6.webp"><img src="formations/formation-6.jpg" width="1200" height="900" loading="lazy" decoding="async" alt="Djouzar et des participants à la fin d'une journée de formation"></picture></figure>
+        <figure><picture><source type="image/webp" srcset="formations/formation-7.webp"><img src="formations/formation-7.jpg" width="1200" height="900" loading="lazy" decoding="async" alt="Djouzar entouré d'un groupe de participants devant une bibliothèque"></picture></figure>
+        <figure><picture><source type="image/webp" srcset="formations/formation-8.webp"><img src="formations/formation-8.jpg" width="1200" height="900" loading="lazy" decoding="async" alt="Djouzar et une promotion d'une douzaine de participants"></picture></figure>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="quotes" data-quotes hidden>
+      <div class="quotes-top">
+        <h3>Ce qu'ils en disent</h3>
+        <div class="q-nav">
+          <button type="button" class="q-prev" aria-label="Témoignage précédent"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <button type="button" class="q-next" aria-label="Témoignage suivant"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </div>
+      </div>
+      <div class="q-track" role="region" aria-label="Témoignages" tabindex="0"></div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== OFFRE ET TARIF ===== -->
 <section id="prix" class="pricing" aria-labelledby="t-price">
   <div class="wrap">
@@ -837,14 +971,14 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         <div class="price-top">
           <div>
             <h3>Empreinte · Session fondateur</h3>
-            <p class="sub">Début le 8&nbsp;novembre · 12&nbsp;places maximum</p>
+            <p class="sub">Début le 8&nbsp;novembre · 16&nbsp;h de live · 12&nbsp;places maximum</p>
           </div>
-          <div class="price-amt"><span class="amt">1&nbsp;290&nbsp;€</span><span class="old">valeur 3&nbsp;250&nbsp;€</span></div>
+          <div class="price-amt"><span class="amt">850&nbsp;€</span><span class="old">valeur 3&nbsp;250&nbsp;€</span></div>
         </div>
         <ul class="stack">
           <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">Le préambule et le parcours vidéo de 4&nbsp;semaines</span><span class="stack-d">Accès à vie aux vidéos et à leurs mises à jour.</span></span></span><span class="stack-v">850&nbsp;€</span></li>
           <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">4 Explorations en direct de 2&nbsp;h</span><span class="stack-d">Avec tout le groupe, pour dérouler le contenu et répondre à vos questions.</span></span></span><span class="stack-v">800&nbsp;€</span></li>
-          <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">4 Lab de 2&nbsp;h, à 3&nbsp;personnes maximum</span><span class="stack-d">Sur votre propre système, écran partagé. C'est là que tout se construit.</span></span></span><span class="stack-v">400&nbsp;€</span></li>
+          <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">4 Lab de 2&nbsp;h, à 3&nbsp;personnes maximum</span><span class="stack-d">Sur votre propre système, écran partagé, le mardi ou le jeudi soir. C'est là que tout se construit.</span></span></span><span class="stack-v">400&nbsp;€</span></li>
           <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">Le Kit d'Extraction</span><span class="stack-d">Les prompts et les gabarits de vos documents d'empreinte, réutilisables à vie.</span></span></span><span class="stack-v">500&nbsp;€</span></li>
           <li><span class="stack-l"><span class="li-ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><span><span class="stack-t">La Bibliothèque de process</span><span class="stack-d">Des process prêts à adapter : documents, veille, notes de réflexion, comptes rendus.</span></span></span><span class="stack-v">700&nbsp;€</span></li>
         </ul>
@@ -864,9 +998,9 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
     </div>
     <p class="price-note rv">Le tarif fondateur n'existe qu'une fois. <strong>Chaque session suivante augmente, et c'est annoncé à l'avance, pas inventé au dernier moment.</strong></p>
     <div class="stairs rv" role="list" aria-label="Évolution du tarif selon la session">
-      <div class="tier t1 is-now" role="listitem"><div class="step-track"><span class="step-bar"></span></div><span class="tier-name">Session fondateur</span><span class="tier-price">1&nbsp;290&nbsp;€</span></div>
-      <div class="tier t2" role="listitem"><div class="step-track"><span class="step-bar"></span></div><span class="tier-name">Session 2</span><span class="tier-price">1&nbsp;590&nbsp;€</span></div>
-      <div class="tier t3" role="listitem"><div class="step-track"><span class="step-bar"></span></div><span class="tier-name">Session 3</span><span class="tier-price">1&nbsp;890&nbsp;€</span></div>
+      <div class="tier t1 is-now" role="listitem"><div class="step-track"><span class="step-bar"></span></div><span class="tier-name">Session fondateur</span><span class="tier-price">850&nbsp;€</span></div>
+      <div class="tier t2" role="listitem"><div class="step-track"><span class="step-bar"></span></div><span class="tier-name">Session 2</span><span class="tier-price">1&nbsp;290&nbsp;€</span></div>
+      <div class="tier t3" role="listitem"><div class="step-track"><span class="step-bar"></span></div><span class="tier-name">Session 3</span><span class="tier-price">1&nbsp;590&nbsp;€</span></div>
     </div>
   </div>
 </section>
@@ -916,7 +1050,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         </details>
         <details class="rv">
           <summary>Combien de temps ça demande, concrètement ?<span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
-          <p>Un préambule de 3 heures au démarrage, puis chaque semaine : 2 à 3 heures de vidéos à placer où vous voulez, une Exploration de 2 heures avec tout le groupe et un Lab de 2 heures en petit groupe de 3&nbsp;personnes maximum. Le rythme est exigeant mais cadré, et tout ce que vous y construisez sert directement votre activité, dès la semaine 1.</p>
+          <p>Un préambule de 3 heures au démarrage, puis chaque semaine : 2 à 3 heures de vidéos à placer où vous voulez, une Exploration de 2 heures avec tout le groupe et un Lab de 2 heures en petit groupe de 3&nbsp;personnes maximum, le mardi ou le jeudi soir. Soit 16 heures de live au total. Le rythme est exigeant mais cadré, et tout ce que vous y construisez sert directement votre activité, dès la semaine 1.</p>
         </details>
         <details class="rv">
           <summary>Je peux apprendre tout ça seul avec des vidéos gratuites.<span class="plus"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
@@ -963,11 +1097,11 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
               <a href="mailto:djouzar@penseria.fr?subject=R%C3%A9servation%20Empreinte%20-%20Session%20fondateur&amp;body=Bonjour%20Djouzar%2C%0D%0A%0D%0AJe%20souhaite%20r%C3%A9server%20ma%20place%20pour%20la%20session%20fondateur%20du%20bootcamp%20Empreinte.%0D%0A%0D%0AMon%20nom%20%3A%0D%0AMon%20activit%C3%A9%20%3A%0D%0A%0D%0AMerci%20%21" class="btn">Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
               <div class="seats" data-seats>Il reste 9&nbsp;places sur 12</div>
             </div>
-            <p class="btn-note">Session fondateur à 1&nbsp;290&nbsp;€ · Les sessions suivantes seront à 1&nbsp;590&nbsp;€ puis 1&nbsp;890&nbsp;€</p>
+            <p class="btn-note">Session fondateur à 850&nbsp;€ · Les sessions suivantes seront à 1&nbsp;290&nbsp;€ puis 1&nbsp;590&nbsp;€</p>
           </div>
           <div class="founder-box">
             <span class="label">POURQUOI LE TARIF FONDATEUR EXISTE</span>
-            <p>1&nbsp;290&nbsp;€ au lieu du prix des sessions suivantes, ce n'est pas une remise, c'est un échange. Les participants de la première session s'engagent à un retour d'expérience honnête et à un témoignage à la fin du parcours. Vous bénéficiez du meilleur tarif que cette formation aura jamais ; les sessions suivantes bénéficient de votre retour. C'est pour ça que le prix remontera ensuite.</p>
+            <p>850&nbsp;€ au lieu du prix des sessions suivantes, ce n'est pas une remise, c'est un échange. Les participants de la première session s'engagent à un retour d'expérience honnête et à un témoignage à la fin du parcours. Vous bénéficiez du meilleur tarif que cette formation aura jamais ; les sessions suivantes bénéficient de votre retour. C'est pour ça que le prix remontera ensuite.</p>
           </div>
         </div>
       </div>
@@ -998,6 +1132,61 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
     for(var i = 0; i < SEATS.total; i++) html += '<i' + (i < taken ? ' class="taken"' : '') + '></i>';
     el.innerHTML = html + '</span><span>Il reste <b>' + SEATS.left + ' places</b> sur ' + SEATS.total + '</span>';
   });
+
+  // Compte à rebours jusqu'au démarrage (8 novembre, heure de Paris)
+  var START = new Date('2026-11-08T00:00:00+01:00').getTime();
+  var cd = document.querySelector('[data-countdown]'), cdTime = cd.querySelector('.cd-time');
+  var pad = function(n){ return (n < 10 ? '0' : '') + n; };
+  function tickCountdown(){
+    var ms = START - Date.now();
+    if(ms <= 0){ cd.hidden = true; clearInterval(cdTimer); return; }
+    var sec = Math.floor(ms / 1000), d = Math.floor(sec / 86400), h = Math.floor(sec % 86400 / 3600), m = Math.floor(sec % 3600 / 60);
+    cdTime.innerHTML = '<span><b>' + d + '</b><small>j</small></span><span><b>' + pad(h) + '</b><small>h</small></span><span><b>' + pad(m) + '</b><small>min</small></span><span class="cd-s"><b>' + pad(sec % 60) + '</b><small>s</small></span>';
+    cd.hidden = false;
+  }
+  var cdTimer = setInterval(tickCountdown, 1000);
+  tickCountdown();
+
+  // Les quatre étapes du système, partagées par le hero et le programme
+  var STAGES = [
+    { week: "L'ancrage", name: 'Le contexte', text: 'Votre voix, votre méthode et vos projets deviennent les fondations.' },
+    { week: 'La connexion', name: 'Les skills', text: "Vos skills relient chaque brique : l'IA sait comment vous travaillez." },
+    { week: "L'amplification", name: 'Les connecteurs', text: 'Mails, documents, agenda, dossiers : vos outils se branchent sur votre empreinte.' },
+    { week: "L'autonomie", name: 'Le système autonome', text: 'Des agents tournent seuls, dans votre style. Vous gardez le jugement.' }
+  ];
+  function sendStage(host, stage){
+    if(host.getAttribute('data-stage') === String(stage)) return;
+    host.setAttribute('data-stage', stage);
+    host.dispatchEvent(new CustomEvent('empreinte:stage', { detail: stage }));
+  }
+
+  // Hero : la construction se joue seule, puis chaque étape se rejoue au clic
+  var heroViz = document.querySelector('[data-viz="hero"]');
+  var legendBtns = $$('.legend-tabs button'), legendText = document.getElementById('legend-text');
+  var autoplay = [];
+  function setHero(stage){
+    sendStage(heroViz, stage);
+    legendBtns.forEach(function(b, j){ b.setAttribute('aria-pressed', j === stage - 1 ? 'true' : 'false'); });
+    var st = STAGES[stage - 1];
+    legendText.innerHTML = '<b>' + st.week + '</b> · ' + st.text;
+  }
+  legendBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      autoplay.forEach(clearTimeout); autoplay = [];
+      setHero(parseInt(b.getAttribute('data-go'), 10));
+    });
+  });
+  if(reduce) setHero(4);
+  else{
+    var heroIO = new IntersectionObserver(function(entries){
+      if(!entries[0].isIntersecting) return;
+      heroIO.disconnect();
+      [[400, 1], [3400, 2], [6600, 3], [9800, 4]].forEach(function(a){
+        autoplay.push(setTimeout(function(){ setHero(a[1]); }, a[0]));
+      });
+    }, { threshold: .3 });
+    heroIO.observe(heroViz);
+  }
 
   // Révélation au scroll
   var io = new IntersectionObserver(function(entries){
@@ -1063,22 +1252,42 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
     });
   });
 
+  // Fenêtre vidéo du programme : un extrait par étape, chargé à la première demande
+  var pip = document.querySelector('[data-pip]'), clips = $$('video', pip), pipTitle = document.getElementById('pip-title');
+  var CLIP_TITLES = ['Prompting avancé', 'Créer un skill', 'Brancher un connecteur', 'Une présentation à votre image'];
+  var pipSeen = false, clipIdx = 0;
+  function playClip(){
+    clips.forEach(function(v, j){
+      if(j !== clipIdx){ v.pause(); return; }
+      if(!v.src) v.src = v.getAttribute('data-src');
+      if(pipSeen && !reduce){ var pr = v.play(); if(pr && pr.catch) pr.catch(function(){}); }
+      else v.pause();
+    });
+  }
+  function setClip(stage){
+    if(stage - 1 === clipIdx && clips[clipIdx].src) return;
+    clipIdx = stage - 1;
+    clips.forEach(function(v, j){ v.classList.toggle('is-on', j === clipIdx); });
+    pipTitle.textContent = CLIP_TITLES[clipIdx];
+    playClip();
+  }
+  if(reduce) clips.forEach(function(v){ v.controls = true; v.preload = 'metadata'; });
+  new IntersectionObserver(function(es){ pipSeen = es[0].isIntersecting; playClip(); }, { rootMargin: '200px 0px' }).observe(pip);
+
   // Programme : l'étape qui traverse le milieu de l'écran pilote la construction 3D
-  var STAGES = ['Les fondations', 'La connexion', "L'amplification", "L'autonomie"];
   var steps = $$('.step');
   var progViz = document.querySelector('[data-viz="program"]');
-  var hudStep = document.getElementById('hud-step'), hudName = document.getElementById('hud-name');
+  var hudStep = document.getElementById('hud-step'), hudName = document.getElementById('hud-name'), hudSub = document.getElementById('hud-sub');
   var hudBars = $$('.hud-bar i');
   function setStep(idx){
     var stage = parseInt(steps[idx].getAttribute('data-stage'), 10);
     steps.forEach(function(s, j){ s.classList.toggle('is-active', j === idx); });
-    hudStep.textContent = 'Étape ' + stage + ' sur 4';
-    hudName.textContent = STAGES[stage - 1];
+    hudStep.textContent = 'Étape ' + stage + ' sur 4 · ' + STAGES[stage - 1].week;
+    hudName.textContent = STAGES[stage - 1].name;
+    hudSub.textContent = STAGES[stage - 1].text;
     hudBars.forEach(function(b, j){ b.classList.toggle('on', j < stage); });
-    if(progViz.getAttribute('data-stage') !== String(stage)){
-      progViz.setAttribute('data-stage', stage);
-      progViz.dispatchEvent(new CustomEvent('empreinte:stage', { detail: stage }));
-    }
+    sendStage(progViz, stage);
+    setClip(stage);
   }
   var stepIO = new IntersectionObserver(function(entries){
     entries.forEach(function(e){ if(e.isIntersecting) setStep(steps.indexOf(e.target)); });
@@ -1110,18 +1319,75 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
       if(!e.isIntersecting) return;
       var el = e.target; cIO.unobserve(el);
       if(reduce) return;
-      var target = parseInt(el.getAttribute('data-target'), 10), start = null, dur = 1400;
-      el.textContent = '0';
+      var target = parseInt(el.getAttribute('data-target'), 10), prefix = el.getAttribute('data-prefix') || '', start = null, dur = 1400;
+      el.textContent = prefix + '0';
       function step(ts){
         if(start === null) start = ts;
         var p = Math.min((ts - start) / dur, 1);
-        el.textContent = fmt(target * (1 - Math.pow(1 - p, 3)));
+        el.textContent = prefix + fmt(target * (1 - Math.pow(1 - p, 3)));
         if(p < 1) requestAnimationFrame(step);
       }
       requestAnimationFrame(step);
     });
   }, { threshold: .6 });
   $$('.count').forEach(function(el){ cIO.observe(el); });
+
+  // Photos de formation : bande qui défile en boucle (copie masquée pour la jonction)
+  var reel = document.querySelector('[data-reel]');
+  if(reel && !reduce){
+    var track = reel.querySelector('.reel-track');
+    $$('figure', track).forEach(function(f){
+      var c = f.cloneNode(true);
+      c.setAttribute('aria-hidden', 'true');
+      c.querySelector('img').alt = '';
+      track.appendChild(c);
+    });
+    reel.classList.add('is-moving');
+  }
+
+  // Témoignages : à remplir ici, la section reste masquée tant que la liste est vide
+  var TEMOIGNAGES = [
+    { texte: "Merci Djouzar pour sa passion, son professionnalisme et sa très grande patience ! Nous avions tous des objectifs perso au-delà de ceux de la formation, et je pense que tout le monde les a atteints ! Donc Djouzar, bravo !! C'est un carton plein pour toi ! Ravie d'avoir passé ces 2 jours avec vous !", nom: 'Marie' },
+    { texte: "Merci beaucoup pour la formation 5/5. Très complet pour une première approche avec l'IA. Et franchement pour avoir eu beaucoup de formations et formateurs, Djouzar, tu es vraiment top !!!", nom: 'Participant anonyme' },
+    { texte: "Formation au top ! Djouzar, bravo pour le format et la qualité des modules, vraiment à la hauteur des attentes.", nom: 'Diego' },
+    { texte: "Merci Djouzar ! Tu es très pédagogique ! Sacrée formation hyper dense mais tellement passionnante…", nom: 'Noelle' },
+    { texte: "Oui très grand merci à Djouzar pour cette formation/conseil first class. Et également merci à tou.te.s pour l'excellente ambiance durant ces deux jours. N'oubliez pas de pratiquer !!!", nom: 'Franck' },
+    { texte: "Merci pour la formation et merci à Djouzar pour sa transmission de savoir.", nom: 'Emmanuel' },
+    { texte: "Merci beaucoup ! C'était très instructif et très sympa ! À très vite.", nom: 'Amélie' }
+  ];
+  var quotes = document.querySelector('[data-quotes]');
+  if(TEMOIGNAGES.length){
+    var qTrack = quotes.querySelector('.q-track');
+    TEMOIGNAGES.forEach(function(t){
+      var fig = document.createElement('figure');
+      fig.className = 'q-card glass';
+      var bq = document.createElement('blockquote'); bq.textContent = t.texte;
+      var cap = document.createElement('figcaption');
+      cap.innerHTML = '<span class="q-av" aria-hidden="true"></span><span><span class="q-name"></span><span class="q-role">Participant à une formation</span></span>';
+      cap.firstChild.textContent = t.nom.charAt(0);
+      cap.querySelector('.q-name').textContent = t.nom;
+      fig.appendChild(bq); fig.appendChild(cap); qTrack.appendChild(fig);
+    });
+    var slide = function(dir){
+      var card = qTrack.firstElementChild;
+      qTrack.scrollBy({ left: dir * (card.offsetWidth + 18), behavior: reduce ? 'auto' : 'smooth' });
+    };
+    var atEnd = function(){ return qTrack.scrollLeft + qTrack.clientWidth >= qTrack.scrollWidth - 8; };
+    quotes.querySelector('.q-prev').addEventListener('click', function(){ slide(-1); });
+    quotes.querySelector('.q-next').addEventListener('click', function(){ if(atEnd()) qTrack.scrollTo({ left: 0, behavior: 'smooth' }); else slide(1); });
+    quotes.hidden = false;
+    // défilement automatique doux, suspendu au survol, au focus et hors écran
+    if(!reduce){
+      var qHold = false, qSeen = false;
+      ['pointerenter', 'focusin'].forEach(function(ev){ quotes.addEventListener(ev, function(){ qHold = true; }); });
+      ['pointerleave', 'focusout'].forEach(function(ev){ quotes.addEventListener(ev, function(){ qHold = false; }); });
+      new IntersectionObserver(function(es){ qSeen = es[0].isIntersecting; }).observe(qTrack);
+      setInterval(function(){
+        if(qHold || !qSeen || document.hidden) return;
+        if(atEnd()) qTrack.scrollTo({ left: 0, behavior: 'smooth' }); else slide(1);
+      }, 6000);
+    }
+  }
 
   // Reflet du verre qui suit le curseur
   $$('.glass, .core').forEach(function(el){
@@ -1148,6 +1414,7 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const COLS = 22, ROWS = 26, H = 0.62, PLATE_TOP = 0.2;
+const rand = n => Math.floor(Math.random() * n);
 
 // Grille de l'empreinte : anneaux concentriques décentrés vers le haut, comme une boucle digitale
 function buildCells(){
@@ -1177,14 +1444,62 @@ function buildCells(){
   return cells;
 }
 const CELLS = buildCells();
+const POOL = CELLS.map((c, k) => k).filter(k => CELLS[k].n.length);
 
 const easeOutBack = t => { const c1 = 1.5, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); };
 const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+const easeInOut = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
 const C_FOUND = new THREE.Color('#cdd0d8');
 const C_GROW = new THREE.Color('#bdb2f6');
 const C_DEEP = new THREE.Color('#5a3fe3');
 const C_LIGHT = new THREE.Color('#a996ff');
+
+// ---------- Textures dessinées (halo lumineux, tuiles d'outils, documents) ----------
+function canvasTex(w, h, draw){
+  const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+  const ctx = cv.getContext('2d');
+  const tex = new THREE.CanvasTexture(cv);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  const paint = () => { ctx.clearRect(0, 0, w, h); draw(ctx); tex.needsUpdate = true; };
+  paint();
+  if(document.fonts) document.fonts.ready.then(paint);
+  return tex;
+}
+const GLOW = canvasTex(64, 64, ctx => {
+  const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(.28, 'rgba(255,255,255,.8)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, 64, 64);
+});
+function rr(ctx, x, y, w, h, r){ ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(x, y, w, h, r); else ctx.rect(x, y, w, h); }
+function tile(ctx, x, y, w, h, r){
+  ctx.save();
+  ctx.shadowColor = 'rgba(46,36,110,.28)'; ctx.shadowBlur = 22; ctx.shadowOffsetY = 8;
+  rr(ctx, x, y, w, h, r); ctx.fillStyle = '#ffffff'; ctx.fill();
+  ctx.restore();
+  rr(ctx, x, y, w, h, r); ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(106,76,240,.28)'; ctx.stroke();
+}
+function drawTool(ctx, kind, label){
+  tile(ctx, 24, 18, 208, 208, 48);
+  ctx.strokeStyle = '#6a4cf0'; ctx.fillStyle = '#6a4cf0'; ctx.lineWidth = 11; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.beginPath();
+  if(kind === 'mail'){ rr(ctx, 72, 84, 112, 80, 14); ctx.stroke(); ctx.beginPath(); ctx.moveTo(78, 92); ctx.lineTo(128, 132); ctx.lineTo(178, 92); ctx.stroke(); }
+  if(kind === 'docs'){ ctx.moveTo(88, 66); ctx.lineTo(146, 66); ctx.lineTo(172, 92); ctx.lineTo(172, 178); ctx.lineTo(88, 178); ctx.closePath(); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(146, 66); ctx.lineTo(146, 92); ctx.lineTo(172, 92); ctx.moveTo(108, 120); ctx.lineTo(152, 120); ctx.moveTo(108, 146); ctx.lineTo(152, 146); ctx.stroke(); }
+  if(kind === 'agenda'){ rr(ctx, 72, 82, 112, 96, 14); ctx.stroke(); ctx.beginPath(); ctx.moveTo(72, 112); ctx.lineTo(184, 112); ctx.moveTo(102, 68); ctx.lineTo(102, 94); ctx.moveTo(154, 68); ctx.lineTo(154, 94); ctx.stroke();
+    [104, 128, 152].forEach(x => { ctx.beginPath(); ctx.arc(x, 144, 7, 0, Math.PI * 2); ctx.fill(); }); }
+  if(kind === 'folder'){ ctx.moveTo(70, 88); ctx.lineTo(112, 88); ctx.lineTo(124, 102); ctx.lineTo(186, 102); ctx.lineTo(186, 174); ctx.lineTo(70, 174); ctx.closePath(); ctx.stroke(); }
+  ctx.fillStyle = '#15151c'; ctx.font = '600 34px "General Sans", system-ui, sans-serif'; ctx.textAlign = 'center';
+  ctx.fillText(label, 128, 278);
+}
+function drawDoc(ctx, title){
+  tile(ctx, 18, 18, 204, 264, 30);
+  ctx.fillStyle = '#5236d6'; ctx.font = '600 36px "General Sans", system-ui, sans-serif'; ctx.textAlign = 'left';
+  ctx.fillText(title, 44, 84);
+  ctx.fillStyle = '#dcdde3';
+  [[44, 116, 150], [44, 146, 128], [44, 176, 144], [44, 206, 96]].forEach(([x, y, w]) => { rr(ctx, x, y, w, 12, 6); ctx.fill(); });
+  ctx.fillStyle = '#f2793a'; ctx.beginPath(); ctx.arc(188, 246, 9, 0, Math.PI * 2); ctx.fill();
+}
 
 class EmpreinteScene {
   constructor(host, opts){
@@ -1215,27 +1530,59 @@ class EmpreinteScene {
     rim.position.set(14, 10, -12);
     this.scene.add(rim);
 
+    // progression lissée de chaque étape (0 à 1) : p[1] contexte ... p[4] autonomie
+    this.p = [0, 0, 0, 0, 0];
     this.buildPlate();
     this.buildBricks();
     this.buildCement();
+    this.buildCards();
+    this.buildSparks();
+    this.buildTools();
     this.buildAgents();
+    this.buildRings();
 
-    this.stage = 0; this.p4 = 0; this.time = 0;
+    this.stage = 0; this.time = 0; this.nextBeat = 0;
     this.rotTarget = { x: 0, y: 0 }; this.rot = { x: 0, y: 0 };
-    this.visible = false; this.running = false; this.dirty = true;
+    this.hover = { x: 0, z: 0, on: false, a: 0 };
+    this.visible = false; this.running = false;
     this.tick = this.tick.bind(this);
 
     new ResizeObserver(() => this.resize()).observe(host);
     this.resize();
     new IntersectionObserver(es => { this.visible = es[0].isIntersecting; this.loop(); }).observe(host);
     document.addEventListener('visibilitychange', () => this.loop());
-    if(opts.interactive && !reduce && matchMedia('(pointer: fine)').matches){
-      host.parentElement.addEventListener('pointermove', e => {
-        const r = host.getBoundingClientRect();
+    if(opts.interactive && !reduce) this.bindPointer();
+  }
+
+  // Survol : les briques sous le curseur se soulèvent ; clic : une onde part du point touché
+  bindPointer(){
+    const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(), inv = new THREE.Matrix4();
+    const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), -(PLATE_TOP + H)), hit = new THREE.Vector3();
+    const locate = e => {
+      const r = this.host.getBoundingClientRect();
+      ndc.set((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+      ray.setFromCamera(ndc, this.camera);
+      this.group.updateMatrixWorld();
+      ray.ray.applyMatrix4(inv.copy(this.group.matrixWorld).invert());
+      if(!ray.ray.intersectPlane(plane, hit)) return false;
+      const inside = Math.abs(hit.x) < COLS / 2 + 1 && Math.abs(hit.z) < ROWS / 2 + 1;
+      if(inside){ this.hover.x = hit.x; this.hover.z = hit.z; }
+      return inside;
+    };
+    const fine = matchMedia('(pointer: fine)').matches;
+    if(fine){
+      this.host.parentElement.addEventListener('pointermove', e => {
+        const r = this.host.getBoundingClientRect();
         this.rotTarget.y = ((e.clientX - r.left) / r.width - .5) * 0.5;
         this.rotTarget.x = ((e.clientY - r.top) / r.height - .5) * 0.16;
       });
+      this.host.addEventListener('pointermove', e => { this.hover.on = locate(e) && this.stage > 0; });
+      this.host.addEventListener('pointerleave', () => { this.hover.on = false; });
     }
+    this.host.addEventListener('pointerdown', e => {
+      if(!locate(e) || this.stage === 0) return;
+      this.spawnRing(this.hover.x, this.hover.z, PLATE_TOP + 3 * H + 0.3, 7, 1.3, .7);
+    });
   }
 
   buildPlate(){
@@ -1267,7 +1614,7 @@ class EmpreinteScene {
         entries.push({
           c, l, stage: l === 1 ? 1 : 3,
           delay: l === 1 ? c.r * 0.9 + Math.random() * 0.18 : (l - 2) * 0.32 + c.r * 0.55 + Math.random() * 0.12,
-          v: 0, start: 0, last: -1, color: new THREE.Color()
+          v: 0, start: 0, last: -1, lift: 0, liftLast: 0, color: new THREE.Color()
         });
       }
     });
@@ -1292,27 +1639,107 @@ class EmpreinteScene {
     this.group.add(this.cementMesh);
   }
 
+  // Étape 1, le contexte : vos documents d'empreinte flottent, puis s'intègrent au plateau
+  buildCards(){
+    this.cards = [['Voix', -6.8, 6.4, 3.5], ['Contexte', 0, 7.4, -3.5], ['Méthode', 6.8, 6.4, 3.5]].map(([title, x, y, z], i) => {
+      const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: canvasTex(240, 300, ctx => drawDoc(ctx, title)), transparent: true, opacity: 0, depthWrite: false }));
+      sp.scale.setScalar(0.0001); sp.renderOrder = 3;
+      this.group.add(sp);
+      return { sp, from: new THREE.Vector3(x, y, z), phase: i * 1.7 };
+    });
+    this.cardTarget = new THREE.Vector3(0, PLATE_TOP + H, 0);
+  }
+
+  // Étape 2, les skills : des impulsions parcourent le réseau comme des synapses
+  buildSparks(){
+    const N = 26, TR = 3;
+    this.sparkTR = TR;
+    const mk = (n, size, color) => {
+      const g = new THREE.BufferGeometry();
+      g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(n * 3), 3));
+      const pts = new THREE.Points(g, new THREE.PointsMaterial({ size, map: GLOW, color, transparent: true, opacity: 0, depthWrite: false }));
+      pts.frustumCulled = false; pts.renderOrder = 2;
+      this.group.add(pts);
+      return pts;
+    };
+    this.headPts = mk(N, 1.7, 0x6a4cf0);
+    this.trailPts = mk(N * TR, 0.95, 0x9a82ff);
+    this.sparks = [];
+    for(let i = 0; i < N; i++){
+      const from = POOL[rand(POOL.length)];
+      this.sparks.push({ prev: from, from, to: CELLS[from].n[rand(CELLS[from].n.length)], t: Math.random(), speed: 1.7 + Math.random() * 1.3 });
+    }
+    this.cursorPt = mk(1, 4.2, 0x8f6dff);
+  }
+
+  // Étape 3, les connecteurs : vos outils se branchent sur l'empreinte
+  buildTools(){
+    this.beamMat = new THREE.MeshBasicMaterial({ color: 0x7c5cff, transparent: true, opacity: .5, depthWrite: false });
+    const defs = [['mail', 'Mails', -11.2, 6.4, -9.5], ['docs', 'Documents', 11.2, 6.0, -10.5], ['agenda', 'Agenda', -11.8, 5.2, 6.5], ['folder', 'Dossiers', 11.8, 4.8, 7.5]];
+    this.tools = defs.map(([kind, label, x, y, z], i) => {
+      const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: canvasTex(256, 300, ctx => drawTool(ctx, kind, label)), transparent: true, opacity: 0, depthWrite: false }));
+      sp.scale.setScalar(0.0001); sp.renderOrder = 3;
+      this.group.add(sp);
+      let best = CELLS[0], bd = Infinity;
+      CELLS.forEach(c => { const d = Math.hypot(c.x - x * 0.36, c.z - z * 0.5) - c.layers * 0.7; if(d < bd){ bd = d; best = c; } });
+      const end = new THREE.Vector3(best.x, PLATE_TOP + best.layers * H + 0.25, best.z);
+      const start = new THREE.Vector3(x, y - 2.1, z);
+      const curve = new THREE.QuadraticBezierCurve3(start, new THREE.Vector3((x + best.x) / 2, Math.max(y, end.y) + 2.2, (z + best.z) / 2), end);
+      const beam = new THREE.Mesh(new THREE.TubeGeometry(curve, 64, 0.06, 6, false), this.beamMat);
+      beam.geometry.setDrawRange(0, 0);
+      this.group.add(beam);
+      return { sp, beam, curve, count: beam.geometry.index.count, base: new THREE.Vector3(x, y, z), phase: i * 1.3 };
+    });
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(this.tools.length * 3 * 3), 3));
+    this.packets = new THREE.Points(g, new THREE.PointsMaterial({ size: 0.95, map: GLOW, color: 0x5a3fe3, transparent: true, opacity: 0, depthWrite: false }));
+    this.packets.frustumCulled = false; this.packets.renderOrder = 2;
+    this.group.add(this.packets);
+  }
+
+  // Étape 4, l'autonomie : des agents qui circulent seuls
   buildAgents(){
     const mat = new THREE.MeshStandardMaterial({ color: 0xf2793a, emissive: 0xf2793a, emissiveIntensity: .55, roughness: .25 });
     this.agents = [];
-    const pool = CELLS.map((c, k) => k).filter(k => CELLS[k].n.length);
     for(let a = 0; a < 5; a++){
       const mesh = new THREE.Mesh(new THREE.SphereGeometry(0.3, 24, 16), mat);
       mesh.castShadow = true; mesh.scale.setScalar(0.0001);
       this.group.add(mesh);
-      const from = pool[Math.floor(Math.random() * pool.length)];
-      this.agents.push({ mesh, from, to: CELLS[from].n[0], prev: -1, t: Math.random(), speed: 1.3 + Math.random() * 0.6 });
+      const from = POOL[rand(POOL.length)];
+      this.agents.push({ mesh, from, to: CELLS[from].n[0], t: Math.random(), speed: 1.3 + Math.random() * 0.6 });
     }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(this.agents.length * 3), 3));
+    this.agentGlow = new THREE.Points(g, new THREE.PointsMaterial({ size: 2, map: GLOW, color: 0xff9a5c, transparent: true, opacity: 0, depthWrite: false }));
+    this.agentGlow.frustumCulled = false;
+    this.group.add(this.agentGlow);
+  }
+
+  buildRings(){
+    const geo = new THREE.RingGeometry(0.95, 1, 96);
+    geo.rotateX(-Math.PI / 2);
+    this.rings = [0, 1, 2, 3].map(() => {
+      const mesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0x6a4cf0, transparent: true, opacity: 0, depthWrite: false, side: THREE.DoubleSide }));
+      mesh.visible = false; mesh.renderOrder = 1;
+      this.group.add(mesh);
+      return { mesh, t: 1, max: 1, dur: 1, peak: .5 };
+    });
+  }
+  spawnRing(x, z, y, max, dur, peak){
+    const r = this.rings.find(r => r.t >= 1) || this.rings[0];
+    Object.assign(r, { t: 0, max, dur, peak });
+    r.mesh.position.set(x, y, z); r.mesh.visible = true;
+    this.loop();
   }
 
   topOf(c){ return PLATE_TOP + c.layers * H + 0.5; }
+  heightAt(c){ return PLATE_TOP + (1 + (c.layers - 1) * this.p[3]) * H + 0.28; }
 
   setStage(n, instant){
     n = Math.max(0, Math.min(4, n));
     if(n === this.stage) return;
     const now = this.time;
-    const rising = n > this.stage;
-    if(rising){
+    if(n > this.stage){
       this.bricks.forEach(e => { if(e.stage > this.stage && e.stage <= n) e.start = now + (instant ? 0 : e.delay); });
       if(this.stage < 2 && n >= 2) this.cement.forEach(e => { e.start = now + (instant ? 0 : e.delay); });
     }
@@ -1320,9 +1747,9 @@ class EmpreinteScene {
     if(instant || reduce){
       this.bricks.forEach(e => { e.v = this.stage >= e.stage ? 1 : 0; });
       this.cement.forEach(e => { e.v = this.stage >= 2 ? 1 : 0; });
-      this.p4 = this.stage >= 4 ? 1 : 0;
+      for(let k = 1; k <= 4; k++) this.p[k] = this.stage >= k ? 1 : 0;
     }
-    this.dirty = true;
+    this.nextBeat = this.time + 1.2;
     this.loop();
   }
 
@@ -1337,9 +1764,8 @@ class EmpreinteScene {
     const d = Math.max(R / Math.tan(fov / 2) / Math.min(aspect, 1.15), 20);
     const el = THREE.MathUtils.degToRad(this.opts.elevation || 56);
     this.camera.position.set(0, Math.sin(el) * d, Math.cos(el) * d);
-    this.camera.lookAt(0, 0.6, 0.6);
+    this.camera.lookAt(0, 0.6, this.opts.look || 0.6);
     this.camera.updateProjectionMatrix();
-    this.dirty = true;
     this.loop();
   }
 
@@ -1359,76 +1785,163 @@ class EmpreinteScene {
     this.last = now; this.time += dt;
     this.update(dt);
     this.renderer.render(this.scene, this.camera);
-    if(!this.host.classList.contains('is-ready')) this.host.classList.add('is-ready');
     requestAnimationFrame(this.tick);
   }
 
   update(dt){
-    const m = new THREE.Matrix4(), q = new THREE.Quaternion(), s = new THREE.Vector3(), p = new THREE.Vector3();
+    const m = new THREE.Matrix4(), q = new THREE.Quaternion(), s = new THREE.Vector3(), v = new THREE.Vector3();
     const t = this.time;
-    let moved = false;
 
+    // progression de chaque étape, montée plus lente que la descente
+    const UP = [0, .9, 1.2, 1.6, 1.6];
+    for(let k = 1; k <= 4; k++){
+      const target = this.stage >= k ? 1 : 0;
+      if(this.p[k] !== target) this.p[k] = target ? Math.min(1, this.p[k] + dt / UP[k]) : Math.max(0, this.p[k] - dt / 0.45);
+    }
+    const [, p1, p2, p3, p4] = this.p;
+
+    // briques : chute, puis soulèvement doux sous le curseur
+    const hv = this.hover;
+    hv.a += ((hv.on ? 1 : 0) - hv.a) * Math.min(1, dt * 8);
+    let moved = false;
     this.bricks.forEach((e, k) => {
-      const on = this.stage >= e.stage;
-      if(on){ if(t >= e.start && e.v < 1) e.v = Math.min(1, e.v + dt / 0.62); }
+      if(this.stage >= e.stage){ if(t >= e.start && e.v < 1) e.v = Math.min(1, e.v + dt / 0.62); }
       else if(e.v > 0) e.v = Math.max(0, e.v - dt / 0.3);
-      if(e.v === e.last) return;
-      e.last = e.v; moved = true;
-      const y = PLATE_TOP + (e.l - 0.5) * H + (1 - easeOutBack(e.v)) * 5;
+      let lt = 0;
+      if(hv.a > 0.001){
+        const d = Math.hypot(e.c.x - hv.x, e.c.z - hv.z);
+        if(d < 2.8) lt = Math.pow(1 - d / 2.8, 2) * 0.85 * hv.a;
+      }
+      e.lift += (lt - e.lift) * Math.min(1, dt * 10);
+      if(e.v === e.last && Math.abs(e.lift - e.liftLast) < 1e-4) return;
+      e.last = e.v; e.liftLast = e.lift; moved = true;
+      const y = PLATE_TOP + (e.l - 0.5) * H + (1 - easeOutBack(e.v)) * 5 + e.lift * e.v;
       const sc = e.v <= 0.001 ? 0.0001 : 1;
-      m.compose(p.set(e.c.x, y, e.c.z), q, s.set(sc, sc, sc));
+      m.compose(v.set(e.c.x, y, e.c.z), q, s.set(sc, sc, sc));
       this.brickMesh.setMatrixAt(k, m);
     });
     if(moved) this.brickMesh.instanceMatrix.needsUpdate = true;
 
+    // ciment des skills
     let cmoved = false;
     this.cement.forEach((e, k) => {
-      const on = this.stage >= 2;
-      if(on){ if(t >= e.start && e.v < 1) e.v = Math.min(1, e.v + dt / 0.5); }
+      if(this.stage >= 2){ if(t >= e.start && e.v < 1) e.v = Math.min(1, e.v + dt / 0.5); }
       else if(e.v > 0) e.v = Math.max(0, e.v - dt / 0.3);
       if(e.v === e.last) return;
       e.last = e.v; cmoved = true;
       const hgt = Math.max(0.0001, easeOutCubic(e.v) * H * 0.82);
-      m.compose(p.set(e.x, PLATE_TOP + hgt / 2, e.z), q, e.alongX ? s.set(0.15, hgt, 0.8) : s.set(0.8, hgt, 0.15));
+      m.compose(v.set(e.x, PLATE_TOP + hgt / 2, e.z), q, e.alongX ? s.set(0.15, hgt, 0.8) : s.set(0.8, hgt, 0.15));
       this.cementMesh.setMatrixAt(k, m);
     });
     if(cmoved) this.cementMesh.instanceMatrix.needsUpdate = true;
     if(this.stage >= 2) this.cementMat.emissiveIntensity = 0.95 + 0.35 * Math.sin(t * 2.6);
 
-    // Autonomie : le gris devient violet, une vague lumineuse parcourt l'empreinte
-    const target4 = this.stage >= 4 ? 1 : 0;
-    if(this.p4 !== target4) this.p4 = target4 ? Math.min(1, this.p4 + dt / 1.6) : Math.max(0, this.p4 - dt / 0.6);
-    if(this.p4 > 0 || this.colorsDirty){
+    // documents de contexte : apparition, flottement, puis absorption dans le plateau
+    const absorb = easeInOut(p2);
+    this.cards.forEach(c => {
+      const a = p1 * (1 - Math.min(1, p2 * 1.8));
+      c.sp.material.opacity = Math.min(1, a * 1.4);
+      const sc = a <= 0.001 ? 0.0001 : easeOutBack(Math.min(1, p1)) * (1 - 0.75 * absorb);
+      c.sp.scale.set(3.4 * sc, 4.25 * sc, 1);
+      v.copy(c.from); v.y += Math.sin(t * 1.3 + c.phase) * 0.28;
+      c.sp.position.lerpVectors(v, this.cardTarget, absorb);
+    });
+
+    // impulsions des skills
+    this.headPts.material.opacity = p2;
+    this.trailPts.material.opacity = p2 * 0.75;
+    if(p2 > 0){
+      const hp = this.headPts.geometry.attributes.position, tp = this.trailPts.geometry.attributes.position;
+      const boost = 1 + p4 * 0.7;
+      const at = (A, B, k, out) => out.set(A.x + (B.x - A.x) * k, this.heightAt(A) + (this.heightAt(B) - this.heightAt(A)) * k + Math.sin(Math.PI * k) * 0.12, A.z + (B.z - A.z) * k);
+      this.sparks.forEach((a, i) => {
+        a.t += dt * a.speed * boost;
+        while(a.t >= 1){
+          a.t -= 1;
+          const opts = CELLS[a.to].n.filter(k => k !== a.from);
+          const next = opts.length ? opts[rand(opts.length)] : a.from;
+          a.prev = a.from; a.from = a.to; a.to = next;
+        }
+        at(CELLS[a.from], CELLS[a.to], a.t, v); hp.setXYZ(i, v.x, v.y, v.z);
+        for(let k = 1; k <= this.sparkTR; k++){
+          const tt = a.t - k * 0.17;
+          if(tt >= 0) at(CELLS[a.from], CELLS[a.to], tt, v); else at(CELLS[a.prev], CELLS[a.from], tt + 1, v);
+          tp.setXYZ(i * this.sparkTR + k - 1, v.x, v.y, v.z);
+        }
+      });
+      hp.needsUpdate = true; tp.needsUpdate = true;
+    }
+
+    // halo du curseur
+    this.cursorPt.material.opacity = hv.a * 0.55;
+    if(hv.a > 0.001){ this.cursorPt.geometry.attributes.position.setXYZ(0, hv.x, PLATE_TOP + 3 * H + 0.4, hv.z); this.cursorPt.geometry.attributes.position.needsUpdate = true; }
+
+    // connecteurs : tuiles, faisceaux qui se tracent, données qui circulent
+    const pp = this.packets.geometry.attributes.position;
+    this.tools.forEach((o, i) => {
+      o.sp.material.opacity = Math.min(1, p3 * 1.5);
+      const sc = p3 <= 0.001 ? 0.0001 : easeOutBack(p3);
+      o.sp.scale.set(4.1 * sc, 4.8 * sc, 1);
+      o.sp.position.set(o.base.x, o.base.y + Math.sin(t * 1.1 + o.phase) * 0.22, o.base.z);
+      const g = Math.max(0, Math.min(1, (p3 - 0.25) / 0.75));
+      o.beam.geometry.setDrawRange(0, Math.floor(o.count * g / 3) * 3);
+      for(let k = 0; k < 3; k++){
+        let u = (t * (0.32 + p4 * 0.25) + k / 3 + o.phase) % 1;
+        if(p4 > 0.5 && k === 1) u = 1 - u;
+        o.curve.getPoint(Math.min(u, g), v);
+        pp.setXYZ(i * 3 + k, v.x, v.y, v.z);
+      }
+    });
+    pp.needsUpdate = true;
+    this.packets.material.opacity = Math.max(0, (p3 - 0.6) / 0.4);
+
+    // autonomie : le gris devient violet, une vague lumineuse parcourt l'empreinte
+    if(p4 > 0 || this.colorsDirty){
       const tmp = new THREE.Color();
       this.bricks.forEach((e, k) => {
         const wave = 0.5 + 0.5 * Math.sin(t * 2.1 - e.c.r * 8);
         const base = e.l === 1 ? C_FOUND : C_GROW;
         tmp.copy(C_DEEP).lerp(C_LIGHT, Math.min(1, (e.l - 1) / 2 * 0.7 + wave * 0.45));
-        e.color.copy(base).lerp(tmp, this.p4);
+        e.color.copy(base).lerp(tmp, p4);
         this.brickMesh.setColorAt(k, e.color);
       });
       this.brickMesh.instanceColor.needsUpdate = true;
-      this.colorsDirty = this.p4 > 0;
+      this.colorsDirty = p4 > 0;
     }
 
-    // Agents : de petites sphères qui sautent de brique en brique, seules
-    this.agents.forEach(a => {
-      const sc = this.p4 <= 0.001 ? 0.0001 : easeOutCubic(this.p4);
-      a.mesh.scale.setScalar(sc);
-      if(this.p4 <= 0) return;
+    // agents : de petites sphères qui sautent de brique en brique, seules
+    const ag = this.agentGlow.geometry.attributes.position;
+    this.agentGlow.material.opacity = p4 * 0.7;
+    this.agents.forEach((a, i) => {
+      a.mesh.scale.setScalar(p4 <= 0.001 ? 0.0001 : easeOutCubic(p4));
+      if(p4 <= 0) return;
       a.t += dt * a.speed;
       if(a.t >= 1){
         a.t -= 1;
         const opts = CELLS[a.to].n.filter(k => k !== a.from);
-        const next = opts.length ? opts[Math.floor(Math.random() * opts.length)] : a.from;
+        const next = opts.length ? opts[rand(opts.length)] : a.from;
         a.from = a.to; a.to = next;
       }
-      const A = CELLS[a.from], B = CELLS[a.to];
-      const k = a.t;
+      const A = CELLS[a.from], B = CELLS[a.to], k = a.t;
       a.mesh.position.set(A.x + (B.x - A.x) * k, this.topOf(A) + (this.topOf(B) - this.topOf(A)) * k + Math.sin(Math.PI * k) * 0.9, A.z + (B.z - A.z) * k);
+      ag.setXYZ(i, a.mesh.position.x, a.mesh.position.y, a.mesh.position.z);
+    });
+    ag.needsUpdate = true;
+
+    // battement du système autonome, et ondes au clic
+    if(this.stage >= 4 && p4 > 0.6 && t >= this.nextBeat){
+      this.spawnRing(0, 0.6, PLATE_TOP + 3 * H + 0.35, 15, 2.6, .45);
+      this.nextBeat = t + 2.8;
+    }
+    this.rings.forEach(r => {
+      if(r.t >= 1){ r.mesh.visible = false; return; }
+      r.t = Math.min(1, r.t + dt / r.dur);
+      const sc = Math.max(0.01, r.max * easeOutCubic(r.t));
+      r.mesh.scale.set(sc, 1, sc);
+      r.mesh.material.opacity = r.peak * Math.pow(1 - r.t, 1.4);
     });
 
-    // Légère respiration du plateau, et suivi doux du curseur
+    // légère respiration du plateau, et suivi doux du curseur
     const sway = reduce ? 0 : Math.sin(t * 0.3) * 0.12;
     this.rot.x += (this.rotTarget.x - this.rot.x) * 0.06;
     this.rot.y += (this.rotTarget.y - this.rot.y) * 0.06;
@@ -1444,21 +1957,15 @@ function start(){
 
   const heroHost = document.querySelector('[data-viz="hero"]');
   if(heroHost){
-    const hero = new EmpreinteScene(heroHost, { interactive: true, elevation: 58, fit: 14.2 });
-    if(reduce){ hero.setStage(4, true); }
-    else{
-      let played = false;
-      new IntersectionObserver((es, obs) => {
-        if(!es[0].isIntersecting || played) return;
-        played = true; obs.disconnect();
-        [[350, 1], [1900, 2], [3300, 3], [5000, 4]].forEach(([ms, n]) => setTimeout(() => hero.setStage(n), ms));
-      }, { threshold: .3 }).observe(heroHost);
-    }
+    const hero = new EmpreinteScene(heroHost, { interactive: true, elevation: 58, fit: 16 });
+    // le script principal pilote les étapes (lecture auto, puis clic sur la légende)
+    hero.setStage(parseInt(heroHost.getAttribute('data-stage'), 10) || 0, reduce);
+    heroHost.addEventListener('empreinte:stage', e => hero.setStage(e.detail, false));
   }
 
   const progHost = document.querySelector('[data-viz="program"]');
   if(progHost){
-    const prog = new EmpreinteScene(progHost, { interactive: false, elevation: 54, fit: 17 });
+    const prog = new EmpreinteScene(progHost, { interactive: false, elevation: 54, fit: 18, look: -3.2 });
     prog.setStage(parseInt(progHost.getAttribute('data-stage'), 10) || 1, true);
     progHost.addEventListener('empreinte:stage', e => prog.setStage(e.detail, false));
   }
