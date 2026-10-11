@@ -524,9 +524,16 @@ strong{color:var(--ink);font-weight:700}
 .profile-d{display:block;margin-top:4px;font-size:.92rem;color:var(--muted)}
 .profile-d::before{content:"";display:inline-block;width:7px;height:7px;margin-right:8px;border-radius:50%;background:var(--accent);vertical-align:1px}
 
-/* ---------- Comment réserver ---------- */
-.how{max-width:900px;margin:18px auto 0;padding:26px 30px;border-radius:var(--r-core);background:rgba(255,255,255,.5);box-shadow:inset 0 0 0 1px rgba(255,255,255,.8)}
-.how-steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:16px}
+/* ---------- Réserver : étapes + calendrier intégré ---------- */
+.book{padding-top:0}
+.book-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,5vw,64px);align-items:start}
+.book-copy h2{margin-bottom:30px}
+.book .seats{margin-top:26px}
+.book-cal .core{padding:8px}
+.calendly-inline-widget{min-width:300px;height:700px;border-radius:18px;overflow:hidden;background:#fff}
+.book-fallback{padding:12px 14px 6px;font-size:.86rem;color:var(--muted)}
+.book-fallback a{color:var(--accent-deep);font-weight:600}
+.how-steps{list-style:none;display:grid;gap:20px}
 .how-steps li{display:flex;gap:12px;align-items:flex-start;font-size:.93rem;color:var(--muted)}
 .how-steps b{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:'General Sans',sans-serif;font-size:.9rem;color:#fff;background:var(--accent)}
 .how-steps strong{display:block;margin-bottom:2px;font-family:'General Sans',sans-serif;font-weight:600;font-size:1rem;color:var(--ink)}
@@ -681,7 +688,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   .trainer-visual{max-width:520px;width:100%;justify-self:center}
   .fit-grid,.faq-grid,.finale-grid{grid-template-columns:1fr}
   .profiles{grid-template-columns:1fr 1fr}
-  .how-steps{grid-template-columns:1fr}
+  .book-grid{grid-template-columns:1fr}
 }
 
 /* ---------- Mobile ---------- */
@@ -706,7 +713,8 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   .profile-n{font-size:1rem}
   .profile-d{font-size:.85rem}
   .profile-d::before{display:none}
-  .how{padding:22px}
+  .book-cal{margin:0 calc(var(--gutter) * -1 + 6px)}
+  .calendly-inline-widget{height:760px}
   .trainer-visual{padding-bottom:0}
   .trainer-stats{position:relative;right:auto;width:auto;margin:-64px 12px 0}
   .logo span{display:none}
@@ -770,7 +778,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
       <a href="#prix">Tarif</a>
       <a href="#faq">Questions</a>
     </div>
-    <a href="#prix" class="btn" data-cta>Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+    <a href="#reserver" class="btn" data-cta>Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
     <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"><span></span><span></span></button>
   </div>
 </nav>
@@ -779,7 +787,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   <a class="m-link" href="#formateur">Votre formateur</a>
   <a class="m-link" href="#prix">Tarif</a>
   <a class="m-link" href="#faq">Questions</a>
-  <a href="#prix" class="btn" data-cta>Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+  <a href="#reserver" class="btn" data-cta>Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
 </div>
 
 <!-- ===== HERO ===== -->
@@ -794,7 +802,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
       <h1 class="hero-in">En 4&nbsp;semaines, construisez l'IA qui porte <em>votre empreinte.</em></h1>
       <p class="lead hero-in">Pour les indépendants et les professionnels : un système IA qui produit dans votre style, branché sur vos outils, que vous savez faire évoluer seul. Sans ligne de commande.</p>
       <div class="cta-block hero-in">
-        <a href="mailto:djouzar@penseria.fr?subject=R%C3%A9servation%20Empreinte%20-%20Session%20fondateur&amp;body=Bonjour%20Djouzar%2C%0D%0A%0D%0AJe%20souhaite%20r%C3%A9server%20ma%20place%20pour%20la%20session%20fondateur%20du%20bootcamp%20Empreinte.%0D%0A%0D%0AMon%20nom%20%3A%0D%0AMon%20activit%C3%A9%20%3A%0D%0A%0D%0AMerci%20%21" class="btn" data-cta>Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+        <a href="#reserver" class="btn" data-cta>Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
         <span class="btn-note g"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg>Satisfait ou remboursé à la fin du bootcamp</span>
       </div>
       <div class="seats hero-in" data-seats>Il reste 9&nbsp;places sur 12</div>
@@ -1091,7 +1099,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
     </div>
 
     <div class="prog-cta cta-block rv">
-      <a href="mailto:djouzar@penseria.fr?subject=R%C3%A9servation%20Empreinte%20-%20Session%20fondateur&amp;body=Bonjour%20Djouzar%2C%0D%0A%0D%0AJe%20souhaite%20r%C3%A9server%20ma%20place%20pour%20la%20session%20fondateur%20du%20bootcamp%20Empreinte.%0D%0A%0D%0AMon%20nom%20%3A%0D%0AMon%20activit%C3%A9%20%3A%0D%0A%0D%0AMerci%20%21" class="btn" data-cta>Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+      <a href="#reserver" class="btn" data-cta>Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
       <div class="seats" data-seats>Il reste 9&nbsp;places sur 12</div>
     </div>
   </div>
@@ -1197,18 +1205,9 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         </div>
         <div class="price-cta">
           <div class="seats" data-seats>Il reste 9&nbsp;places sur 12</div>
-          <a href="mailto:djouzar@penseria.fr?subject=R%C3%A9servation%20Empreinte%20-%20Session%20fondateur&amp;body=Bonjour%20Djouzar%2C%0D%0A%0D%0AJe%20souhaite%20r%C3%A9server%20ma%20place%20pour%20la%20session%20fondateur%20du%20bootcamp%20Empreinte.%0D%0A%0D%0AMon%20nom%20%3A%0D%0AMon%20activit%C3%A9%20%3A%0D%0A%0D%0AMerci%20%21" class="btn" data-cta>Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+          <a href="#reserver" class="btn" data-cta>Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
         </div>
       </div>
-    </div>
-    <div class="how rv">
-      <span class="label">Comment réserver</span>
-      <ol class="how-steps">
-        <li><b>1</b><span><strong>Choisissez un créneau</strong>Un court échange en visio, pour vérifier ensemble que le bootcamp correspond à votre activité.</span></li>
-        <li><b>2</b><span><strong>Recevez votre lien de paiement</strong>Le paiement se fait via un lien sécurisé que je vous communique directement.</span></li>
-        <li><b>3</b><span><strong>Votre place est confirmée</strong>Vous recevez toutes les informations pour bien démarrer le 8&nbsp;novembre.</span></li>
-      </ol>
-      <p class="how-contact">Une question avant de réserver ? Écrivez-moi à <a href="mailto:djouzar@penseria.fr">djouzar@penseria.fr</a><a data-linkedin hidden target="_blank" rel="noopener"> ou sur LinkedIn</a>.</p>
     </div>
     <div class="guar glass rv">
       <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-shield"/></svg></span>
@@ -1222,6 +1221,29 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
       <div class="tier t1 is-now" role="listitem"><div class="step-track"><span class="here">Vous êtes ici</span><span class="step-bar"></span></div><span class="tier-name">Session fondateur</span><span class="tier-price">850&nbsp;€</span><span class="tier-tag">Le prix le plus bas</span></div>
       <div class="tier t2" role="listitem"><div class="step-track"><span class="inc">+440&nbsp;€</span><span class="step-bar"></span></div><span class="tier-name">Session 2</span><span class="tier-price">1&nbsp;290&nbsp;€</span></div>
       <div class="tier t3" role="listitem"><div class="step-track"><span class="inc">+300&nbsp;€</span><span class="step-bar"></span></div><span class="tier-name">Session 3</span><span class="tier-price">1&nbsp;590&nbsp;€</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RÉSERVER ===== -->
+<section id="reserver" class="book" aria-labelledby="t-book">
+  <div class="wrap book-grid">
+    <div class="book-copy">
+      <span class="eyebrow rv">Réserver ma place</span>
+      <h2 id="t-book" class="rv">Choisissez un créneau. <em>On en parle de vive voix.</em></h2>
+      <ol class="how-steps rv">
+        <li><b>1</b><span><strong>Choisissez un créneau</strong>Un échange de 30&nbsp;min en visio, pour vérifier ensemble que le bootcamp correspond à votre activité.</span></li>
+        <li><b>2</b><span><strong>Recevez votre lien de paiement</strong>Le paiement se fait via un lien sécurisé que je vous communique directement.</span></li>
+        <li><b>3</b><span><strong>Votre place est confirmée</strong>Vous recevez toutes les informations pour bien démarrer le 8&nbsp;novembre.</span></li>
+      </ol>
+      <div class="seats rv" data-seats>Il reste 9&nbsp;places sur 12</div>
+      <p class="how-contact rv">Une question avant de réserver ? Écrivez-moi à <a href="mailto:djouzar@penseria.fr">djouzar@penseria.fr</a><a data-linkedin hidden target="_blank" rel="noopener"> ou sur LinkedIn</a>.</p>
+    </div>
+    <div class="book-cal bezel rv">
+      <div class="core">
+        <div class="calendly-inline-widget" data-url="https://calendly.com/lamachinepensante/cafe-virtuel-avec-djouzar"></div>
+        <p class="book-fallback">Le calendrier ne s'affiche pas ? <a href="https://calendly.com/lamachinepensante/cafe-virtuel-avec-djouzar" target="_blank" rel="noopener">Ouvrir Calendly dans un nouvel onglet</a></p>
+      </div>
     </div>
   </div>
 </section>
@@ -1289,7 +1311,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
             <h2 id="t-finale">Les autres apprennent à utiliser l'IA générique. <em>Vous, vous construisez la vôtre.</em></h2>
             <p class="lead">Dans 4&nbsp;semaines, vous avez un système qui travaille comme vous, connaît vos projets, et que vous savez faire évoluer sans moi. Ou vous êtes remboursé.</p>
             <div class="cta-block">
-              <a href="mailto:djouzar@penseria.fr?subject=R%C3%A9servation%20Empreinte%20-%20Session%20fondateur&amp;body=Bonjour%20Djouzar%2C%0D%0A%0D%0AJe%20souhaite%20r%C3%A9server%20ma%20place%20pour%20la%20session%20fondateur%20du%20bootcamp%20Empreinte.%0D%0A%0D%0AMon%20nom%20%3A%0D%0AMon%20activit%C3%A9%20%3A%0D%0A%0D%0AMerci%20%21" class="btn" data-cta>Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+              <a href="#reserver" class="btn" data-cta>Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
               <div class="seats" data-seats>Il reste 9&nbsp;places sur 12</div>
             </div>
             <p class="btn-note">Session fondateur à 850&nbsp;€ TTC · Les sessions suivantes seront à 1&nbsp;290&nbsp;€ puis 1&nbsp;590&nbsp;€ TTC</p>
@@ -1320,11 +1342,8 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $$ = function(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
 
-  // Lien de réservation (calendrier) : à renseigner ici, il remplace l'e-mail sur tous les boutons
-  var RESERVATION_URL = 'https://calendly.com/lamachinepensante/cafe-virtuel-avec-djouzar';
-  if(RESERVATION_URL) $$('[data-cta]').forEach(function(a){ a.href = RESERVATION_URL; a.target = '_blank'; a.rel = 'noopener'; });
   // Profil LinkedIn : à renseigner ici, les liens « LinkedIn » restent masqués tant qu'il est vide
-  var LINKEDIN_URL = '';
+  var LINKEDIN_URL = 'https://www.linkedin.com/in/djouzar-abassebay/';
   $$('[data-linkedin]').forEach(function(a){ if(LINKEDIN_URL){ a.href = LINKEDIN_URL; a.hidden = false; } });
 
   // Places restantes : à mettre à jour ici, une seule fois pour toute la page
@@ -1381,7 +1400,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   if(reduce) setHero(4);
   else{
     var heroIO = new IntersectionObserver(function(entries){
-      if(!entries[0].isIntersecting) return;
+      if(!entries[entries.length - 1].isIntersecting) return;
       heroIO.disconnect();
       [[400, 1], [3400, 2], [6600, 3], [9800, 4]].forEach(function(a){
         autoplay.push(setTimeout(function(){ setHero(a[1]); }, a[0]));
@@ -1399,7 +1418,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   // Nav plus opaque dès qu'on quitte le haut de page
   var nav = document.getElementById('nav');
   new IntersectionObserver(function(entries){
-    nav.classList.toggle('is-scrolled', !entries[0].isIntersecting);
+    nav.classList.toggle('is-scrolled', !entries[entries.length - 1].isIntersecting);
   }).observe(document.getElementById('nav-sentinel'));
 
   // Lien de nav actif selon la section visible
@@ -1474,7 +1493,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
     playClip();
   }
   if(reduce) clips.forEach(function(v){ v.controls = true; v.preload = 'metadata'; });
-  new IntersectionObserver(function(es){ pipSeen = es[0].isIntersecting; playClip(); }, { rootMargin: '200px 0px' }).observe(pip);
+  new IntersectionObserver(function(es){ pipSeen = es[es.length - 1].isIntersecting; playClip(); }, { rootMargin: '200px 0px' }).observe(pip);
 
   // Programme : l'étape qui traverse le milieu de l'écran pilote la construction 3D
   var steps = $$('.step');
@@ -1583,7 +1602,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
       var qHold = false, qSeen = false;
       ['pointerenter', 'focusin'].forEach(function(ev){ quotes.addEventListener(ev, function(){ qHold = true; }); });
       ['pointerleave', 'focusout'].forEach(function(ev){ quotes.addEventListener(ev, function(){ qHold = false; }); });
-      new IntersectionObserver(function(es){ qSeen = es[0].isIntersecting; }).observe(qTrack);
+      new IntersectionObserver(function(es){ qSeen = es[es.length - 1].isIntersecting; }).observe(qTrack);
       setInterval(function(){
         if(qHold || !qSeen || document.hidden) return;
         if(atEnd()) qTrack.scrollTo({ left: 0, behavior: 'smooth' }); else slide(1);
@@ -1647,10 +1666,26 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
     };
     var startCrowd = function(){ if(cRun || reduce || !cSeen) return; cRun = true; cLast = performance.now(); requestAnimationFrame(crowdLoop); };
     new ResizeObserver(sizeCrowd).observe(crowd);
-    new IntersectionObserver(function(es){ cSeen = es[0].isIntersecting; startCrowd(); }).observe(crowd);
+    new IntersectionObserver(function(es){ cSeen = es[es.length - 1].isIntersecting; startCrowd(); }).observe(crowd);
     document.addEventListener('visibilitychange', startCrowd);
     card.addEventListener('pointermove', function(e){ var r = crowd.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
     card.addEventListener('pointerleave', function(){ mouse.x = mouse.y = -999; });
+  }
+
+  // Calendrier Calendly : chargé seulement à l'approche de la section
+  var cal = document.querySelector('.calendly-inline-widget');
+  if(cal){
+    var calIO = new IntersectionObserver(function(entries){
+      if(!entries[entries.length - 1].isIntersecting) return;
+      calIO.disconnect();
+      var sc = document.createElement('script');
+      sc.src = 'https://assets.calendly.com/assets/external/widget.js'; sc.async = true;
+      sc.onload = function(){
+        if(window.Calendly && !cal.querySelector('iframe')) window.Calendly.initInlineWidget({ url: cal.getAttribute('data-url'), parentElement: cal });
+      };
+      document.body.appendChild(sc);
+    }, { rootMargin: '800px 0px' });
+    calIO.observe(cal);
   }
 
   // Reflet du verre qui suit le curseur
@@ -1813,7 +1848,7 @@ class EmpreinteScene {
 
     new ResizeObserver(() => this.resize()).observe(host);
     this.resize();
-    new IntersectionObserver(es => { this.visible = es[0].isIntersecting; this.loop(); }).observe(host);
+    new IntersectionObserver(es => { this.visible = es[es.length - 1].isIntersecting; this.loop(); }).observe(host);
     document.addEventListener('visibilitychange', () => this.loop());
     if(opts.interactive && !reduce) this.bindPointer();
   }
@@ -2231,7 +2266,7 @@ function start(){
   if(progHost){
     // créée seulement à l'approche de la section, pour alléger le chargement initial
     new IntersectionObserver((es, obs) => {
-      if(!es[0].isIntersecting) return;
+      if(!es[es.length - 1].isIntersecting) return;
       obs.disconnect();
       const prog = new EmpreinteScene(progHost, { interactive: false, elevation: 54, fit: 18, look: -3.2 });
       prog.setStage(parseInt(progHost.getAttribute('data-stage'), 10) || 1, true);
