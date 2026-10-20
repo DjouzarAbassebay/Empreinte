@@ -31,5 +31,6 @@
       "destination": "https://www.bootcamp-empreinte.fr/$1",
       "permanent": true
     }
-  ]
+  ],
+  "cleanUrls": true
 }

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finaliser votre inscription · Empreinte</title>
+<meta name="description" content="Paiement sécurisé de la session fondateur du bootcamp Empreinte.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pages.css">
+<script async src="https://js.stripe.com/v3/buy-button.js"></script>
+<style>
+.pay-eyebrow{display:inline-block;margin-bottom:16px;padding:7px 14px;border-radius:999px;font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-soft)}
+.pay-lead{margin-top:14px;font-size:1.08rem;color:var(--muted)}
+.recap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px 30px;margin-top:28px;padding:22px 24px;border-radius:20px;background:linear-gradient(120deg,rgba(106,76,240,.13),rgba(106,76,240,.04));box-shadow:inset 0 0 0 1px rgba(106,76,240,.22)}
+.recap ul{list-style:none;padding:0;margin-top:6px}
+.recap li{margin-top:4px;font-size:.95rem}
+.recap li::before{content:"";display:inline-block;width:7px;height:7px;margin-right:9px;border-radius:50%;background:var(--accent);vertical-align:1px}
+.recap-r{text-align:right}
+.recap-amt{display:block;font-family:'General Sans',sans-serif;font-weight:600;font-size:2.6rem;line-height:1;letter-spacing:-.04em;color:var(--accent)}
+.recap-ttc{display:block;margin-top:4px;font-size:.85rem;color:var(--muted)}
+.consent{margin-top:26px;display:grid;gap:12px}
+.consent label{display:flex;gap:12px;align-items:flex-start;font-size:.95rem;cursor:pointer}
+.consent input{flex:none;width:20px;height:20px;margin-top:3px;accent-color:var(--accent)}
+.buy{margin-top:22px}
+.buy[hidden],.buy-wait[hidden]{display:none}
+.buy-wait{margin-top:22px;padding:14px 16px;border-radius:14px;font-size:.92rem;color:var(--muted);background:rgba(21,21,28,.04);text-align:center}
+.secure{margin-top:22px;font-size:.88rem;color:var(--muted)}
+@media (max-width:640px){.recap-r{text-align:left}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="./"><svg viewBox="0 0 256 256" aria-hidden="true"><path d="M70,128a132.68,132.68,0,0,1-14,59.58,6,6,0,0,1-5.38,3.33,6,6,0,0,1-5.36-8.67A120.74,120.74,0,0,0,58,128,69.72,69.72,0,0,1,84.25,73.36a6,6,0,0,1,7.51,9.37A57.73,57.73,0,0,0,70,128Zm58-6a6,6,0,0,0-6,6,186.07,186.07,0,0,1-23.23,90.07,6,6,0,0,0,10.5,5.82A198.14,198.14,0,0,0,134,128,6,6,0,0,0,128,122Zm0-32a38,38,0,0,0-38,38,6,6,0,0,0,12,0,26,26,0,0,1,52,0,216.06,216.06,0,0,1-20.71,92.85A6,6,0,1,0,144.16,226,227.94,227.94,0,0,0,166,128,38,38,0,0,0,128,90Zm0-64A102.11,102.11,0,0,0,26,128a90,90,0,0,1-5.12,30,6,6,0,1,0,11.31,4A101.83,101.83,0,0,0,38,128a90,90,0,0,1,180,0,284.7,284.7,0,0,1-5.33,54.84,6,6,0,0,0,4.72,7.05,6.8,6.8,0,0,0,1.17.11,6,6,0,0,0,5.88-4.84A295.92,295.92,0,0,0,230,128,102.12,102.12,0,0,0,128,26ZM94,154.13a6,6,0,0,0-7.07,4.69,152.82,152.82,0,0,1-17.44,46,6,6,0,0,0,10.4,6,164.77,164.77,0,0,0,18.8-49.65A6,6,0,0,0,94,154.13ZM128,58a70.76,70.76,0,0,0-8.75.54,6,6,0,1,0,1.49,11.91A58,58,0,0,1,186,128a252.27,252.27,0,0,1-1.94,31.26,6,6,0,0,0,5.21,6.69,6.59,6.59,0,0,0,.75,0,6,6,0,0,0,5.95-5.26A266.46,266.46,0,0,0,198,128,70.08,70.08,0,0,0,128,58ZM185.44,186.2a6,6,0,0,0-7.31,4.31c-1.47,5.74-3.18,11.49-5.06,17.09a6,6,0,0,0,11.38,3.82c2-5.88,3.75-11.9,5.3-17.92A6,6,0,0,0,185.44,186.2Z"/></svg><span>Empreinte<b>.</b></span></a>
+  <a class="back" href="./">Retour au site</a>
+</header>
+<main id="contenu">
+<article class="card pay-card">
+  <span class="pay-eyebrow">Session fondateur · Début le 8&nbsp;novembre</span>
+  <h1>Finalisez votre inscription.</h1>
+  <p class="pay-lead">Merci pour notre échange. Il ne reste qu'une étape pour confirmer votre place dans le bootcamp Empreinte.</p>
+
+  <div class="recap">
+    <div class="recap-l">
+      <strong>Empreinte · Session fondateur</strong>
+      <ul>
+        <li>En ligne · préambule de 3&nbsp;h + 4&nbsp;semaines</li>
+        <li>2 à 3&nbsp;h de vidéos et 2 lives d'1&nbsp;h&nbsp;30 par semaine, soit 12&nbsp;h de live</li>
+        <li>Accès à vie aux vidéos et à toutes leurs mises à jour</li>
+        <li>Satisfait ou remboursé à la fin du bootcamp</li>
+      </ul>
+    </div>
+    <div class="recap-r"><span class="recap-amt">850&nbsp;€</span><span class="recap-ttc">TTC, TVA incluse</span></div>
+  </div>
+
+  <form class="consent" id="consent" onsubmit="return false">
+    <label><input type="checkbox" id="c-cgv"> J'ai lu et j'accepte les <a href="cgv.html" target="_blank" rel="noopener">conditions générales de vente</a>.</label>
+    <label><input type="checkbox" id="c-start"> Je demande que le bootcamp commence à sa date prévue, même si elle tombe pendant mon délai de rétractation de 14&nbsp;jours. Je reste libre de me rétracter dans ce délai, en payant seulement ce qui m'aura été fourni.</label>
+  </form>
+
+  <div class="buy" id="buy" hidden>
+    <stripe-buy-button
+      buy-button-id="buy_btn_1USi6oB0b0xQD3dY5f7FRaMA"
+      publishable-key="pk_live_51USdWaB0b0xQD3dYtyrRL2Pynjn67NxW09hrnatVR91MOyt2KSy4oYiuaRnfVMo7f9VjMHnS2mcAhHXNruIGo3HT001IEDKlh0">
+    </stripe-buy-button>
+  </div>
+  <p class="buy-wait" id="buy-wait">Cochez les deux cases pour afficher le paiement.</p>
+
+  <p class="secure">Paiement sécurisé par Stripe. Vous recevez une confirmation et votre facture par e-mail. Une question ? <a href="mailto:djouzar@penseria.fr">djouzar@penseria.fr</a> · 06&nbsp;02&nbsp;34&nbsp;04&nbsp;40</p>
+</article>
+<script>
+(function(){
+  var cgv = document.getElementById('c-cgv'), start = document.getElementById('c-start');
+  var buy = document.getElementById('buy'), wait = document.getElementById('buy-wait');
+  function sync(){ var ok = cgv.checked && start.checked; buy.hidden = !ok; wait.hidden = ok; }
+  cgv.addEventListener('change', sync); start.addEventListener('change', sync); sync();
+})();
+</script>
+</main>
+<footer class="foot">
+  <span>© 2026 Penseria. Tous droits réservés.</span>
+  <a href="mentions-legales.html">Mentions légales</a>
+  <a href="cgv.html">CGV</a>
+  <a href="confidentialite.html">Politique de confidentialité</a>
+</footer>
+</body>
+</html>

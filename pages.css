@@ -1,0 +1,35 @@
+/* Pages secondaires d'Empreinte : mentions légales, CGV, confidentialité, paiement */
+:root{
+  --bg:#edeef1;--ink:#15151c;--ink-2:#34353f;--muted:#5f616c;
+  --line:rgba(21,21,28,.1);--accent:#6a4cf0;--accent-deep:#5236d6;--accent-soft:rgba(106,76,240,.11);--spark:#f2793a;
+  --shadow-tint:46,36,110;--ease:cubic-bezier(.32,.72,0,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Satoshi',system-ui,sans-serif;font-size:1.02rem;line-height:1.7;color:var(--ink-2);background:var(--bg);-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(600px 420px at 100% 0,rgba(185,168,255,.35),transparent 70%),radial-gradient(500px 380px at 0 100%,rgba(255,198,166,.25),transparent 70%);background-attachment:fixed}
+a{color:var(--accent-deep)}
+:focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:6px}
+.top{max-width:860px;margin:0 auto;padding:28px 22px 0;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.logo{display:inline-flex;align-items:center;gap:9px;font-family:'General Sans',sans-serif;font-weight:600;font-size:1.2rem;letter-spacing:-.03em;color:var(--ink);text-decoration:none}
+.logo svg{width:24px;height:24px;fill:var(--accent)}
+.logo b{color:var(--accent);font-weight:600}
+.back{font-size:.92rem;font-weight:600;text-decoration:none}
+main{max-width:860px;margin:0 auto;padding:40px 22px 64px}
+.card{background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.9);border-radius:26px;padding:clamp(24px,5vw,52px);box-shadow:0 30px 60px -36px rgba(var(--shadow-tint),.35),inset 0 1px 1px #fff}
+h1,h2,h3{font-family:'General Sans',sans-serif;font-weight:600;color:var(--ink);letter-spacing:-.025em;text-wrap:balance}
+h1{font-size:clamp(2rem,4.4vw,2.7rem);line-height:1.08;letter-spacing:-.04em}
+h2{font-size:1.28rem;margin:38px 0 10px}
+h3{font-size:1.05rem;margin:22px 0 6px}
+.updated{margin-top:10px;font-size:.9rem;color:var(--muted)}
+p,li{margin-top:10px}
+ul,ol{padding-left:1.3em}
+strong{color:var(--ink)}
+.box{margin-top:16px;padding:16px 18px;border-radius:16px;background:var(--accent-soft)}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.94rem}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-weight:700;color:var(--ink)}
+.foot{max-width:860px;margin:0 auto;padding:0 22px 40px;font-size:.88rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 16px}
+.foot a{color:var(--muted);text-decoration:none}
+.foot a:hover{color:var(--accent-deep);text-decoration:underline}
+@media (max-width:640px){table,thead,tbody,tr,th,td{display:block}thead{display:none}td{padding:6px 0;border:0}tr{padding:10px 0;border-bottom:1px solid var(--line)}}
