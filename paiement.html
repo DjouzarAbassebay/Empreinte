@@ -59,7 +59,6 @@
 
   <form class="consent" id="consent" onsubmit="return false">
     <label><input type="checkbox" id="c-cgv"> J'ai lu et j'accepte les <a href="cgv.html" target="_blank" rel="noopener">conditions générales de vente</a>.</label>
-    <label><input type="checkbox" id="c-start"> Je demande que le bootcamp commence à sa date prévue, même si elle tombe pendant mon délai de rétractation de 14&nbsp;jours. Je reste libre de me rétracter dans ce délai, en payant seulement ce qui m'aura été fourni.</label>
   </form>
 
   <div class="buy" id="buy" hidden>
@@ -68,16 +67,16 @@
       publishable-key="pk_live_51USdWaB0b0xQD3dYtyrRL2Pynjn67NxW09hrnatVR91MOyt2KSy4oYiuaRnfVMo7f9VjMHnS2mcAhHXNruIGo3HT001IEDKlh0">
     </stripe-buy-button>
   </div>
-  <p class="buy-wait" id="buy-wait">Cochez les deux cases pour afficher le paiement.</p>
+  <p class="buy-wait" id="buy-wait">Cochez la case pour afficher le paiement.</p>
 
   <p class="secure">Paiement sécurisé par Stripe. Vous recevez une confirmation et votre facture par e-mail. Une question ? <a href="mailto:djouzar@penseria.fr">djouzar@penseria.fr</a> · 06&nbsp;02&nbsp;34&nbsp;04&nbsp;40</p>
 </article>
 <script>
 (function(){
-  var cgv = document.getElementById('c-cgv'), start = document.getElementById('c-start');
+  var cgv = document.getElementById('c-cgv');
   var buy = document.getElementById('buy'), wait = document.getElementById('buy-wait');
-  function sync(){ var ok = cgv.checked && start.checked; buy.hidden = !ok; wait.hidden = ok; }
-  cgv.addEventListener('change', sync); start.addEventListener('change', sync); sync();
+  function sync(){ var ok = cgv.checked; buy.hidden = !ok; wait.hidden = ok; }
+  cgv.addEventListener('change', sync); sync();
 })();
 </script>
 </main>
