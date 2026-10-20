@@ -839,7 +839,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         <a href="#reserver" class="btn" data-cta>Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
         <span class="btn-note g"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg>Satisfait ou remboursé à la fin du bootcamp</span>
       </div>
-      <div class="seats hero-in" data-seats>Il reste 9&nbsp;places sur 12</div>
+      <div class="seats hero-in" data-seats>Il reste 5&nbsp;places sur 12</div>
     </div>
     <div class="hero-stage hero-in">
       <div class="viz hero-viz" data-viz="hero" data-stage="0" aria-hidden="true">
@@ -1144,7 +1144,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
 
     <div class="prog-cta cta-block rv">
       <a href="#reserver" class="btn" data-cta>Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-      <div class="seats" data-seats>Il reste 9&nbsp;places sur 12</div>
+      <div class="seats" data-seats>Il reste 5&nbsp;places sur 12</div>
     </div>
   </div>
 </section>
@@ -1248,7 +1248,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
           <div class="pay-r"><span class="pay-amt">850&nbsp;€<small>TTC</small></span><span class="pay-save">Soit 2&nbsp;400&nbsp;€ d'économie</span></div>
         </div>
         <div class="price-cta">
-          <div class="seats" data-seats>Il reste 9&nbsp;places sur 12</div>
+          <div class="seats" data-seats>Il reste 5&nbsp;places sur 12</div>
           <a href="#reserver" class="btn" data-cta>Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
         </div>
       </div>
@@ -1280,7 +1280,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
         <li><b>2</b><span><strong>Recevez votre lien de paiement</strong>Le paiement se fait via un lien sécurisé que je vous communique directement.</span></li>
         <li><b>3</b><span><strong>Votre place est confirmée</strong>Vous recevez toutes les informations pour bien démarrer le 8&nbsp;novembre.</span></li>
       </ol>
-      <div class="seats rv" data-seats>Il reste 9&nbsp;places sur 12</div>
+      <div class="seats rv" data-seats>Il reste 5&nbsp;places sur 12</div>
       <p class="how-contact rv">Une question avant de réserver ? Écrivez-moi à <a href="mailto:djouzar@penseria.fr">djouzar@penseria.fr</a><a data-linkedin hidden target="_blank" rel="noopener"> ou sur LinkedIn</a>.</p>
     </div>
     <div class="book-cal bezel rv">
@@ -1356,7 +1356,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
             <p class="lead">Dans 4&nbsp;semaines, vous avez un système qui travaille comme vous, connaît vos projets, et que vous savez faire évoluer sans moi. Ou vous êtes remboursé.</p>
             <div class="cta-block">
               <a href="#reserver" class="btn" data-cta>Réserver ma place<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-              <div class="seats" data-seats>Il reste 9&nbsp;places sur 12</div>
+              <div class="seats" data-seats>Il reste 5&nbsp;places sur 12</div>
             </div>
             <p class="btn-note">Session fondateur à 850&nbsp;€ TTC · Les sessions suivantes seront à 1&nbsp;290&nbsp;€ puis 1&nbsp;590&nbsp;€ TTC</p>
           </div>
@@ -1392,7 +1392,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   $$('[data-linkedin]').forEach(function(a){ if(LINKEDIN_URL){ a.href = LINKEDIN_URL; a.hidden = false; } });
 
   // Places restantes : à mettre à jour ici, une seule fois pour toute la page
-  var SEATS = { total: 12, left: 9 };
+  var SEATS = { total: 12, left: 5 };
   $$('[data-seats]').forEach(function(el){
     var taken = SEATS.total - SEATS.left, html = '<span class="seats-bricks" aria-hidden="true">';
     for(var i = 0; i < SEATS.total; i++) html += '<i' + (i < taken ? ' class="taken"' : '') + '></i>';
