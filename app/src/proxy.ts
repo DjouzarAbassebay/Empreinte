@@ -6,6 +6,15 @@ const PUBLIC_PATHS = ["/connexion", "/mot-de-passe-oublie", "/auth/", "/api/cale
 export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request });
 
+  // Tant que Supabase n'est pas configuré, seule la page de connexion est servie.
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    if (request.nextUrl.pathname === "/connexion") return response;
+    const url = request.nextUrl.clone();
+    url.pathname = "/connexion";
+    url.search = "";
+    return NextResponse.redirect(url);
+  }
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,

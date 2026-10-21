@@ -11,12 +11,18 @@ export default async function LoginPage({
   searchParams: Promise<{ erreur?: string; suite?: string }>;
 }) {
   const { erreur, suite } = await searchParams;
+  const configured = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
   return (
     <div className="glass auth-card">
       <Logo href="https://www.bootcamp-empreinte.fr/" />
       <span className="auth-eyebrow">Espace membre</span>
       <h1>Bon retour.</h1>
       <p className="lead">Connectez-vous pour accéder à vos lives, vos vidéos et vos ressources.</p>
+      {!configured && (
+        <div className="alert alert-info" style={{ marginBottom: 16 }}>
+          Aperçu : la plateforme n'est pas encore reliée à Supabase. La connexion sera possible une fois les variables d'environnement renseignées.
+        </div>
+      )}
       {erreur && <div className="alert alert-error" role="alert" style={{ marginBottom: 16 }}>{erreur}</div>}
       <form action={signIn} className="form">
         <input type="hidden" name="suite" value={suite ?? "/"} />

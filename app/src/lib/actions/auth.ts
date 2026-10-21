@@ -16,6 +16,9 @@ export async function signIn(formData: FormData) {
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
   const password = String(formData.get("password") ?? "");
   const next = safeNext(formData.get("suite"));
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    redirect(`/connexion?erreur=${encodeURIComponent("Plateforme pas encore configurée.")}`);
+  }
   if (!email || !password) {
     redirect(`/connexion?erreur=${encodeURIComponent("Renseignez votre e-mail et votre mot de passe.")}`);
   }
