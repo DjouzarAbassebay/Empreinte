@@ -25,17 +25,22 @@ Plateforme privée du bootcamp Empreinte : connexion par identifiant et mot de p
    - Redirect URLs : `https://espace.bootcamp-empreinte.fr/auth/callback`
 5. Dans **Project Settings > API**, récupérez `Project URL`, la clé `anon` et la clé `service_role`.
 
-Votre propre compte admin :
+Votre compte admin (ou un compte admin de démo), en une commande depuis le dossier `app/`, une fois `.env.local` rempli avec l'URL Supabase et la clé `service_role` :
 
-1. Dans **Authentication > Users > Add user > Create new user**, créez `djouzar@penseria.fr` avec un mot de passe, en cochant « Auto Confirm User ».
-2. Dans **SQL Editor**, exécutez :
+```bash
+npm run create-admin -- lamachinepensante@gmail.com Test2026 "Djouzar Abassebay"
+```
+
+La commande crée le compte (ou met à jour son mot de passe s'il existe) et lui donne le rôle admin. Relancez-la avec un autre e-mail pour chaque admin supplémentaire.
+
+Sans Node sur votre poste, l'équivalent manuel : **Authentication > Users > Add user > Create new user** (cochez « Auto Confirm User »), puis dans **SQL Editor** :
 
 ```sql
 update public.profiles set role = 'admin', full_name = 'Djouzar Abassebay'
-where email = 'djouzar@penseria.fr';
+where email = 'lamachinepensante@gmail.com';
 ```
 
-Vous pourrez ensuite créer tous les autres comptes depuis l'onglet Admin > Participants de la plateforme.
+Vous pourrez ensuite créer tous les comptes participants depuis l'onglet Admin > Participants de la plateforme.
 
 ### 2. Bunny Stream
 
