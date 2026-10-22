@@ -152,6 +152,14 @@ begin
 end;
 $$;
 
+-- Droits d'exécution : le trigger n'est jamais appelé via l'API,
+-- les deux autres fonctions sont réservées aux personnes connectées.
+revoke execute on function public.handle_new_user() from public, anon, authenticated;
+revoke execute on function public.is_admin() from public, anon;
+revoke execute on function public.register_for_event(uuid) from public, anon;
+grant execute on function public.is_admin() to authenticated;
+grant execute on function public.register_for_event(uuid) to authenticated;
+
 -- -------------------------------------------------------------
 -- Ressources
 -- -------------------------------------------------------------
