@@ -507,7 +507,7 @@ strong{color:var(--ink);font-weight:700}
 .profile-d{display:block;margin-top:4px;font-size:.92rem;color:var(--muted)}
 .profile-d::before{content:"";display:inline-block;width:7px;height:7px;margin-right:8px;border-radius:50%;background:var(--accent);vertical-align:1px}
 
-/* ---------- Réserver : étapes + calendrier intégré ---------- */
+/* ---------- Réserver : étapes + formulaire de contact ---------- */
 .book{padding-top:0}
 .book-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,5vw,64px);align-items:start}
 .book-copy h2{margin-bottom:30px}
@@ -1219,7 +1219,12 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
       <div class="core">
         <form class="cform" id="cform">
           <label class="cf-label" for="cf-msg">Votre message</label>
-          <textarea class="cf-input" id="cf-msg" name="message" rows="6">Je suis intéressé.</textarea>
+          <textarea class="cf-input" id="cf-msg" name="message" rows="7">Bonjour Djouz,
+
+Ton Bootcamp a l'air intéressant. Est-ce que je pourrais avoir plus d'informations ?
+
+Bonne journée.
+Votre nom</textarea>
           <button class="btn cf-btn" type="submit">Envoyer ma demande<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></button>
           <p class="cf-status" id="cf-status" role="status" aria-live="polite"></p>
           <p class="cf-note">Le bouton ouvre votre messagerie avec ce message, adressé à <a href="mailto:djouzar@penseria.fr">djouzar@penseria.fr</a>. Il ne vous reste qu'à cliquer sur « Envoyer » : je vous recontacte personnellement.</p>
@@ -1667,7 +1672,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
     var cfStatus = document.getElementById('cf-status');
     cform.addEventListener('submit', function(e){
       e.preventDefault();
-      var msg = document.getElementById('cf-msg').value.trim() || 'Je suis intéressé.';
+      var msg = document.getElementById('cf-msg').value.trim() || document.getElementById('cf-msg').defaultValue;
       window.location.href = 'mailto:djouzar@penseria.fr?subject=' + encodeURIComponent('Bootcamp Empreinte : je suis intéressé') + '&body=' + encodeURIComponent(msg);
       cfStatus.innerHTML = "Votre messagerie s'ouvre avec votre message : cliquez sur « Envoyer » et je vous recontacte. Rien ne s'est ouvert ? Écrivez-moi à <a href=\"mailto:djouzar@penseria.fr\">djouzar@penseria.fr</a>.";
     });
