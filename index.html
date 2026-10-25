@@ -529,20 +529,11 @@ strong{color:var(--ink);font-weight:700}
 .cf-input{width:100%;padding:14px 16px;border-radius:16px;border:1px solid var(--line-2);background:#fff;font:inherit;font-size:1rem;color:var(--ink);transition:border-color .3s var(--ease),box-shadow .3s var(--ease)}
 .cf-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
 textarea.cf-input{resize:vertical;min-height:130px;line-height:1.55}
-.cf-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .cf-btn{margin-top:14px;justify-self:start;border:0}
-.cf-btn:disabled{opacity:.6;cursor:wait}
 .cf-status{min-height:1.4em;font-size:.92rem;color:var(--accent-deep)}
 .cf-status a{color:var(--accent-deep);font-weight:600}
-.cf-mail{display:inline-block;margin-top:6px;padding:8px 14px;border-radius:999px;background:var(--accent-soft);text-decoration:none}
 .cf-note{font-size:.84rem;color:var(--muted)}
 .cf-note a{color:var(--accent-deep)}
-.cf-done{padding:clamp(28px,5vw,56px);text-align:center}
-.cf-done[hidden],.cform[hidden]{display:none}
-.cf-ok{width:56px;height:56px;margin:0 auto 16px;border-radius:50%;display:grid;place-items:center;color:#fff;background:var(--accent)}
-.cf-ok .i{width:26px;height:26px}
-.cf-done h3{font-size:1.4rem;margin-bottom:6px}
-.cf-done p{color:var(--muted)}
 .finale-grid.is-single{grid-template-columns:1fr}
 
 /* ---------- FAQ ---------- */
@@ -1215,9 +1206,9 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
     <div class="book-copy">
       <span class="eyebrow rv">Réserver ma place</span>
       <h2 id="t-book" class="rv">Vous êtes intéressé ? <em>Écrivez-moi, je vous recontacte.</em></h2>
-      <p class="book-intro rv">La prochaine promotion démarre le 10&nbsp;janvier. Laissez simplement votre e-mail : je vous recontacte personnellement pour répondre à vos questions et vous réserver une place.</p>
+      <p class="book-intro rv">La prochaine promotion démarre le 10&nbsp;janvier. Envoyez-moi un message en un clic : je vous recontacte personnellement pour répondre à vos questions et vous réserver une place.</p>
       <ol class="how-steps rv">
-        <li><b>1</b><span><strong>Envoyez votre message</strong>Votre e-mail suffit. Le message est déjà prêt, vous pouvez le compléter si vous le souhaitez.</span></li>
+        <li><b>1</b><span><strong>Envoyez votre message</strong>Il est déjà rédigé : votre messagerie s'ouvre, vous pouvez le compléter puis l'envoyer.</span></li>
         <li><b>2</b><span><strong>Je vous recontacte</strong>Personnellement, par e-mail, pour faire le point sur votre activité et répondre à vos questions.</span></li>
         <li><b>3</b><span><strong>Votre place est réservée</strong>Vous recevez toutes les informations pour bien démarrer le 10&nbsp;janvier.</span></li>
       </ol>
@@ -1226,21 +1217,13 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
     </div>
     <div class="book-cal bezel rv">
       <div class="core">
-        <form class="cform" id="cform" novalidate>
-          <label class="cf-label" for="cf-email">Votre e-mail</label>
-          <input class="cf-input" id="cf-email" name="email" type="email" required autocomplete="email" inputmode="email" placeholder="vous@exemple.fr">
+        <form class="cform" id="cform">
           <label class="cf-label" for="cf-msg">Votre message</label>
-          <textarea class="cf-input" id="cf-msg" name="message" rows="5">Je suis intéressé.</textarea>
-          <input class="cf-hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <textarea class="cf-input" id="cf-msg" name="message" rows="6">Je suis intéressé.</textarea>
           <button class="btn cf-btn" type="submit">Envoyer ma demande<span class="btn-ic"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span></button>
           <p class="cf-status" id="cf-status" role="status" aria-live="polite"></p>
-          <p class="cf-note">Je vous recontacte personnellement par e-mail. Votre adresse sert uniquement à vous répondre (voir la <a href="confidentialite.html">politique de confidentialité</a>).</p>
+          <p class="cf-note">Le bouton ouvre votre messagerie avec ce message, adressé à <a href="mailto:djouzar@penseria.fr">djouzar@penseria.fr</a>. Il ne vous reste qu'à cliquer sur « Envoyer » : je vous recontacte personnellement.</p>
         </form>
-        <div class="cf-done" id="cf-done" hidden>
-          <span class="cf-ok" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>
-          <h3>Merci, c'est envoyé.</h3>
-          <p>Je vous recontacte très vite à l'adresse indiquée.</p>
-        </div>
       </div>
     </div>
   </div>
@@ -1678,41 +1661,15 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
     if(window.EMPREINTE_3D !== true) $$('.viz').forEach(function(v){ v.classList.add('no-3d'); });
   }, 5000);
 
-  // Formulaire de contact : la fonction /api/contact envoie la demande par e-mail, sans quitter la page
+  // Formulaire de contact : ouvre la messagerie du visiteur avec la demande déjà adressée à Djouzar
   var cform = document.getElementById('cform');
   if(cform){
-    var cfStatus = document.getElementById('cf-status'), cfDone = document.getElementById('cf-done');
-    var cfEmail = document.getElementById('cf-email'), cfBtn = cform.querySelector('.cf-btn');
-    // en cas d'échec, la demande part par la messagerie du visiteur, déjà rédigée
-    var cfFail = function(){
-      var body = document.getElementById('cf-msg').value + '\n\nMon e-mail : ' + cfEmail.value.trim();
-      var href = 'mailto:djouzar@penseria.fr?subject=' + encodeURIComponent('Bootcamp Empreinte : nouvelle demande') + '&body=' + encodeURIComponent(body);
-      cfStatus.innerHTML = "L'envoi automatique n'a pas abouti. <a class=\"cf-mail\" href=\"" + href + "\">Envoyer ma demande par e-mail</a>";
-      cfBtn.disabled = false;
-    };
+    var cfStatus = document.getElementById('cf-status');
     cform.addEventListener('submit', function(e){
       e.preventDefault();
-      var email = cfEmail.value.trim();
-      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-        cfStatus.textContent = 'Indiquez une adresse e-mail valide.';
-        cfEmail.focus();
-        return;
-      }
-      cfBtn.disabled = true;
-      cfStatus.textContent = 'Envoi en cours…';
-      fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          email: email,
-          message: document.getElementById('cf-msg').value,
-          _honey: cform.elements._honey.value
-        })
-      }).then(function(r){ return r.json(); }).then(function(d){
-        if(String(d.success) !== 'true') return cfFail();
-        cform.hidden = true;
-        cfDone.hidden = false;
-      }).catch(cfFail);
+      var msg = document.getElementById('cf-msg').value.trim() || 'Je suis intéressé.';
+      window.location.href = 'mailto:djouzar@penseria.fr?subject=' + encodeURIComponent('Bootcamp Empreinte : je suis intéressé') + '&body=' + encodeURIComponent(msg);
+      cfStatus.innerHTML = "Votre messagerie s'ouvre avec votre message : cliquez sur « Envoyer » et je vous recontacte. Rien ne s'est ouvert ? Écrivez-moi à <a href=\"mailto:djouzar@penseria.fr\">djouzar@penseria.fr</a>.";
     });
   }
 
