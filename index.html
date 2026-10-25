@@ -194,12 +194,6 @@ strong{color:var(--ink);font-weight:700}
 .nav-links a[aria-current]{color:var(--ink)}
 .nav .btn{min-height:46px;padding:5px 5px 5px 18px;gap:10px;font-size:.92rem}
 .nav .btn-ic{width:34px;height:34px}
-.countdown{display:inline-flex;align-items:center;gap:10px;padding:6px 14px 6px 12px;border-radius:var(--r-pill);background:rgba(255,255,255,.55);box-shadow:inset 0 0 0 1px rgba(21,21,28,.06),inset 0 1px 1px #fff;font-size:.82rem;color:var(--muted);white-space:nowrap}
-.countdown[hidden]{display:none}
-.cd-dot{width:7px;height:7px;border-radius:50%;background:var(--spark);box-shadow:0 0 0 4px rgba(242,121,58,.16)}
-.cd-time{display:inline-flex;gap:6px;font-variant-numeric:tabular-nums;color:var(--ink)}
-.cd-time b{font-family:'General Sans',sans-serif;font-weight:600;font-size:.98rem;letter-spacing:-.01em}
-.cd-time small{font-size:.74rem;color:var(--muted);margin-left:1px}
 .menu-btn{display:none;position:relative;width:46px;height:46px;border:0;border-radius:50%;background:var(--ink);cursor:pointer;flex:none}
 .menu-btn span{position:absolute;left:14px;right:14px;height:1.6px;border-radius:2px;background:#fff;transition:transform .5s var(--ease)}
 .menu-btn span:first-child{top:19px}
@@ -540,6 +534,7 @@ textarea.cf-input{resize:vertical;min-height:130px;line-height:1.55}
 .cf-btn:disabled{opacity:.6;cursor:wait}
 .cf-status{min-height:1.4em;font-size:.92rem;color:var(--accent-deep)}
 .cf-status a{color:var(--accent-deep);font-weight:600}
+.cf-mail{display:inline-block;margin-top:6px;padding:8px 14px;border-radius:999px;background:var(--accent-soft);text-decoration:none}
 .cf-note{font-size:.84rem;color:var(--muted)}
 .cf-note a{color:var(--accent-deep)}
 .cf-done{padding:clamp(28px,5vw,56px);text-align:center}
@@ -661,7 +656,6 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   .hero{min-height:auto;padding:116px 0 48px}
   .hero-grid{grid-template-columns:1fr;gap:12px}
   .hero-viz{height:min(54dvh,500px)}
-  .countdown .cd-label{display:none}
   .facts-bar{grid-template-columns:1fr 1fr}
   .fact:nth-child(3){border-left:0}
   .fact:nth-child(n+3){border-top:1px solid var(--line)}
@@ -713,9 +707,6 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   .book-cal{margin:0 calc(var(--gutter) * -1 + 6px)}
   .trainer-visual{padding-bottom:0}
   .trainer-stats{position:relative;right:auto;width:auto;margin:-64px 12px 0}
-  .logo span{display:none}
-  .countdown{margin-left:auto;padding:6px 12px}
-  .cd-time .cd-s{display:none}
   .legend{margin-top:-36px}
   .legend-tabs button{padding:8px 8px 9px}
   .legend-tabs button span{font-size:.8rem}
@@ -768,7 +759,6 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
 <nav class="nav" id="nav" aria-label="Navigation principale">
   <div class="nav-pill">
     <a href="#top" class="logo"><svg class="i" aria-hidden="true"><use href="#i-fp"/></svg><span>Empreinte<b>.</b></span></a>
-    <div class="countdown" data-countdown hidden><span class="cd-dot" aria-hidden="true"></span><span class="cd-label">Début dans</span><span class="cd-time" role="timer" aria-label="Temps restant avant le début du bootcamp"></span></div>
     <div class="nav-links">
       <a href="#programme">Le programme</a>
       <a href="#formateur">Votre formateur</a>
@@ -1359,20 +1349,6 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
     el.innerHTML = html + '</span><span>' + (SEATS.left < SEATS.total ? 'Il reste <b>' + SEATS.left + ' places</b> sur ' + SEATS.total : '<b>' + SEATS.total + ' places</b> maximum') + '</span>';
   });
 
-  // Compte à rebours jusqu'au démarrage (10 janvier, heure de Paris)
-  var START = new Date('2027-01-10T00:00:00+01:00').getTime();
-  var cd = document.querySelector('[data-countdown]'), cdTime = cd.querySelector('.cd-time');
-  var pad = function(n){ return (n < 10 ? '0' : '') + n; };
-  function tickCountdown(){
-    var ms = START - Date.now();
-    if(ms <= 0){ cd.hidden = true; clearInterval(cdTimer); return; }
-    var sec = Math.floor(ms / 1000), d = Math.floor(sec / 86400), h = Math.floor(sec % 86400 / 3600), m = Math.floor(sec % 3600 / 60);
-    cdTime.innerHTML = '<span><b>' + d + '</b><small>j</small></span><span><b>' + pad(h) + '</b><small>h</small></span><span><b>' + pad(m) + '</b><small>min</small></span><span class="cd-s"><b>' + pad(sec % 60) + '</b><small>s</small></span>';
-    cd.hidden = false;
-  }
-  var cdTimer = setInterval(tickCountdown, 1000);
-  tickCountdown();
-
   // Les quatre étapes du système, partagées par le hero et le programme
   var STAGES = [
     { week: "L'ancrage", name: 'Le contexte', text: 'Votre voix, votre méthode et vos projets deviennent les fondations.' },
@@ -1707,8 +1683,11 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
   if(cform){
     var cfStatus = document.getElementById('cf-status'), cfDone = document.getElementById('cf-done');
     var cfEmail = document.getElementById('cf-email'), cfBtn = cform.querySelector('.cf-btn');
+    // en cas d'échec, la demande part par la messagerie du visiteur, déjà rédigée
     var cfFail = function(){
-      cfStatus.innerHTML = "L'envoi n'a pas abouti. Écrivez-moi directement à <a href=\"mailto:djouzar@penseria.fr\">djouzar@penseria.fr</a>.";
+      var body = document.getElementById('cf-msg').value + '\n\nMon e-mail : ' + cfEmail.value.trim();
+      var href = 'mailto:djouzar@penseria.fr?subject=' + encodeURIComponent('Bootcamp Empreinte : nouvelle demande') + '&body=' + encodeURIComponent(body);
+      cfStatus.innerHTML = "L'envoi automatique n'a pas abouti. <a class=\"cf-mail\" href=\"" + href + "\">Envoyer ma demande par e-mail</a>";
       cfBtn.disabled = false;
     };
     cform.addEventListener('submit', function(e){
