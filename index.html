@@ -1678,7 +1678,7 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
     if(window.EMPREINTE_3D !== true) $$('.viz').forEach(function(v){ v.classList.add('no-3d'); });
   }, 5000);
 
-  // Formulaire de contact : envoi par e-mail via FormSubmit, sans quitter la page
+  // Formulaire de contact : la fonction /api/contact envoie la demande par e-mail, sans quitter la page
   var cform = document.getElementById('cform');
   if(cform){
     var cfStatus = document.getElementById('cf-status'), cfDone = document.getElementById('cf-done');
@@ -1700,16 +1700,13 @@ details[open]>summary .plus{transform:rotate(45deg);background:var(--accent);col
       }
       cfBtn.disabled = true;
       cfStatus.textContent = 'Envoi en cours…';
-      fetch('https://formsubmit.co/ajax/djouzar@penseria.fr', {
+      fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
           email: email,
           message: document.getElementById('cf-msg').value,
-          _honey: cform.elements._honey.value,
-          _replyto: email,
-          _subject: 'Bootcamp Empreinte : nouvelle demande',
-          _template: 'table'
+          _honey: cform.elements._honey.value
         })
       }).then(function(r){ return r.json(); }).then(function(d){
         if(String(d.success) !== 'true') return cfFail();
